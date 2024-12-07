@@ -6,39 +6,44 @@ import Zombie from "./enemiesTypes/Zombie";
 import Bat from "./enemiesTypes/Bat";
 import Hand from "./enemiesTypes/Hand";
 import BatCrazy from "./enemiesTypes/BatCrazy";
-
-// const FlyingEnemies = [
-//   //   Bird,
-//   //   Bat,
-//   //   BatCrazy,
-//   //   Fly,
-//   //   Spinner,
-//   //   Ghost,
-//   //   GhostEye,
-//   //   GhostFast,
-//   //   GhostGloomy,
-//   //   Raven,
-// ];
-
-// const ClimbingEnemies = [
-//   Spider,
-//   // SpiderBig
-// ];
-
-// const GroundEnemies = [
-//   // Digger, Hand, Plant, Snail, Zombie, ZombieGround
-// ];
+import Bird from "./enemiesTypes/Bird";
+import Digger from "./enemiesTypes/Digger";
+import Fly from "./enemiesTypes/Fly";
+import Ghost from "./enemiesTypes/Ghost";
+import GhostEye from "./enemiesTypes/GhostEye";
+import GhostFast from "./enemiesTypes/GhostFast";
+import GhostGloomy from "./enemiesTypes/GhostGloomy";
+import Plant from "./enemiesTypes/Plant";
+import Raven from "./enemiesTypes/Raven";
+import Spinner from "./enemiesTypes/Spinner";
+import ZombieGround from "./enemiesTypes/ZombieGround";
 
 class Enemies {
-  private static readonly FlyingEnemies = [Bat, BatCrazy];
-  private static readonly GroundEnemies = [Zombie];
-  private static readonly GroundStaticEnemies = [Hand];
+  private static readonly FlyingEnemies = [
+    Bat,
+    BatCrazy,
+    Bird,
+    Fly,
+    Ghost,
+    GhostEye,
+    GhostFast,
+    GhostGloomy,
+    Raven,
+    Spinner,
+  ];
+  private static readonly GroundStaticEnemies = [
+    Hand,
+    Digger,
+    Plant,
+    ZombieGround,
+  ];
   private static readonly ClimbingEnemies = [Spider, SpiderBig];
+  private static readonly GroundEnemies = [Zombie];
 
   public static readonly EnemiesTypes = [
     ...this.FlyingEnemies,
-    ...this.ClimbingEnemies,
     ...this.GroundStaticEnemies,
+    ...this.ClimbingEnemies,
     ...this.GroundEnemies,
   ];
 

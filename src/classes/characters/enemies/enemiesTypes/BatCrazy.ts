@@ -13,7 +13,7 @@ class BatCrazy extends FlyingEnemy {
   }
 
   init() {
-    this.sizeScale = 0.28; // scale size of the bird
+    this.sizeScale = 0.28;
 
     this.vFrameX = (this.vy + 5) * this.sizeScale;
   }

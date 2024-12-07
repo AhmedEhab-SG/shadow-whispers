@@ -3,7 +3,8 @@ import Enemy from "./Enemy";
 
 abstract class FlyingEnemy extends Enemy {
   private _angle = 0;
-  private _va = 0;
+  private _angleCurve = 0;
+  private _va = 0; // angle velocity
 
   constructor(
     protected enemyObj: EnemyObj,
@@ -35,6 +36,14 @@ abstract class FlyingEnemy extends Enemy {
 
   protected set va(value: number) {
     this._va = value;
+  }
+
+  protected get angleCurve(): number {
+    return this._angleCurve;
+  }
+
+  protected set angleCurve(value: number) {
+    this._angleCurve = value;
   }
 }
 
