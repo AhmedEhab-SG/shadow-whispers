@@ -38,7 +38,7 @@ class HeroStates {
   private enviGroundMargin: number;
   private enviGravity: number;
 
-  constructor(
+  public constructor(
     protected hero: Hero,
     protected heroObj: HeroObj,
     {

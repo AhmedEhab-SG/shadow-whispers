@@ -8,7 +8,7 @@ class Idle extends State {
   public static readonly stateName = HeroStates.IDLE;
   public readonly stateName = Idle.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, Idle.stateName);
   }
 

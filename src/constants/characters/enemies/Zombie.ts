@@ -4,22 +4,22 @@ import zombieImg from "../../../assets/sprite/enemies/zombie.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Zombie {
-  static id: number = 17;
-  static name: Enemies = Enemies.ZOMBIE;
-  static type: EnemiesTypes = EnemiesTypes.GROUND;
-  static image: string = zombieImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 17;
+  public static name: Enemies = Enemies.ZOMBIE;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND;
+  public static image: string = zombieImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 2236,
     height: 410,
   };
-  static frame = {
+  public static frame = {
     width: 292,
     height: 410,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Zombie {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Zombie.id,
       name: Zombie.name,

@@ -4,22 +4,22 @@ import spinnerImg from "../../../assets/sprite/enemies/spinner.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Spinner {
-  static id: number = 16;
-  static name: Enemies = Enemies.SPINNER;
-  static type: EnemiesTypes = EnemiesTypes.FLYING;
-  static image: string = spinnerImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 16;
+  public static name: Enemies = Enemies.SPINNER;
+  public static type: EnemiesTypes = EnemiesTypes.FLYING;
+  public static image: string = spinnerImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 1917,
     height: 212,
   };
-  static frame = {
+  public static frame = {
     width: 213,
     height: 212,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Spinner {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Spinner.id,
       name: Spinner.name,

@@ -8,7 +8,7 @@ class FallRight extends State {
   public static readonly stateName = HeroStates.FALL_RIGHT;
   public readonly stateName = FallRight.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, FallRight.stateName);
   }
 

@@ -9,7 +9,7 @@ class Spider extends ClimbingEnemy {
 
   protected enviGroundMargin: number;
 
-  constructor(
+  public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
     {

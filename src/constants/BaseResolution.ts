@@ -1,6 +1,6 @@
 class BaseResolution {
-  static width = 1280;
-  static height = 720;
+  public static readonly WIDTH = 1280;
+  public static readonly HEIGHT = 720;
 }
 
 export default BaseResolution;

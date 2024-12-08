@@ -5,7 +5,7 @@ class ControlKeys extends Event {
   private _keys: BaseKeys[] = [];
   public _key: BaseKeys | "" = "";
 
-  constructor(
+  public constructor(
     private defaultControls: DefaultControlsType,
     public debugMode: boolean
   ) {

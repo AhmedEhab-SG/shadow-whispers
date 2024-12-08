@@ -8,7 +8,7 @@ class Dizzy extends State {
   public static readonly stateName = HeroStates.DIZZY;
   public readonly stateName = Dizzy.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, Dizzy.stateName);
   }
 

@@ -7,12 +7,15 @@ class Spinner extends FlyingEnemy {
   public readonly uniqueName = Spinner.uniqueName;
   public readonly type = Spinner.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(SpinnerObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.35;
 
     this.va = Math.random() * 0.08 + 0.03;

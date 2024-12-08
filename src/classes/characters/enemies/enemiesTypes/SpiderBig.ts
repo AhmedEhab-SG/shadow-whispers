@@ -10,7 +10,7 @@ class SpiderBig extends ClimbingEnemy {
   protected enviGroundMargin: number;
   protected heroCord: { x: number; y: number };
 
-  constructor(
+  public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
     {

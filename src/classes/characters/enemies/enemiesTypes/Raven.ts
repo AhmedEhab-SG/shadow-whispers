@@ -7,12 +7,15 @@ class Raven extends FlyingEnemy {
   public readonly uniqueName = Raven.uniqueName;
   public readonly type = Raven.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(RavenObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.35;
 
     this.va = Math.random() * 0.08 + 0.03;

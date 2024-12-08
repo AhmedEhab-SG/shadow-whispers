@@ -6,7 +6,7 @@ abstract class FlyingEnemy extends Enemy {
   private _angleCurve = 0;
   private _va = 0; // angle velocity
 
-  constructor(
+  protected constructor(
     protected enemyObj: EnemyObj,
     protected gameWidth: number,
     protected gameHeight: number

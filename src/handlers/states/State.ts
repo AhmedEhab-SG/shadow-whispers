@@ -8,7 +8,7 @@ import { EnemyObj } from "../../types/enemy";
 import { HeroObj } from "../../types/hero";
 
 abstract class State implements IState {
-  constructor(
+  protected constructor(
     protected character: Hero | Enemy,
     protected characterObj: HeroObj | EnemyObj,
     protected state: HeroStates | EnemyStates

@@ -4,7 +4,7 @@ class Layer extends Sprite {
   private x = 0;
   private y = 0;
 
-  constructor(
+  public constructor(
     private imageSrc: string,
     private width: number,
     private height: number,
@@ -14,14 +14,14 @@ class Layer extends Sprite {
     this.loadImage(this.imageSrc);
   }
 
-  update({ gameSpeed = 0 }) {
+  public update({ gameSpeed = 0 }) {
     this.x -= gameSpeed * this.speedMod;
     if (this.x < -this.width) {
       this.x += this.width;
     }
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  public draw(ctx: CanvasRenderingContext2D) {
     if (!this.imgLoaded) return;
 
     // Draw the image twice to create a seamless infinite scroll effect

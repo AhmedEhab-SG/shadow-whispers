@@ -4,22 +4,22 @@ import ghostFastImg from "../../../assets/sprite/enemies/ghost_fast.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class GhostFast {
-  static id: number = 8;
-  static name: Enemies = Enemies.GHOST_FAST;
-  static type: EnemiesTypes = EnemiesTypes.FLYING;
-  static image: string = ghostFastImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 8;
+  public static name: Enemies = Enemies.GHOST_FAST;
+  public static type: EnemiesTypes = EnemiesTypes.FLYING;
+  public static image: string = ghostFastImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 524,
     height: 70,
   };
-  static frame = {
+  public static frame = {
     width: 87.33,
     height: 70,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class GhostFast {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: GhostFast.id,
       name: GhostFast.name,

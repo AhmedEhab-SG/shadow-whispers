@@ -4,22 +4,22 @@ import ravenImg from "../../../assets/sprite/enemies/raven.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Raven {
-  static id: number = 12;
-  static name: Enemies = Enemies.RAVEN;
-  static type: EnemiesTypes = EnemiesTypes.FLYING;
-  static image: string = ravenImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 12;
+  public static name: Enemies = Enemies.RAVEN;
+  public static type: EnemiesTypes = EnemiesTypes.FLYING;
+  public static image: string = ravenImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 1626,
     height: 194,
   };
-  static frame = {
+  public static frame = {
     width: 271,
     height: 194,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Raven {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Raven.id,
       name: Raven.name,

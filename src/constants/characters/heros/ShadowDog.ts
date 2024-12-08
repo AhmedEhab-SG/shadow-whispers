@@ -4,25 +4,25 @@ import HeroStates from "../../../enum/HeroStates";
 import { HeroObj, States } from "../../../types/hero";
 
 class ShadowDog {
-  static id: number = 1;
-  static name: Heroes = Heroes.SHADOW_DOG;
-  static image: string = ShadowDogImg;
-  static width: number = 100;
-  static height: number = 91.3;
-  static weight: number = 1;
-  static speed: number = 1;
-  static lives: number = 3;
-  static energy: number = 100;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 1;
+  public static name: Heroes = Heroes.SHADOW_DOG;
+  public static image: string = ShadowDogImg;
+  public static width: number = 100;
+  public static height: number = 91.3;
+  public static weight: number = 1;
+  public static speed: number = 1;
+  public static lives: number = 3;
+  public static energy: number = 100;
+  public static fps: number = 20;
+  public static sprite = {
     width: 6876,
     height: 5230,
   };
-  static frame = {
+  public static frame = {
     width: 575,
     height: 523,
   };
-  static states: States[] = [
+  public static states: States[] = [
     {
       key: HeroStates.IDLE,
       name: "IDLE",
@@ -109,7 +109,7 @@ class ShadowDog {
     },
   ];
 
-  static get heroObj(): HeroObj {
+  public static get heroObj(): HeroObj {
     return {
       id: ShadowDog.id,
       name: ShadowDog.name,

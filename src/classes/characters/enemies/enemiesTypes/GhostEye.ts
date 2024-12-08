@@ -7,12 +7,15 @@ class GhostEye extends FlyingEnemy {
   public readonly uniqueName = GhostEye.uniqueName;
   public readonly type = GhostEye.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(GhostEyeObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.va = Math.random() * 0.08 + 0.03;
 
     this.vFrameX = (this.vy + this.angleCurve + 10) * this.sizeScale;

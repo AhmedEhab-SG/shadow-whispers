@@ -7,14 +7,14 @@ import layer5 from "../../assets/sprite/environments/forest/layer-5.png";
 import Environments from "../../enum/Environments";
 
 class Forest {
-  static id: number = 2;
-  static name: Environments = Environments.FOREST;
-  static width: number = 1667;
-  static height: number = 500;
-  static jumpHeight: number = 25;
-  static gravity: number = 0.45;
-  static groundMargin: number = 50;
-  static layers: Layer[] = [
+  public static id: number = 2;
+  public static name: Environments = Environments.FOREST;
+  public static width: number = 1667;
+  public static height: number = 500;
+  public static jumpHeight: number = 25;
+  public static gravity: number = 0.45;
+  public static groundMargin: number = 50;
+  public static layers: Layer[] = [
     {
       image: layer1,
       speed: 0,
@@ -37,7 +37,7 @@ class Forest {
     },
   ];
 
-  static get environmentObj(): EnvironmentObj {
+  public static get environmentObj(): EnvironmentObj {
     return {
       id: Forest.id,
       name: Forest.name,

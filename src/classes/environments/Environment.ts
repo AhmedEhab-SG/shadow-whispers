@@ -2,15 +2,14 @@ import IDrawable from "../../interfaces/IDrawable";
 import { EnvironmentObj } from "../../types/environment";
 import Layer from "./Layer";
 
-class Environment implements IDrawable {
+abstract class Environment implements IDrawable {
   private _layers: Layer[] = [];
-  private _groundMargin: number = 0;
+  private _groundMargin: number;
 
-  constructor(private environmentObj: EnvironmentObj, private height: number) {
-    this.init();
-  }
-
-  init() {
+  protected constructor(
+    private environmentObj: EnvironmentObj,
+    private height: number
+  ) {
     this._layers = this.environmentObj.layers.map(
       ({ image, speed }) =>
         new Layer(image, this.environmentObj.width, this.height, speed)
@@ -21,11 +20,11 @@ class Environment implements IDrawable {
       this.environmentObj.height;
   }
 
-  update({ gameSpeed }: { gameSpeed: number }): void {
+  public update({ gameSpeed }: { gameSpeed: number }): void {
     this._layers.forEach((layer) => layer.update({ gameSpeed }));
   }
 
-  draw(ctx: CanvasRenderingContext2D) {
+  public draw(ctx: CanvasRenderingContext2D) {
     this._layers.forEach((layer) => layer.draw(ctx));
   }
 

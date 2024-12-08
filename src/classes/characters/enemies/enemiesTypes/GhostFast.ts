@@ -7,12 +7,15 @@ class GhostFast extends FlyingEnemy {
   public readonly uniqueName = GhostFast.uniqueName;
   public readonly type = GhostFast.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(GhostFastObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.85;
 
     this.va = Math.random() * 0.08 + 0.03;

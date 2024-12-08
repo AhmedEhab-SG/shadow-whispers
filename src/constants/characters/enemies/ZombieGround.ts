@@ -4,22 +4,22 @@ import zombieGroundImg from "../../../assets/sprite/enemies/zombie_ground.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class ZombieGround {
-  static id: number = 18;
-  static name: Enemies = Enemies.ZOMBIE_GROUND;
-  static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
-  static image: string = zombieGroundImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 18;
+  public static name: Enemies = Enemies.ZOMBIE_GROUND;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
+  public static image: string = zombieGroundImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 961,
     height: 90,
   };
-  static frame = {
+  public static frame = {
     width: 120.12,
     height: 90,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class ZombieGround {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: ZombieGround.id,
       name: ZombieGround.name,

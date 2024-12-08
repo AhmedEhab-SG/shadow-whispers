@@ -9,7 +9,7 @@ class RunRight extends State {
   public static readonly stateName = HeroStates.RUN_RIGHT;
   public readonly stateName = RunRight.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, RunRight.stateName);
   }
 

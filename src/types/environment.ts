@@ -1,4 +1,5 @@
-import Environments from "../enum/Environments";
+import Environments from "../classes/environments";
+import EnvironmentsEnum from "../enum/Environments";
 
 type Layer = {
   image: string;
@@ -7,7 +8,7 @@ type Layer = {
 
 type EnvironmentObj = {
   id: number;
-  name: Environments;
+  name: EnvironmentsEnum;
   width: number;
   height: number;
   jumpHeight: number;
@@ -16,4 +17,8 @@ type EnvironmentObj = {
   layers: Layer[];
 };
 
-export type { EnvironmentObj, Layer };
+type EnvironmentsInstance = InstanceType<
+  (typeof Environments.EnvironmentTypes)[number]
+>;
+
+export type { EnvironmentObj, Layer, EnvironmentsInstance };

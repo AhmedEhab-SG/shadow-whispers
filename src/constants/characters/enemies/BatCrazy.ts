@@ -4,22 +4,22 @@ import batCrazyImg from "../../../assets/sprite/enemies/bat_crazy.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class BatCrazy {
-  static id: number = 2;
-  static name: Enemies = Enemies.BAT_CRAZY;
-  static type: EnemiesTypes = EnemiesTypes.FLYING;
-  static image: string = batCrazyImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 2;
+  public static name: Enemies = Enemies.BAT_CRAZY;
+  public static type: EnemiesTypes = EnemiesTypes.FLYING;
+  public static image: string = batCrazyImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 1904,
     height: 167,
   };
-  static frame = {
+  public static frame = {
     width: 238,
     height: 167,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class BatCrazy {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: BatCrazy.id,
       name: BatCrazy.name,

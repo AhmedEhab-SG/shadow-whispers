@@ -8,7 +8,7 @@ class Sit extends State {
   public static readonly stateName = HeroStates.SIT;
   public readonly stateName = Sit.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, Sit.stateName);
   }
 

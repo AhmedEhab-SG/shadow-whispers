@@ -13,8 +13,8 @@ class Canvas {
 
   private init() {
     this._tag.id = this._id;
-    this._tag.width = this.baseResolution.width;
-    this._tag.height = this.baseResolution.height;
+    this._tag.width = this.baseResolution.WIDTH;
+    this._tag.height = this.baseResolution.HEIGHT;
   }
 
   public create() {
@@ -25,8 +25,8 @@ class Canvas {
     this._ctx.clearRect(
       0,
       0,
-      this.baseResolution.width,
-      this.baseResolution.height
+      this.baseResolution.WIDTH,
+      this.baseResolution.HEIGHT
     );
   }
 

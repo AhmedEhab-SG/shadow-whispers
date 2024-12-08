@@ -4,22 +4,22 @@ import handImg from "../../../assets/sprite/enemies/hand.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Hand {
-  static id: number = 10;
-  static name: Enemies = Enemies.HAND;
-  static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
-  static image: string = handImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 10;
+  public static name: Enemies = Enemies.HAND;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
+  public static image: string = handImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 446,
     height: 80,
   };
-  static frame = {
+  public static frame = {
     width: 55.75,
     height: 80,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Hand {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Hand.id,
       name: Hand.name,

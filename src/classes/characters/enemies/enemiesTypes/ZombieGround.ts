@@ -9,7 +9,7 @@ class ZombieGround extends GroundEnemy {
 
   protected enviGroundMargin: number;
 
-  constructor(
+  public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
     { enviGroundMargin }: { enviGroundMargin: number }
@@ -20,8 +20,8 @@ class ZombieGround extends GroundEnemy {
     this.init();
   }
 
-  init() {
-    this.sizeScale = 0.90;
+  protected init() {
+    this.sizeScale = 0.9;
 
     this.vx = Math.random() * 0.8 + 0.3;
 
@@ -30,7 +30,7 @@ class ZombieGround extends GroundEnemy {
     super.init();
   }
 
-  update({
+  public update({
     deltaTime,
     gameSpeed,
   }: {

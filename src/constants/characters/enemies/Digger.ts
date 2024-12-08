@@ -4,22 +4,22 @@ import diggerImg from "../../../assets/sprite/enemies/digger.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Digger {
-  static id: number = 4;
-  static name: Enemies = Enemies.DIGGER;
-  static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
-  static image: string = diggerImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 4;
+  public static name: Enemies = Enemies.DIGGER;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
+  public static image: string = diggerImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 2080,
     height: 178,
   };
-  static frame = {
+  public static frame = {
     width: 260,
     height: 178,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Digger {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Digger.id,
       name: Digger.name,

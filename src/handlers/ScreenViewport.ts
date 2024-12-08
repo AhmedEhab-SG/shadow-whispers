@@ -1,7 +1,7 @@
 import AspectRatio from "../enum/AspectRatio";
 
 class ScreenViewport {
-  constructor(private _aspectRatio: AspectRatio) {}
+  public constructor(private _aspectRatio: AspectRatio) {}
 
   public calculateWidth(): number {
     return Math.floor(innerWidth);

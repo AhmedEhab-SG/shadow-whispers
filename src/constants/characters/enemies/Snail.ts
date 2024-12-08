@@ -4,22 +4,22 @@ import snailImg from "../../../assets/sprite/enemies/snail.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Snail {
-  static id: number = 13;
-  static name: Enemies = Enemies.SNAIL;
-  static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
-  static image: string = snailImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 13;
+  public static name: Enemies = Enemies.SNAIL;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
+  public static image: string = snailImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 960,
     height: 119,
   };
-  static frame = {
+  public static frame = {
     width: 160,
     height: 119,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Snail {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Snail.id,
       name: Snail.name,

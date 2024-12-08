@@ -8,7 +8,7 @@ class EnemyStates {
 
   public States: InstanceType<(typeof EnemyStates.States)[number]>[];
 
-  constructor(protected enemy: Enemy, protected enemyObj: EnemyObj) {
+  public constructor(protected enemy: Enemy, protected enemyObj: EnemyObj) {
     this.States = EnemyStates.States.map((StateClass) => {
       return new StateClass(this.enemy, this.enemyObj);
     });

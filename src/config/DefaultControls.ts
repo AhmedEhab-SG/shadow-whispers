@@ -1,7 +1,7 @@
 import BaseKeys from "../enum/BaseKeys";
 
 class DefaultControls {
-  static controls: [BaseKeys, string[]][] = [
+  public static controls: [BaseKeys, string[]][] = [
     [BaseKeys.RIGHT, ["ArrowRight", "KeyD"]],
     [BaseKeys.LEFT, ["ArrowLeft", "KeyA"]],
     [BaseKeys.UP, ["ArrowUp", "KeyW"]],
@@ -10,7 +10,7 @@ class DefaultControls {
     [BaseKeys.DEBUG, ["KeyP"]],
   ];
 
-  static map = new Map<BaseKeys, string[]>(DefaultControls.controls);
+  public static map = new Map<BaseKeys, string[]>(DefaultControls.controls);
 }
 
 type DefaultControlsType = typeof DefaultControls;

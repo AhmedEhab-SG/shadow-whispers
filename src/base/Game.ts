@@ -36,7 +36,7 @@ class Game extends GameUtils implements IGame {
   private menu?: Menu;
   private inGame?: InGame;
 
-  constructor() {
+  public constructor() {
     super();
     this.init();
   }

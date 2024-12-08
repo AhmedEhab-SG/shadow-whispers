@@ -12,7 +12,7 @@ class Dive extends State {
 
   private enviGravity: number;
 
-  constructor(
+  public constructor(
     protected hero: Hero,
     protected heroObj: HeroObj,
     { enviGravity }: { enviGravity: number }

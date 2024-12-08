@@ -7,12 +7,15 @@ class Fly extends FlyingEnemy {
   public readonly uniqueName = Fly.uniqueName;
   public readonly type = Fly.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(FlyObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.8;
 
     this.va = Math.random() * 0.08 + 0.03;

@@ -1,7 +1,4 @@
-import BaseKeys from "../../enum/BaseKeys";
 import Sprite from "../../utils/Sprite";
-import Boom from "../vfx/Boom";
-import Enemy from "./enemies/Enemy";
 
 abstract class Character extends Sprite {
   private _width = 0;
@@ -32,21 +29,7 @@ abstract class Character extends Sprite {
     );
   }
 
-  abstract update({
-    deltaTime,
-    keys,
-    cords,
-    gameSpeed,
-    enemies,
-    booms,
-  }: {
-    deltaTime: number;
-    keys: BaseKeys[];
-    cords: { x: number; y: number };
-    gameSpeed: number;
-    enemies: Enemy[];
-    booms: Boom[];
-  }): void;
+  abstract update({ deltaTime }: { deltaTime: number }): void;
 
   // Getters and Setters
   public get width() {

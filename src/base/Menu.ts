@@ -4,7 +4,7 @@ import IDrawable from "../interfaces/IDrawable";
 import Interval from "../utils/Interval";
 
 class Menu extends Interval implements IDrawable {
-  constructor(
+  public constructor(
     private width: number,
     private height: number,
     private gameStatus: GameStatus
@@ -15,10 +15,8 @@ class Menu extends Interval implements IDrawable {
 
   private init() {}
 
-  update({
+  public update({
     deltaTime,
-    keys,
-    cords,
   }: {
     deltaTime: number;
     keys: BaseKeys[];
@@ -29,7 +27,7 @@ class Menu extends Interval implements IDrawable {
     if (deltaTime) return;
   }
 
-  draw(ctx: CanvasRenderingContext2D): void {
+  public draw(_ctx: CanvasRenderingContext2D): void {
     if (this.gameStatus !== GameStatus.MENU) return;
   }
 }

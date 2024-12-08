@@ -7,12 +7,15 @@ class Ghost extends FlyingEnemy {
   public readonly uniqueName = Ghost.uniqueName;
   public readonly type = Ghost.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(GhostObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.3;
 
     this.va = Math.random() * 0.08 + 0.03;

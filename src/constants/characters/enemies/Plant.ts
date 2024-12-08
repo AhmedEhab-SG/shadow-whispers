@@ -4,22 +4,22 @@ import plantImg from "../../../assets/sprite/enemies/plant.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Plant {
-  static id: number = 11;
-  static name: Enemies = Enemies.PLANT;
-  static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
-  static image: string = plantImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 11;
+  public static name: Enemies = Enemies.PLANT;
+  public static type: EnemiesTypes = EnemiesTypes.GROUND_STATIC;
+  public static image: string = plantImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 120,
     height: 87,
   };
-  static frame = {
+  public static frame = {
     width: 60,
     height: 87,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Plant {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Plant.id,
       name: Plant.name,

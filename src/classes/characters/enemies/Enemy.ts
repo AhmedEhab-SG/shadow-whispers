@@ -11,7 +11,7 @@ abstract class Enemy extends Character {
 
   private _vFrameX: number = 1;
 
-  constructor(protected enemyObj: EnemyObj) {
+  protected constructor(protected enemyObj: EnemyObj) {
     super();
     this.loadImage(this.enemyObj.image);
 

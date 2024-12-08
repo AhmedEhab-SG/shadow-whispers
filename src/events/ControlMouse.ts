@@ -2,7 +2,7 @@ class ControlMouse extends Event {
   private _cords: { x: number; y: number } = { x: 0, y: 0 };
   private _canvasRect: DOMRect;
 
-  constructor(private canvas: HTMLCanvasElement) {
+  public constructor(private canvas: HTMLCanvasElement) {
     super("controlMouse");
     this._canvasRect = this.canvas.getBoundingClientRect();
   }

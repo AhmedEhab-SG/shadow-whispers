@@ -3,40 +3,38 @@ import BaseKeys from "../../../enum/BaseKeys";
 import HeroStatesEnum from "../../../enum/HeroStates";
 import HeroStates from "../../../handlers/states/heroStates";
 import { HeroObj, HeroStateInstance } from "../../../types/hero";
+import FloatingMessage from "../../ui/FloatingMessage";
 import Boom from "../../vfx/Boom";
 import Particle from "../../vfx/particles/Particle";
 import Character from "../Character";
 import Enemy from "../enemies/Enemy";
 import EnemiesCollision from "./collisions/EnemyCollision";
 
-class Hero extends Character {
+abstract class Hero extends Character {
   private _lives = 0;
   private _energy = 0;
-  private maxEnergy = 0;
+  private _maxEnergy = 0;
 
-  private heroStates?: HeroStates;
+  private _heroStates?: HeroStates;
   private _currentState?: HeroStateInstance;
 
   private energyRef = { timer: 0 };
 
   private _particles: Particle[] = [];
 
-  constructor(
-    private heroObj: HeroObj,
-    private gameWidth: number,
-    private gameHeight: number,
-    private enviGroundMargin: number,
-    private enviGravity: number,
-    private _gameSpeed: number,
-    private maxGameSpeed: number,
-    public gameStatus: GameStatus,
-    private _score: number
+  protected constructor(
+    protected heroObj: HeroObj,
+    protected gameWidth: number,
+    protected gameHeight: number,
+    protected enviGroundMargin: number,
+    protected enviGravity: number,
+    protected _gameSpeed: number,
+    protected maxGameSpeed: number,
+    protected _score: number,
+    public gameStatus: GameStatus
   ) {
     super();
-    this.init();
-  }
 
-  private init(): void {
     this.loadImage(this.heroObj.image);
 
     this.sizeScale = 0.45;
@@ -47,10 +45,10 @@ class Hero extends Character {
 
     this._lives = this.heroObj.lives;
     this._energy = this.heroObj.energy;
-    this.maxEnergy = this.heroObj.energy;
+    this._maxEnergy = this.heroObj.energy;
 
     // create hero states and init
-    this.heroStates = new HeroStates(this, this.heroObj, {
+    this._heroStates = new HeroStates(this, this.heroObj, {
       gameHeight: this.gameHeight,
       enviGroundMargin: this.enviGroundMargin,
       enviGravity: this.enviGravity,
@@ -58,7 +56,7 @@ class Hero extends Character {
     this.setState(HeroStatesEnum.IDLE, 0);
   }
 
-  private horizontalMovement(input: BaseKeys[]) {
+  protected horizontalMovement(input: BaseKeys[]) {
     this.x += this.vx; // velocity x
 
     if (input.includes(BaseKeys.RIGHT) && !input.includes(BaseKeys.LEFT)) {
@@ -74,7 +72,7 @@ class Hero extends Character {
 
       if (
         this._currentState ===
-        this.heroStates?.getState(HeroStatesEnum.ROLL_LEFT)
+        this._heroStates?.getState(HeroStatesEnum.ROLL_LEFT)
       )
         this.vx = -this.heroObj.speed - this.maxGameSpeed * 1.5;
     } else {
@@ -83,7 +81,7 @@ class Hero extends Character {
     }
   }
 
-  private verticalMovement() {
+  protected verticalMovement() {
     this.y += this.vy * this.enviGravity; // apply velocity
 
     if (!this.isOnGround()) this.vy += this.heroObj.weight * this.enviGravity;
@@ -95,7 +93,7 @@ class Hero extends Character {
       this.y = this.gameHeight - this.height - this.enviGroundMargin;
   }
 
-  private boundaries(): void {
+  protected boundaries(): void {
     // horizontal boundary check
     if (this.x < 0) this.x = 0;
     if (this.x > this.gameWidth - this.width)
@@ -117,7 +115,7 @@ class Hero extends Character {
     )
       return;
 
-    this._currentState = this.heroStates?.getState(state);
+    this._currentState = this._heroStates?.getState(state);
 
     // hanlde the speed of the game
     this._gameSpeed = this.maxGameSpeed * gameSpeedMod;
@@ -125,22 +123,23 @@ class Hero extends Character {
     this._currentState?.enter();
   }
 
-  private energyHandler(deltaTime: number) {
+  protected energyHandler(deltaTime: number) {
     this.runConstInterval(
       () => {
         if (
           this._currentState !==
-            this.heroStates?.getState(HeroStatesEnum.ROLL_RIGHT) &&
+            this._heroStates?.getState(HeroStatesEnum.ROLL_RIGHT) &&
           this._currentState !==
-            this.heroStates?.getState(HeroStatesEnum.ROLL_LEFT) &&
-          this._energy < this.maxEnergy
+            this._heroStates?.getState(HeroStatesEnum.ROLL_LEFT) &&
+          this._energy < this._maxEnergy
         ) {
           if (
-            this._currentState === this.heroStates?.getState(HeroStatesEnum.SIT)
+            this._currentState ===
+            this._heroStates?.getState(HeroStatesEnum.SIT)
           )
             this._energy += 15;
           else this._energy += 5;
-          if (this._energy > this.maxEnergy) this._energy = this.maxEnergy;
+          if (this._energy > this._maxEnergy) this._energy = this._maxEnergy;
         }
       },
       deltaTime,
@@ -154,16 +153,19 @@ class Hero extends Character {
     return this.y === this.gameHeight - this.height - this.enviGroundMargin;
   }
 
+  // overload the method
   public update({
     deltaTime,
     keys,
     enemies,
     booms,
+    floatingMessages,
   }: {
     deltaTime: number;
     keys: BaseKeys[];
     enemies: Enemy[];
     booms: Boom[];
+    floatingMessages: FloatingMessage[];
   }): void {
     // update with constant time
     this.animateCharacter(deltaTime, this.heroObj.fps);
@@ -185,7 +187,13 @@ class Hero extends Character {
 
     // enemy collision
 
-    EnemiesCollision.checkCollision(this, enemies, booms, this._score);
+    EnemiesCollision.checkCollision(
+      this,
+      enemies,
+      booms,
+      this._score,
+      floatingMessages
+    );
     this._score = EnemiesCollision.score;
 
     // update the particles
@@ -226,6 +234,23 @@ class Hero extends Character {
   }
 
   // Getters and Setters
+
+  protected get heroStates(): HeroStates {
+    return this._heroStates as HeroStates;
+  }
+
+  protected set heroStates(heroStates: HeroStates) {
+    this._heroStates = heroStates;
+  }
+
+  protected get maxEnergy(): number {
+    return this._maxEnergy;
+  }
+
+  protected set maxEnergy(maxEnergy: number) {
+    this._maxEnergy = maxEnergy;
+  }
+
   public get gameSpeed(): number {
     return this._gameSpeed;
   }

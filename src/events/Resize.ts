@@ -1,7 +1,7 @@
 import ScreenViewport from "../handlers/ScreenViewport";
 
 class Resize extends Event {
-  constructor(
+  public constructor(
     private screenViewport: ScreenViewport,
     private canvas: HTMLCanvasElement
   ) {

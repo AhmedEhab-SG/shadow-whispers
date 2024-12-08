@@ -4,22 +4,22 @@ import birdImg from "../../../assets/sprite/enemies/bird.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Bird {
-  static id: number = 3;
-  static name: Enemies = Enemies.BIRD;
-  static type: EnemiesTypes = EnemiesTypes.FLYING;
-  static image: string = birdImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 3;
+  public static name: Enemies = Enemies.BIRD;
+  public static type: EnemiesTypes = EnemiesTypes.FLYING;
+  public static image: string = birdImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 1904,
     height: 188,
   };
-  static frame = {
+  public static frame = {
     width: 266,
     height: 188,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Bird {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Bird.id,
       name: Bird.name,

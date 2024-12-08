@@ -9,7 +9,7 @@ class Dead extends State {
   public static readonly stateName = HeroStates.DEAD;
   public readonly stateName = Dead.stateName;
 
-  constructor(protected hero: Hero, protected heroObj: HeroObj) {
+  public constructor(protected hero: Hero, protected heroObj: HeroObj) {
     super(hero, heroObj, Dead.stateName);
   }
 

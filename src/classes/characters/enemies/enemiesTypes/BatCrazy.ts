@@ -7,18 +7,21 @@ class BatCrazy extends FlyingEnemy {
   public readonly uniqueName = BatCrazy.uniqueName;
   public readonly type = BatCrazy.type;
 
-  constructor(protected gameWidth: number, protected gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number
+  ) {
     super(BatCrazyObj.enemyObj, gameWidth, gameHeight);
     this.init();
   }
 
-  init() {
+  private init() {
     this.sizeScale = 0.28;
 
     this.vFrameX = (this.vy + 5) * this.sizeScale;
   }
 
-  update({
+  public update({
     deltaTime,
     gameSpeed,
   }: {

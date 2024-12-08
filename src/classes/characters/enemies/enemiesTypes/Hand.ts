@@ -9,7 +9,7 @@ class Hand extends GroundEnemy {
 
   protected enviGroundMargin: number;
 
-  constructor(
+  public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
     { enviGroundMargin }: { enviGroundMargin: number }
@@ -20,7 +20,7 @@ class Hand extends GroundEnemy {
     this.init();
   }
 
-  init() {
+  protected init() {
     this.sizeScale = 0.95; // scale size of the bird
 
     this.vx = Math.random() * 0.8 + 0.3; // velocity x-axis speed
@@ -30,7 +30,7 @@ class Hand extends GroundEnemy {
     super.init();
   }
 
-  update({
+  public update({
     deltaTime,
     gameSpeed,
   }: {

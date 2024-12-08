@@ -4,22 +4,22 @@ import spiderImg from "../../../assets/sprite/enemies/spider.png";
 import Enemies, { EnemiesTypes } from "../../../enum/Enemies";
 
 class Spider {
-  static id: number = 14;
-  static name: Enemies = Enemies.SPIDER;
-  static type: EnemiesTypes = EnemiesTypes.CLIMBING;
-  static image: string = spiderImg;
-  static weight: number = 0.8;
-  static speed: number = 0.5;
-  static fps: number = 20;
-  static sprite = {
+  public static id: number = 14;
+  public static name: Enemies = Enemies.SPIDER;
+  public static type: EnemiesTypes = EnemiesTypes.CLIMBING;
+  public static image: string = spiderImg;
+  public static weight: number = 0.8;
+  public static speed: number = 0.5;
+  public static fps: number = 20;
+  public static sprite = {
     width: 1860,
     height: 175,
   };
-  static frame = {
+  public static frame = {
     width: 310,
     height: 175,
   };
-  static states: state[] = [
+  public static states: state[] = [
     {
       key: EnemyStates.ENGAGE,
       name: "ENGAGE",
@@ -28,7 +28,7 @@ class Spider {
     },
   ];
 
-  static get enemyObj(): EnemyObj {
+  public static get enemyObj(): EnemyObj {
     return {
       id: Spider.id,
       name: Spider.name,
