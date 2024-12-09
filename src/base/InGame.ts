@@ -149,9 +149,9 @@ class InGame extends Interval implements IDrawable {
     this.ui.forEach((ui) =>
       ui.update({
         deltaTime,
+        score: this.score,
         hero: {
           energy: this.hero?.energy ?? 0,
-          score: this.score,
           lives: this.hero?.lives ?? 0,
         },
       })
@@ -194,9 +194,9 @@ class InGame extends Interval implements IDrawable {
     this.score = 0;
     this.time = 0;
     this.speed = 0;
-    this.gameStatus = GameStatus.PLAYING;
     this.activeEnemies = [];
     this.floatingMessages = [];
+    this.gameStatus = GameStatus.PLAYING;
     this.init();
   }
 }

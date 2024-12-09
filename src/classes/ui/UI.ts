@@ -26,13 +26,15 @@ abstract class UI extends Sprite {
     keys,
     cords,
     gameSpeed,
+    score,
     hero,
   }: {
     deltaTime: number;
     keys: BaseKeys[];
     cords: { x: number; y: number };
     gameSpeed: number;
-    hero: { energy: number; score: number; lives: number };
+    score: number;
+    hero: { energy: number; lives: number };
   }): void;
 
   public draw(ctx: CanvasRenderingContext2D): void {

@@ -45,8 +45,7 @@ class Game extends GameUtils implements IGame {
     this.width = this.canvas.width;
     this.height = this.canvas.height;
 
-    this.setStylesResolutionToCanvas(
-      this.canvas.tag,
+    this.canvas.setBaseStyles(
       this.screenViewport.calculateWidth(),
       this.screenViewport.calculateHeight()
     );
@@ -69,7 +68,7 @@ class Game extends GameUtils implements IGame {
     this.controlMouse.addHandlers();
   }
 
-  public update({ deltaTime }: { deltaTime: number }): void {
+  protected update({ deltaTime }: { deltaTime: number }): void {
     // start menu update
     this.menu?.update({
       deltaTime,
@@ -86,7 +85,7 @@ class Game extends GameUtils implements IGame {
     this.gameStatus = this.inGame?.gameStatus ?? this.gameStatus;
   }
 
-  public draw(): void {
+  protected draw(): void {
     // Clear the canvas
     this.canvas.clear();
 

@@ -1,6 +1,4 @@
-import IDrawable from "./IDrawable";
-
-interface IGame extends IDrawable {
+interface IGame {
   start(): void;
 }
 

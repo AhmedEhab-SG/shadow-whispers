@@ -7,8 +7,8 @@ class Score extends UI {
     this.textY = 30;
   }
 
-  public update({ hero }: { hero: { score: number } }): void {
-    this.text = `Score: ${hero.score.toFixed(0)}`;
+  public update({ score }: { score: number }): void {
+    this.text = `Score: ${score.toFixed(0)}`;
   }
 }
 

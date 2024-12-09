@@ -17,6 +17,24 @@ class Canvas {
     this._tag.height = this.baseResolution.HEIGHT;
   }
 
+  public setBaseStyles(
+    width: number,
+    height: number,
+    { defaultStyles = true } = {}
+  ) {
+    this._tag.style.width = `${width}px`;
+    this._tag.style.height = `${height}px`;
+
+    if (!defaultStyles) return;
+    this._tag.style.position = "absolute";
+    this._tag.style.border = "3px solid white";
+    this._tag.style.top = "50%";
+    this._tag.style.left = "50%";
+    this._tag.style.transform = "translate(-50%, -50%)";
+    this._tag.style.maxWidth = "100%";
+    this._tag.style.maxHeight = "100%";
+  }
+
   public create() {
     document.body.appendChild(this._tag);
   }
