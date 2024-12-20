@@ -1,4 +1,4 @@
-import UI from "./UI";
+import UI from "../UI";
 
 class Score extends UI {
   public constructor({ gameWidth }: { gameWidth?: number }) {

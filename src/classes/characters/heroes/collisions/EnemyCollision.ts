@@ -7,8 +7,6 @@ import FloatingMessage from "../../../ui/FloatingMessage";
 import heartImg from "../../../../assets/imgs/ui/heart.png";
 
 class EnemiesCollision extends Collision {
-  public static score: number = 0;
-
   public static checkCollision(
     hero: Hero,
     enemies: Enemy[],
@@ -29,7 +27,6 @@ class EnemiesCollision extends Collision {
         hero.currentState?.stateName === HeroStates.DIVE
       ) {
         // fix score
-        score++;
 
         floatingMessages.push(
           new FloatingMessage("+1", enemy.x, enemy.y, {
@@ -38,7 +35,7 @@ class EnemiesCollision extends Collision {
           })
         );
 
-        EnemiesCollision.score = score;
+        score++;
       } else {
         hero.setState(HeroStates.DIZZY, 0);
 
@@ -62,6 +59,9 @@ class EnemiesCollision extends Collision {
         );
       }
     });
+
+    // update score
+    hero.score = score;
   }
 }
 

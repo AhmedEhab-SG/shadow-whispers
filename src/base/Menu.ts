@@ -23,8 +23,6 @@ class Menu extends Interval implements IDrawable {
     cords: { x: number; y: number };
   }): void {
     if (this.gameStatus !== GameStatus.MENU) return;
-
-    if (deltaTime) return;
   }
 
   public draw(_ctx: CanvasRenderingContext2D): void {

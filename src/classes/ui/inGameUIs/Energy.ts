@@ -1,4 +1,4 @@
-import UI from "./UI";
+import UI from "../UI";
 
 class Energy extends UI {
   public constructor() {

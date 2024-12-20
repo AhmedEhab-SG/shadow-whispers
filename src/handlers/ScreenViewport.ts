@@ -3,12 +3,12 @@ import AspectRatio from "../enum/AspectRatio";
 class ScreenViewport {
   public constructor(private _aspectRatio: AspectRatio) {}
 
-  public calculateWidth(): number {
+  public calcWidth(): number {
     return Math.floor(innerWidth);
   }
 
-  public calculateHeight(): number {
-    return Math.floor(this.calculateWidth() / this._aspectRatio);
+  public calcHeight(): number {
+    return Math.floor(this.calcWidth() / this._aspectRatio);
   }
 
   // Getter and Setter

@@ -1,5 +1,7 @@
 import UI from "../classes/ui";
 
-type InGameUIInstance = InstanceType<(typeof UI.InGameUI)[number]>;
+type InGameUIInstance = InstanceType<(typeof UI.InGameUIs)[number]>;
 
-export type { InGameUIInstance };
+type MenuUIInstance = InstanceType<(typeof UI.MenuUIs)[number]>;
+
+export type { InGameUIInstance, MenuUIInstance };

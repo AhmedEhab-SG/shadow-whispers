@@ -46,8 +46,8 @@ class Game extends GameUtils implements IGame {
     this.height = this.canvas.height;
 
     this.canvas.setBaseStyles(
-      this.screenViewport.calculateWidth(),
-      this.screenViewport.calculateHeight()
+      this.screenViewport.calcWidth(),
+      this.screenViewport.calcHeight()
     );
     this.canvas.create();
 

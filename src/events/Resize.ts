@@ -17,8 +17,8 @@ class Resize extends Event {
   }
 
   private handler = (): void => {
-    this.canvas.style.width = `${this.screenViewport.calculateWidth()}px`;
-    this.canvas.style.height = `${this.screenViewport.calculateHeight()}px`;
+    this.canvas.style.width = `${this.screenViewport.calcWidth()}px`;
+    this.canvas.style.height = `${this.screenViewport.calcHeight()}px`;
   };
 }
 

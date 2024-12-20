@@ -2,12 +2,14 @@ import GameStatus from "../../../config/GameStatus";
 import BaseKeys from "../../../enum/BaseKeys";
 import HeroStatesEnum from "../../../enum/HeroStates";
 import HeroStates from "../../../handlers/states/heroStates";
+import { CollectableInstance } from "../../../types/collectable";
 import { HeroObj, HeroStateInstance } from "../../../types/hero";
 import FloatingMessage from "../../ui/FloatingMessage";
 import Boom from "../../vfx/Boom";
 import Particle from "../../vfx/particles/Particle";
 import Character from "../Character";
 import Enemy from "../enemies/Enemy";
+import CollectableCollision from "./collisions/CollectableCollision";
 import EnemiesCollision from "./collisions/EnemyCollision";
 
 abstract class Hero extends Character {
@@ -160,12 +162,14 @@ abstract class Hero extends Character {
     enemies,
     booms,
     floatingMessages,
+    collectables,
   }: {
     deltaTime: number;
     keys: BaseKeys[];
     enemies: Enemy[];
     booms: Boom[];
     floatingMessages: FloatingMessage[];
+    collectables: CollectableInstance[];
   }): void {
     // update with constant time
     this.animateCharacter(deltaTime, this.heroObj.fps);
@@ -186,7 +190,6 @@ abstract class Hero extends Character {
     this.energyHandler(deltaTime);
 
     // enemy collision
-
     EnemiesCollision.checkCollision(
       this,
       enemies,
@@ -194,7 +197,9 @@ abstract class Hero extends Character {
       this._score,
       floatingMessages
     );
-    this._score = EnemiesCollision.score;
+
+    // collectables collision
+    CollectableCollision.checkCollision(this, collectables, floatingMessages);
 
     // update the particles
     this._particles.forEach((particle) =>
@@ -243,7 +248,7 @@ abstract class Hero extends Character {
     this._heroStates = heroStates;
   }
 
-  protected get maxEnergy(): number {
+  public get maxEnergy(): number {
     return this._maxEnergy;
   }
 
@@ -277,6 +282,10 @@ abstract class Hero extends Character {
 
   public get score(): number {
     return this._score;
+  }
+
+  public set score(score: number) {
+    this._score = score;
   }
 
   public get particles(): Particle[] {

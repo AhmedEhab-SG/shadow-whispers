@@ -1,5 +1,5 @@
-import UI from "./UI";
-import heartImg from "../../assets/imgs/ui/heart.png";
+import UI from "../UI";
+import heartImg from "../../../assets/imgs/ui/heart.png";
 
 class Lives extends UI {
   private lives: number = 0;

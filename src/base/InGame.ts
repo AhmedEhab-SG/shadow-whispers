@@ -8,16 +8,21 @@ import IDrawable from "../interfaces/IDrawable";
 import { EnemiesTypesInstance } from "../types/enemy";
 import Interval from "../utils/Interval";
 import { EnvironmentsInstance } from "../types/environment";
-import FloatingMessage from "../classes/ui/FloatingMessage";
-import UI from "../classes/ui";
+import FloatingMessage from "../classes/ui/FloatingMessage.ts";
+import InGameUIs from "../classes/ui/index.ts";
 import { InGameUIInstance } from "../types/ui.ts";
 import Heroes from "../classes/characters/heroes";
+import { CollectableInstance } from "../types/collectable.ts";
+import Collectables from "../classes/collectables/index.ts";
 
 class InGame extends Interval implements IDrawable {
+  private level = 1;
+
+  private score = 0;
+
   private speed = 0;
   private maxSpeed = 3;
 
-  private score = 0;
   //private highScore = 0;
 
   private time = 0;
@@ -37,6 +42,10 @@ class InGame extends Interval implements IDrawable {
   private booms: Boom[] = [];
   private floatingMessages: FloatingMessage[] = [];
 
+  private collectables?: Collectables;
+  private activeCollectables: CollectableInstance[] = [];
+  private collectableTimerRef = { timer: 0 };
+
   public constructor(
     private width: number,
     private height: number,
@@ -51,10 +60,10 @@ class InGame extends Interval implements IDrawable {
   private init() {
     this.currentEnvironment = this.environments.getRandomEnvironment();
 
-    this.ui = new UI({
+    this.ui = new InGameUIs({
       gameWidth: this.width,
       timeLimit: this.maxTime,
-    }).getAllInGameUI();
+    }).getAllInGameUIs();
 
     this.hero = new Heroes(
       this.width,
@@ -71,6 +80,40 @@ class InGame extends Interval implements IDrawable {
       enviGroundMargin: this.currentEnvironment.groundMargin,
       heroCord: { x: this.hero.x, y: this.hero.y },
     });
+
+    this.collectables = new Collectables(
+      this.width,
+      this.height,
+      this.currentEnvironment.groundMargin
+    );
+  }
+
+  // collectable handling
+  private addCollectable(deltaTime: number) {
+    this.runConstInterval(
+      () =>
+        this.activeCollectables.push(
+          this.collectables?.getRandomCollectable()!
+        ),
+      deltaTime,
+      this.collectableTimerRef,
+      {
+        interval: 60 * 1000,
+      }
+    );
+  }
+
+  private destroyCollectable(deltaTime: number) {
+    this.activeCollectables.forEach((collectable) => {
+      collectable.update({
+        deltaTime,
+        gameSpeed: this.speed,
+      });
+      if (collectable.markForDelete)
+        this.activeCollectables = this.activeCollectables.filter(
+          (activeCollectable) => activeCollectable !== collectable
+        );
+    });
   }
 
   // enemy handling
@@ -80,7 +123,7 @@ class InGame extends Interval implements IDrawable {
       deltaTime,
       this.enemyTimerRef,
       {
-        interval: 500,
+        interval: this.level * 1000,
       }
     );
   }
@@ -122,6 +165,7 @@ class InGame extends Interval implements IDrawable {
       enemies: this.activeEnemies,
       booms: this.booms,
       floatingMessages: this.floatingMessages,
+      collectables: this.activeCollectables,
     });
     this.speed = this.hero?.gameSpeed ?? this.speed;
     this.gameStatus = this.hero?.gameStatus ?? this.gameStatus;
@@ -156,6 +200,10 @@ class InGame extends Interval implements IDrawable {
         },
       })
     );
+
+    // update collectable
+    this.addCollectable(deltaTime);
+    this.destroyCollectable(deltaTime);
   }
 
   public draw(ctx: CanvasRenderingContext2D, debugMode: boolean): void {
@@ -177,8 +225,10 @@ class InGame extends Interval implements IDrawable {
     this.activeEnemies.forEach((enemy) => enemy.draw(ctx, debugMode));
 
     // draw UI
-
     this.ui.forEach((ui) => ui.draw(ctx));
+
+    // draw collectable
+    this.activeCollectables.forEach((collectable) => collectable.draw(ctx));
   }
 
   private isTimesUp(deltaTime: number): boolean {
