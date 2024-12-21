@@ -19,6 +19,9 @@ class FallRight extends State {
 
     if (this.hero.isOnGround()) return this.hero.setState(HeroStates.IDLE, 0);
 
+    if (!this.hero.isOnGround() && keys.includes(BaseKeys.LEFT))
+      return this.hero.setState(HeroStates.FALL_LEFT, 0);
+
     if (
       !this.hero.isOnGround() &&
       keys.includes(BaseKeys.RIGHT) &&

@@ -102,7 +102,6 @@ class InGame extends Interval implements IDrawable {
       }
     );
   }
-
   private destroyCollectable(deltaTime: number) {
     this.activeCollectables.forEach((collectable) => {
       collectable.update({

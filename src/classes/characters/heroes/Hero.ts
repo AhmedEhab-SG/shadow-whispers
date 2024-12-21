@@ -2,8 +2,8 @@ import GameStatus from "../../../config/GameStatus";
 import BaseKeys from "../../../enum/BaseKeys";
 import HeroStatesEnum from "../../../enum/HeroStates";
 import HeroStates from "../../../handlers/states/heroStates";
-import { CollectableInstance } from "../../../types/collectable";
 import { HeroObj, HeroStateInstance } from "../../../types/hero";
+import Collectable from "../../collectables/Collectable";
 import FloatingMessage from "../../ui/FloatingMessage";
 import Boom from "../../vfx/Boom";
 import Particle from "../../vfx/particles/Particle";
@@ -169,7 +169,7 @@ abstract class Hero extends Character {
     enemies: Enemy[];
     booms: Boom[];
     floatingMessages: FloatingMessage[];
-    collectables: CollectableInstance[];
+    collectables: Collectable[];
   }): void {
     // update with constant time
     this.animateCharacter(deltaTime, this.heroObj.fps);
@@ -273,7 +273,8 @@ abstract class Hero extends Character {
   }
 
   public set energy(energy: number) {
-    this._energy = energy;
+    if (energy > this._maxEnergy) this._energy = this._maxEnergy;
+    else this._energy = energy;
   }
 
   public get currentState(): HeroStateInstance | undefined {

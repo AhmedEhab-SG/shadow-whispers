@@ -1,3 +1,4 @@
+import { CollectableObj } from "../../types/collectable";
 import Sprite from "../../utils/Sprite";
 import Hero from "../characters/heroes/Hero";
 
@@ -24,24 +25,29 @@ abstract class Collectable extends Sprite {
   private _strokeOffsetY: number = 0;
   private _storkeSizeScale = 1;
 
+  private readonly _effectMessage: string;
+  private readonly _effectNumber: number;
+
   protected constructor(
     protected gameWidth: number,
     protected gameHeight: number,
     protected enviGroundMargin: number,
-    protected imgSrc: string
+    protected collectableObj: CollectableObj
   ) {
     super();
-    this.loadImage(imgSrc);
+    this.loadImage(collectableObj.image);
 
     this.x = this.gameWidth;
+
+    this._effectMessage = collectableObj.effectMessage;
+    this._effectNumber = collectableObj.effectNumber;
 
     this.y =
       Math.random() *
       ((this.gameHeight - this.size - this.enviGroundMargin) *
         this._gameHightRange);
-  }
 
-  protected initSize(): void {
+    this.size = collectableObj.size;
     this._maxSize = this.size * this._maxSizeScale;
     this._minSize = this.size * this._minSizeScale;
   }
@@ -228,6 +234,14 @@ abstract class Collectable extends Sprite {
 
   protected set storkeSizeScale(storkeSizeScale: number) {
     this._storkeSizeScale = storkeSizeScale;
+  }
+
+  public get effectMessage(): string {
+    return this._effectMessage;
+  }
+
+  public get effectNumber(): number {
+    return this._effectNumber;
   }
 }
 

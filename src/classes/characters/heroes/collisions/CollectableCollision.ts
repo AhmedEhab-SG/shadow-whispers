@@ -2,12 +2,12 @@ import Collision from "./Collision.";
 import Hero from "../Hero";
 import HeroStates from "../../../../enum/HeroStates";
 import FloatingMessage from "../../../ui/FloatingMessage";
-import { CollectableInstance } from "../../../../types/collectable";
+import Collectable from "../../../collectables/Collectable";
 
 class CollectableCollision extends Collision {
   public static checkCollision(
     hero: Hero,
-    collectables: CollectableInstance[],
+    collectables: Collectable[],
     floatingMessages: FloatingMessage[]
   ): void {
     if (hero.currentState?.stateName === HeroStates.DEAD || !hero.lives) return;
@@ -29,7 +29,11 @@ class CollectableCollision extends Collision {
       collectable.destroy();
 
       floatingMessages.push(
-        new FloatingMessage(collectable.message, collectable.x, collectable.y)
+        new FloatingMessage(
+          collectable.effectMessage,
+          collectable.x,
+          collectable.y
+        )
       );
     });
   }
