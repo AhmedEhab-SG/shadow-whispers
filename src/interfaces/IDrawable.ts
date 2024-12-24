@@ -1,16 +1,14 @@
 import DefaultKeys from "../enum/BaseKeys";
+import { ControlActions } from "../types/events";
+import { GameStates } from "../types/game";
 
 interface IDrawable {
-  update({
-    deltaTime,
-    keys,
-    cords,
-    gameSpeed,
-  }: {
+  update({}: {
     deltaTime: number;
     keys: DefaultKeys[];
-    cords: { x: number; y: number };
+    controlActions: ControlActions;
     gameSpeed: number;
+    gameStatus: GameStates;
   }): void;
   draw(ctx: CanvasRenderingContext2D, debugMode?: boolean): void;
 }

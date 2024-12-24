@@ -1,36 +1,70 @@
-import { InGameUIInstance, MenuUIInstance } from "../../types/ui.ts";
+import {
+  InGameUIInstance,
+  MenuUIInstance,
+  PauseUIInstance,
+} from "../../types/ui.ts";
 import Energy from "./inGameUIs/Energy.ts";
 import Lives from "./inGameUIs/Lives.ts";
+import Pause from "./inGameUIs/Pause.ts";
 import Score from "./inGameUIs/Score.ts";
 import Time from "./inGameUIs/Time.ts";
+import Exit from "./menuUIs/Exit.ts";
+import Name from "./menuUIs/Name.ts";
+import Start from "./menuUIs/Start.ts";
+import Menu from "./pauseUIs/Menu.ts";
+import Paused from "./pauseUIs/Paused.ts";
+import Restart from "./pauseUIs/Restart.ts";
+import Resume from "./pauseUIs/Resume.ts";
 
 class UI {
-  public static readonly InGameUIs = [Energy, Score, Time, Lives];
-  public static readonly MenuUIs = [];
+  public static readonly InGameUIs = [Energy, Score, Time, Lives, Pause];
+  public static readonly MenuUIs = [Name, Start, Exit];
+  public static readonly PauseUI = [Paused, Resume, Restart, Menu];
 
-  private gameWidth: number;
-  private timeLimit: number;
+  private gameWidth: number | undefined;
+  private timeLimit: number | undefined;
+  private gameHeight: number | undefined;
 
   public constructor({
     gameWidth,
+    gameHeight,
     timeLimit,
   }: {
-    gameWidth: number;
-    timeLimit: number;
+    gameWidth?: number;
+    gameHeight?: number;
+    timeLimit?: number;
   }) {
     this.gameWidth = gameWidth;
+    this.gameHeight = gameHeight;
     this.timeLimit = timeLimit;
   }
 
   public getAllInGameUIs(): InGameUIInstance[] {
     return UI.InGameUIs.map(
       (InGameUI) =>
-        new InGameUI({ gameWidth: this.gameWidth, timeLimit: this.timeLimit })
+        new InGameUI({
+          gameWidth: this.gameWidth,
+          timeLimit: this.timeLimit,
+          gameHeight: this.gameHeight,
+        })
     );
   }
 
   public getAllMenuUIs(): MenuUIInstance[] {
-    return UI.MenuUIs.map((MenuUI) =>  MenuUI);
+    return UI.MenuUIs.map(
+      (MenuUI) =>
+        new MenuUI({ gameWidth: this.gameWidth, gameHeight: this.gameHeight })
+    );
+  }
+
+  public getAllPauseUI(): PauseUIInstance[] {
+    return UI.PauseUI.map(
+      (PauseUI) =>
+        new PauseUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+        })
+    );
   }
 }
 

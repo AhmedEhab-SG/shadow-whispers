@@ -1,6 +1,6 @@
 import Hero from "../Hero";
 import ShadowDogObj from "../../../../constants/characters/heros/ShadowDog";
-import GameStatus from "../../../../config/GameStatus";
+import { GameStates } from "../../../../types/game";
 
 class ShadowDog extends Hero {
   public static readonly uniqueName = ShadowDogObj.name;
@@ -14,7 +14,7 @@ class ShadowDog extends Hero {
     gameSpeed: number,
     maxGameSpeed: number,
     score: number,
-    gameStatus: GameStatus
+    gameStates: GameStates
   ) {
     super(
       ShadowDogObj.heroObj,
@@ -25,7 +25,7 @@ class ShadowDog extends Hero {
       gameSpeed,
       maxGameSpeed,
       score,
-      gameStatus
+      gameStates
     );
   }
 }

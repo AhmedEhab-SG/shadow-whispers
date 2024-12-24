@@ -7,14 +7,16 @@ class Time extends UI {
   public constructor({
     gameWidth,
     timeLimit,
+    gameHeight,
   }: {
     gameWidth?: number;
-    timeLimit: number;
+    gameHeight?: number;
+    timeLimit?: number;
   }) {
     super();
-    this.timeLimit = timeLimit;
+    this.timeLimit = timeLimit || 0;
     this.textX = gameWidth ? gameWidth * 0.75 - 50 : 0;
-    this.textY = 35;
+    this.textY = gameHeight ? gameHeight * 0.05 : 0;
   }
 
   private getTime(time: number, maxTime: number): string {

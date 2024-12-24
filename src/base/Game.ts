@@ -3,20 +3,24 @@ import GameStatus from "../config/GameStatus";
 import BaseResolution from "../constants/BaseResolution";
 import AspectRatio from "../enum/AspectRatio";
 import ControlKeys from "../events/ControlKeys";
-import ControlMouse from "../events/ControlMouse";
 import Resize from "../events/Resize";
 import ScreenViewport from "../handlers/ScreenViewport";
 import IGame from "../interfaces/IGame";
 import Canvas from "../utils/Canvas";
 import GameUtils from "../utils/GameUtils";
-import Menu from "./Menu";
-import InGame from "./InGame";
+import Menu from "./status/Menu";
+import InGame from "./status/InGame";
+import { GameStates } from "../types/game";
+import ControlInput from "../events/ControlInput";
 
 class Game extends GameUtils implements IGame {
   private width = 0;
   private height = 0;
-  private gameStatus: GameStatus = GameStatus.PLAYING;
-  private debugMode = false;
+
+  private gameStates: GameStates = {
+    debugMode: false,
+    status: GameStatus.MENU,
+  };
 
   // Canvas
   private canvas: Canvas = new Canvas(BaseResolution);
@@ -29,9 +33,9 @@ class Game extends GameUtils implements IGame {
   // Events
   private controlKeys: ControlKeys = new ControlKeys(
     DefaultControls,
-    this.debugMode
+    this.gameStates.debugMode
   );
-  private controlMouse: ControlMouse = new ControlMouse(this.canvas.tag);
+  private controlInput: ControlInput = new ControlInput(this.canvas.tag);
 
   private menu?: Menu;
   private inGame?: InGame;
@@ -57,32 +61,32 @@ class Game extends GameUtils implements IGame {
   private afterInit(): void {
     this.events();
 
-    // game features init
-    this.menu = new Menu(this.width, this.height, this.gameStatus);
-    this.inGame = new InGame(this.width, this.height, this.gameStatus);
+    // game status init
+    this.menu = new Menu(this.width, this.height, this.gameStates);
+    this.inGame = new InGame(this.width, this.height, this.gameStates);
   }
 
   private events(): void {
     new Resize(this.screenViewport, this.canvas.tag).addHandler();
     this.controlKeys.addHandlers();
-    this.controlMouse.addHandlers();
+    this.controlInput.addHandlers();
   }
 
   protected update({ deltaTime }: { deltaTime: number }): void {
     // start menu update
+
     this.menu?.update({
       deltaTime,
       keys: this.controlKeys.keys,
-      cords: this.controlMouse.cords,
+      controlActions: this.controlInput.controlActions,
     });
 
     // in game update
     this.inGame?.update({
       deltaTime,
       keys: this.controlKeys.keys,
-      cords: this.controlMouse.cords,
+      controlActions: this.controlInput.controlActions,
     });
-    this.gameStatus = this.inGame?.gameStatus ?? this.gameStatus;
   }
 
   protected draw(): void {

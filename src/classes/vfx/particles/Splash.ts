@@ -31,6 +31,8 @@ class Splash extends Particle {
     this.gravity += 0.1;
 
     this.vy += this.gravity;
+
+    this.fadeParticle();
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {

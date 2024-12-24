@@ -1,7 +1,7 @@
-import GameStatus from "../../../config/GameStatus";
 import BaseKeys from "../../../enum/BaseKeys";
 import HeroStatesEnum from "../../../enum/HeroStates";
 import HeroStates from "../../../handlers/states/heroStates";
+import { GameStates } from "../../../types/game";
 import { HeroObj, HeroStateInstance } from "../../../types/hero";
 import Collectable from "../../collectables/Collectable";
 import FloatingMessage from "../../ui/FloatingMessage";
@@ -33,7 +33,7 @@ abstract class Hero extends Character {
     protected _gameSpeed: number,
     protected maxGameSpeed: number,
     protected _score: number,
-    public gameStatus: GameStatus
+    public gameStates: GameStates
   ) {
     super();
 

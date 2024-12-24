@@ -29,6 +29,8 @@ class Fire extends Particle {
     this.x += Math.sin(this.angle * 10);
 
     this.y += Math.random() * 2 - 1 - this.vy;
+
+    this.fadeParticle();
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {

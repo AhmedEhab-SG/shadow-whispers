@@ -23,7 +23,7 @@ class Dead extends State {
     //switch to falling state and then die
 
     if (this.hero.frameX >= this.hero.maxFrameX && this.hero.isOnGround())
-      this.hero.gameStatus = GameStatus.OVER;
+      this.hero.gameStates.status = GameStatus.OVER;
 
     //stops the game
   }

@@ -21,6 +21,8 @@ class Dust extends Particle {
     super.update({ gameSpeed });
     this.size *= 0.95;
     this.y -= this.vy;
+
+    this.fadeParticle();
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {

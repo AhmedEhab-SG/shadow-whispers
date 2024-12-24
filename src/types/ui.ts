@@ -4,4 +4,6 @@ type InGameUIInstance = InstanceType<(typeof UI.InGameUIs)[number]>;
 
 type MenuUIInstance = InstanceType<(typeof UI.MenuUIs)[number]>;
 
-export type { InGameUIInstance, MenuUIInstance };
+type PauseUIInstance = InstanceType<(typeof UI.PauseUI)[number]>;
+
+export type { InGameUIInstance, MenuUIInstance, PauseUIInstance };

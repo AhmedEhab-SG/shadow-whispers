@@ -1,4 +1,6 @@
 import BaseKeys from "../../enum/BaseKeys";
+import { ControlActions } from "../../types/events";
+import { GameStates } from "../../types/game";
 import Sprite from "../../utils/Sprite";
 
 abstract class UI extends Sprite {
@@ -14,6 +16,10 @@ abstract class UI extends Sprite {
   private _imgY: number = 0;
   private _imgSize: number = 0;
   private _drawImg: boolean = false;
+  private _shdowColor: string = "white";
+
+  private _textWidth: number = 0;
+  private _textHeight: number = 0;
 
   private _markForDelete: boolean = false;
 
@@ -21,25 +27,48 @@ abstract class UI extends Sprite {
     this._markForDelete = true;
   }
 
-  abstract update({
-    deltaTime,
-    keys,
-    cords,
-    gameSpeed,
-    score,
-    hero,
-  }: {
+  protected isClicked(controlActions: ControlActions): boolean {
+    return (
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY &&
+      controlActions.isClick
+    );
+  }
+
+  protected isHover(controlActions: ControlActions): boolean {
+    return (
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY
+    );
+  }
+
+  protected isHold(controlActions: ControlActions): boolean {
+    return (
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY &&
+      controlActions.isHold
+    );
+  }
+
+  abstract update({}: {
     deltaTime: number;
     keys: BaseKeys[];
-    cords: { x: number; y: number };
+    controlActions: ControlActions;
     gameSpeed: number;
     score: number;
     hero: { energy: number; lives: number };
+    gameStates: GameStates;
   }): void;
 
   public draw(ctx: CanvasRenderingContext2D): void {
     ctx.save();
-    ctx.shadowColor = "white";
+    ctx.shadowColor = this._shdowColor;
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
     ctx.shadowBlur = 5;
@@ -54,6 +83,9 @@ abstract class UI extends Sprite {
     ctx.font = `${this._fontSize}px ${this._fontFamily}`;
     ctx.fillStyle = this._color;
     ctx.fillText(this._text, this._textX, this._textY);
+    this._textWidth = ctx.measureText(this.text).width;
+    this._textHeight = ctx.measureText(this.text).actualBoundingBoxAscent;
+
     ctx.restore();
   }
 
@@ -61,6 +93,22 @@ abstract class UI extends Sprite {
 
   protected get text(): string {
     return this._text;
+  }
+
+  protected get textWidth(): number {
+    return this._textWidth;
+  }
+
+  protected set textWidth(textWidth: number) {
+    this._textWidth = textWidth;
+  }
+
+  protected get textHeight(): number {
+    return this._textHeight;
+  }
+
+  protected set textHeight(textHeight: number) {
+    this._textHeight = textHeight;
   }
 
   protected set text(text: string) {
@@ -127,6 +175,14 @@ abstract class UI extends Sprite {
 
   protected set imgSize(imgSize: number) {
     this._imgSize = imgSize;
+  }
+
+  protected get shdowColor(): string {
+    return this._shdowColor;
+  }
+
+  protected set shdowColor(shdowColor: string) {
+    this._shdowColor = shdowColor;
   }
 
   protected get drawImg(): boolean {

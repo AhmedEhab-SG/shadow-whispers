@@ -1,5 +1,6 @@
 import BaseKeys from "../enum/BaseKeys";
 import IDrawable from "../interfaces/IDrawable";
+import { ControlActions } from "../types/events";
 import Interval from "./Interval";
 
 abstract class Sprite extends Interval implements IDrawable {
@@ -16,12 +17,12 @@ abstract class Sprite extends Interval implements IDrawable {
   abstract update({
     deltaTime,
     keys,
-    cords,
+    controlActions,
     gameSpeed,
   }: {
     deltaTime: number;
     keys: BaseKeys[];
-    cords: { x: number; y: number };
+    controlActions: ControlActions;
     gameSpeed: number;
   }): void;
 

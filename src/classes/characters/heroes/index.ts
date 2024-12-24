@@ -1,7 +1,7 @@
 import { HeroesTypesInstance } from "../../../types/hero";
 import HeroesEnum from "../../../enum/Heroes";
 import ShadowDog from "./heroTypes/ShadowDog";
-import GameStatus from "../../../config/GameStatus";
+import { GameStates } from "../../../types/game";
 
 class Heroes {
   public static readonly HeroTypes = [ShadowDog];
@@ -14,7 +14,7 @@ class Heroes {
     private gameSpeed: number,
     private maxGameSpeed: number,
     private score: number,
-    public gameStatus: GameStatus
+    private gameStates: GameStates
   ) {}
 
   public getHeroByName(uniqueName: HeroesEnum): HeroesTypesInstance {
@@ -28,7 +28,7 @@ class Heroes {
       this.gameSpeed,
       this.maxGameSpeed,
       this.score,
-      this.gameStatus
+      this.gameStates
     );
   }
 
@@ -43,7 +43,7 @@ class Heroes {
       this.gameSpeed,
       this.maxGameSpeed,
       this.score,
-      this.gameStatus
+      this.gameStates
     );
   }
 
@@ -58,7 +58,7 @@ class Heroes {
           this.gameSpeed,
           this.maxGameSpeed,
           this.score,
-          this.gameStatus
+          this.gameStates
         )
     );
   }

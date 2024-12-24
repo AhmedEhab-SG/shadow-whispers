@@ -16,10 +16,18 @@ abstract class Particle extends Sprite {
 
   public update({ gameSpeed }: { gameSpeed: number }): void {
     this._x -= this._vx + gameSpeed;
+  }
 
-    this._size *= 0.98;
+  protected fadeParticle({
+    sizeMod = 0.98,
+    minSize = 0.5,
+  }: {
+    sizeMod?: number;
+    minSize?: number;
+  } = {}): void {
+    this._size *= sizeMod;
 
-    if (this._size < 0.5) this.destroy();
+    if (this._size < minSize) this.destroy();
   }
 
   abstract draw(ctx: CanvasRenderingContext2D): void;
