@@ -10,16 +10,14 @@ import Interval from "../../utils/Interval.ts";
 import { EnvironmentsInstance } from "../../types/environment.ts";
 import FloatingMessage from "../../classes/ui/FloatingMessage.ts";
 import UI from "../../classes/ui/index.ts";
-import { InGameUIInstance, PauseUIInstance } from "../../types/ui.ts";
+import { PlayingUIInstance } from "../../types/ui.ts";
 import Heroes from "../../classes/characters/heroes/index.ts";
 import { CollectableInstance } from "../../types/collectable.ts";
 import Collectables from "../../classes/collectables/index.ts";
 import { GameStates } from "../../types/game.ts";
 import { ControlActions } from "../../types/events.ts";
-import Backgrounds from "../../classes/backgrounds/index.ts";
-import BackgroundsEnum from "../../enum/Backgrounds.ts";
 
-class InGame extends Interval implements IDrawable {
+class Playing extends Interval implements IDrawable {
   private level = 1;
 
   private score = 0;
@@ -41,8 +39,7 @@ class InGame extends Interval implements IDrawable {
   private activeEnemies: EnemiesTypesInstance[] = [];
   private enemyTimerRef = { timer: 0 };
 
-  private inGameUi: InGameUIInstance[] = [];
-  private pauseUi: PauseUIInstance[] = [];
+  private ui: PlayingUIInstance[] = [];
 
   private booms: Boom[] = [];
   private floatingMessages: FloatingMessage[] = [];
@@ -50,8 +47,6 @@ class InGame extends Interval implements IDrawable {
   private collectables?: Collectables;
   private activeCollectables: CollectableInstance[] = [];
   private collectableTimerRef = { timer: 0 };
-
-  private backgrounds?: Backgrounds;
 
   public constructor(
     private width: number,
@@ -67,18 +62,11 @@ class InGame extends Interval implements IDrawable {
   private init() {
     this.currentEnvironment = this.environments.getRandomEnvironment();
 
-    this.inGameUi = new UI({
+    this.ui = new UI({
       gameWidth: this.width,
       timeLimit: this.maxTime,
       gameHeight: this.height,
-    }).getAllInGameUIs();
-
-    this.pauseUi = new UI({
-      gameWidth: this.width,
-      gameHeight: this.height,
-    }).getAllPauseUI();
-
-    this.backgrounds = new Backgrounds(this.width, this.height);
+    }).getAllPlayingUIs();
 
     this.hero = new Heroes(
       this.width,
@@ -164,9 +152,6 @@ class InGame extends Interval implements IDrawable {
     keys: BaseKeys[];
     controlActions: ControlActions;
   }): void {
-    // update pause screen
-    this.pauseUpdate(controlActions);
-
     if (this.gameStates.status === GameStatus.RESTART) this.restart();
 
     if (this.gameStates.status !== GameStatus.PLAYING) return;
@@ -208,7 +193,7 @@ class InGame extends Interval implements IDrawable {
     );
 
     // update UI
-    this.inGameUi.forEach((ui) =>
+    this.ui.forEach((ui) =>
       ui.update({
         deltaTime,
         score: this.score,
@@ -249,33 +234,10 @@ class InGame extends Interval implements IDrawable {
     this.activeEnemies.forEach((enemy) => enemy.draw(ctx, debugMode));
 
     // draw UI
-    this.inGameUi.forEach((ui) => ui.draw(ctx));
+    this.ui.forEach((ui) => ui.draw(ctx));
 
     // draw collectable
     this.activeCollectables.forEach((collectable) => collectable.draw(ctx));
-
-    // draw pause screen
-    this.pauseDraw(ctx);
-  }
-
-  private pauseDraw(ctx: CanvasRenderingContext2D): void {
-    if (this.gameStates.status !== GameStatus.PAUSED) return;
-    this.backgrounds
-      ?.getBackgroundsByName(BackgroundsEnum.TRNASPARENT)
-      ?.draw(ctx);
-
-    this.pauseUi.forEach((ui) => ui.draw(ctx));
-  }
-
-  private pauseUpdate(controlActions: ControlActions): void {
-    if (this.gameStates.status !== GameStatus.PAUSED) return;
-
-    this.pauseUi.forEach((ui) =>
-      ui.update({
-        controlActions,
-        gameStates: this.gameStates,
-      })
-    );
   }
 
   private isTimesUp(deltaTime: number): boolean {
@@ -298,4 +260,4 @@ class InGame extends Interval implements IDrawable {
   }
 }
 
-export default InGame;
+export default Playing;

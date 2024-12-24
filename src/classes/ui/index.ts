@@ -1,13 +1,13 @@
 import {
-  InGameUIInstance,
+  PlayingUIInstance,
   MenuUIInstance,
   PauseUIInstance,
 } from "../../types/ui.ts";
-import Energy from "./inGameUIs/Energy.ts";
-import Lives from "./inGameUIs/Lives.ts";
-import Pause from "./inGameUIs/Pause.ts";
-import Score from "./inGameUIs/Score.ts";
-import Time from "./inGameUIs/Time.ts";
+import Energy from "./PlayingUIs/Energy.ts";
+import Lives from "./PlayingUIs/Lives.ts";
+import Pause from "./PlayingUIs/Pause.ts";
+import Score from "./PlayingUIs/Score.ts";
+import Time from "./PlayingUIs/Time.ts";
 import Exit from "./menuUIs/Exit.ts";
 import Name from "./menuUIs/Name.ts";
 import Start from "./menuUIs/Start.ts";
@@ -17,7 +17,7 @@ import Restart from "./pauseUIs/Restart.ts";
 import Resume from "./pauseUIs/Resume.ts";
 
 class UI {
-  public static readonly InGameUIs = [Energy, Score, Time, Lives, Pause];
+  public static readonly PlayingUIs = [Energy, Score, Time, Lives, Pause];
   public static readonly MenuUIs = [Name, Start, Exit];
   public static readonly PauseUI = [Paused, Resume, Restart, Menu];
 
@@ -39,8 +39,8 @@ class UI {
     this.timeLimit = timeLimit;
   }
 
-  public getAllInGameUIs(): InGameUIInstance[] {
-    return UI.InGameUIs.map(
+  public getAllPlayingUIs(): PlayingUIInstance[] {
+    return UI.PlayingUIs.map(
       (InGameUI) =>
         new InGameUI({
           gameWidth: this.gameWidth,

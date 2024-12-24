@@ -9,9 +9,10 @@ import IGame from "../interfaces/IGame";
 import Canvas from "../utils/Canvas";
 import GameUtils from "../utils/GameUtils";
 import Menu from "./status/Menu";
-import InGame from "./status/InGame";
+import Playing from "./status/Playing";
 import { GameStates } from "../types/game";
 import ControlInput from "../events/ControlInput";
+import Pause from "./status/Pause";
 
 class Game extends GameUtils implements IGame {
   private width = 0;
@@ -38,7 +39,8 @@ class Game extends GameUtils implements IGame {
   private controlInput: ControlInput = new ControlInput(this.canvas.tag);
 
   private menu?: Menu;
-  private inGame?: InGame;
+  private playing?: Playing;
+  private pause?: Pause;
 
   public constructor() {
     super();
@@ -63,7 +65,8 @@ class Game extends GameUtils implements IGame {
 
     // game status init
     this.menu = new Menu(this.width, this.height, this.gameStates);
-    this.inGame = new InGame(this.width, this.height, this.gameStates);
+    this.playing = new Playing(this.width, this.height, this.gameStates);
+    this.pause = new Pause(this.width, this.height, this.gameStates);
   }
 
   private events(): void {
@@ -82,9 +85,14 @@ class Game extends GameUtils implements IGame {
     });
 
     // in game update
-    this.inGame?.update({
+    this.playing?.update({
       deltaTime,
       keys: this.controlKeys.keys,
+      controlActions: this.controlInput.controlActions,
+    });
+
+    // pause update
+    this.pause?.update({
       controlActions: this.controlInput.controlActions,
     });
   }
@@ -97,7 +105,10 @@ class Game extends GameUtils implements IGame {
     this.menu?.draw(this.canvas.ctx);
 
     // in game draw
-    this.inGame?.draw(this.canvas.ctx, this.controlKeys.debugMode);
+    this.playing?.draw(this.canvas.ctx, this.controlKeys.debugMode);
+
+    // pause draw
+    this.pause?.draw(this.canvas.ctx);
   }
 
   public start(): void {
