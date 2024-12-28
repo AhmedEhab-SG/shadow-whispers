@@ -24,6 +24,8 @@ class Game extends GameUtils implements IGame {
     status: GameStatus.MENU,
   };
 
+  private debugTimerRef = { timer: 0 };
+
   // Canvas
   private canvas: Canvas = new Canvas(BaseResolution);
 
@@ -80,6 +82,12 @@ class Game extends GameUtils implements IGame {
 
   protected update({ deltaTime }: { deltaTime: number }): void {
     // start menu update
+
+    this.runConstInterval(
+      () => console.log(deltaTime),
+      deltaTime,
+      this.debugTimerRef
+    );
 
     this.menu?.update({
       deltaTime,
