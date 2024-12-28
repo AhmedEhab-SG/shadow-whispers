@@ -154,6 +154,9 @@ class Playing extends Interval implements IDrawable {
   }): void {
     if (this.gameStates.status === GameStatus.RESTART) this.restart();
 
+    if (this.gameStates.status === GameStatus.RESTART_LEVEL)
+      this.restartLevel();
+
     if (this.gameStates.status !== GameStatus.PLAYING) return;
 
     // timer game over
@@ -214,7 +217,9 @@ class Playing extends Interval implements IDrawable {
   public draw(ctx: CanvasRenderingContext2D, debugMode: boolean): void {
     if (
       this.gameStates.status !== GameStatus.PLAYING &&
-      this.gameStates.status !== GameStatus.PAUSED
+      this.gameStates.status !== GameStatus.PAUSED &&
+      this.gameStates.status !== GameStatus.OVER &&
+      this.gameStates.status !== GameStatus.TIMES_UP
     )
       return;
 
@@ -250,6 +255,11 @@ class Playing extends Interval implements IDrawable {
   }
 
   private restart(): void {
+    this.level = 1;
+    this.restartLevel();
+  }
+
+  private restartLevel(): void {
     this.score = 0;
     this.time = 0;
     this.speed = 0;

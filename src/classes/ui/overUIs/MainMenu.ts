@@ -3,7 +3,7 @@ import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class Pause extends UI {
+class MenuOver extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,9 +13,11 @@ class Pause extends UI {
   }) {
     super();
 
-    this.text = "Pause";
-    this.textX = gameWidth ? gameWidth * 0.5 : 0;
-    this.textY = gameHeight ? gameHeight * 0.05 : 0;
+    this.text = "Main Menu";
+    this.textX = gameWidth ? gameWidth * 0.58 : 0;
+    this.textY = gameHeight ? gameHeight * 0.5 : 0;
+    this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({
@@ -30,9 +32,10 @@ class Pause extends UI {
       this.shdowColor = "black";
 
       if (this.isClicked(controlActions)) {
-        this.color = "white";
+        this.color = "grey";
         this.shdowColor = "black";
-        gameStates.status = GameStatus.PAUSED;
+
+        gameStates.status = GameStatus.MENU;
       }
     } else {
       this.color = "black";
@@ -41,4 +44,4 @@ class Pause extends UI {
   }
 }
 
-export default Pause;
+export default MenuOver;

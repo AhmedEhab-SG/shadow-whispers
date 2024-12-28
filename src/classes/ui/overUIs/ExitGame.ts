@@ -1,9 +1,7 @@
-import GameStatus from "../../../config/GameStatus";
 import { ControlActions } from "../../../types/events";
-import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class Pause extends UI {
+class ExitGame extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,26 +11,23 @@ class Pause extends UI {
   }) {
     super();
 
-    this.text = "Pause";
-    this.textX = gameWidth ? gameWidth * 0.5 : 0;
-    this.textY = gameHeight ? gameHeight * 0.05 : 0;
+    this.text = "Exit Game";
+    this.textX = gameWidth ? gameWidth * 0.45 : 0;
+    this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
-  public update({
-    controlActions,
-    gameStates,
-  }: {
-    controlActions: ControlActions;
-    gameStates: GameStates;
-  }): void {
+  public update({ controlActions }: { controlActions: ControlActions }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shdowColor = "black";
 
       if (this.isClicked(controlActions)) {
-        this.color = "white";
+        this.color = "grey";
         this.shdowColor = "black";
-        gameStates.status = GameStatus.PAUSED;
+
+        close();
       }
     } else {
       this.color = "black";
@@ -41,4 +36,4 @@ class Pause extends UI {
   }
 }
 
-export default Pause;
+export default ExitGame;

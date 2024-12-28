@@ -13,6 +13,7 @@ import Playing from "./status/Playing";
 import { GameStates } from "../types/game";
 import ControlInput from "../events/ControlInput";
 import Pause from "./status/Pause";
+import Over from "./status/Over";
 
 class Game extends GameUtils implements IGame {
   private width = 0;
@@ -41,6 +42,7 @@ class Game extends GameUtils implements IGame {
   private menu?: Menu;
   private playing?: Playing;
   private pause?: Pause;
+  private over?: Over;
 
   public constructor() {
     super();
@@ -67,6 +69,7 @@ class Game extends GameUtils implements IGame {
     this.menu = new Menu(this.width, this.height, this.gameStates);
     this.playing = new Playing(this.width, this.height, this.gameStates);
     this.pause = new Pause(this.width, this.height, this.gameStates);
+    this.over = new Over(this.width, this.height, this.gameStates);
   }
 
   private events(): void {
@@ -95,6 +98,11 @@ class Game extends GameUtils implements IGame {
     this.pause?.update({
       controlActions: this.controlInput.controlActions,
     });
+
+    // over update
+    this.over?.update({
+      controlActions: this.controlInput.controlActions,
+    });
   }
 
   protected draw(): void {
@@ -109,6 +117,9 @@ class Game extends GameUtils implements IGame {
 
     // pause draw
     this.pause?.draw(this.canvas.ctx);
+
+    // over draw
+    this.over?.draw(this.canvas.ctx);
   }
 
   public start(): void {

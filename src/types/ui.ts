@@ -6,4 +6,11 @@ type MenuUIInstance = InstanceType<(typeof UI.MenuUIs)[number]>;
 
 type PauseUIInstance = InstanceType<(typeof UI.PauseUI)[number]>;
 
-export type { PlayingUIInstance, MenuUIInstance, PauseUIInstance };
+type OverUIInstance = InstanceType<(typeof UI.OverUIs)[number]>;
+
+export type {
+  PlayingUIInstance,
+  MenuUIInstance,
+  PauseUIInstance,
+  OverUIInstance,
+};
