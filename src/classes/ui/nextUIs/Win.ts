@@ -1,6 +1,6 @@
 import UI from "../UI";
 
-class GameOver extends UI {
+class Win extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,15 +10,15 @@ class GameOver extends UI {
   }) {
     super();
 
-    this.text = "Game Over";
-    this.textX = gameWidth ? gameWidth * 0.5 - 150 : 0;
+    this.text = "You Beat This Level!";
+    this.textX = gameWidth ? gameWidth * 0.3 : 0;
     this.textY = gameHeight ? gameHeight * 0.25 : 0;
     this.fontSize = 70;
-    this.color = "rgb(168, 0, 0)";
-    this.shadowColor = "rgb(0,0,0)";
+    this.color = "rgb(50,205,50)";
+    this.shadowColor = "black";
   }
 
   public update({}): void {}
 }
 
-export default GameOver;
+export default Win;

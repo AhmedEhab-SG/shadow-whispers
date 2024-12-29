@@ -21,17 +21,17 @@ class ExitGame extends UI {
   public update({ controlActions }: { controlActions: ControlActions }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shdowColor = "black";
+      this.shadowColor = "black";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shdowColor = "black";
+        this.shadowColor = "black";
 
         close();
       }
     } else {
       this.color = "black";
-      this.shdowColor = "white";
+      this.shadowColor = "white";
     }
   }
 }

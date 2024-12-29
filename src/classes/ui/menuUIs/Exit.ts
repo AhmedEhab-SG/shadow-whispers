@@ -15,7 +15,7 @@ class Exit extends UI {
     this.textY = gameHeight ? gameHeight * 0.65 : 0;
     this.text = "Exit";
     this.color = "grey";
-    this.shdowColor = "white";
+    this.shadowColor = "white";
     this.fontSize = 55;
     this.fontFamily = "Bangers, cursive";
   }
@@ -23,17 +23,17 @@ class Exit extends UI {
   public update({ controlActions }: { controlActions: ControlActions }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shdowColor = "grey";
+      this.shadowColor = "grey";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shdowColor = "white";
+        this.shadowColor = "white";
 
         close();
       }
     } else {
       this.color = "grey";
-      this.shdowColor = "white";
+      this.shadowColor = "white";
     }
   }
 }

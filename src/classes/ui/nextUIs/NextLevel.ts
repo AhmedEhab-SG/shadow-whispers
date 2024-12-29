@@ -3,7 +3,7 @@ import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class Restart extends UI {
+class NextLevel extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,10 +13,11 @@ class Restart extends UI {
   }) {
     super();
 
-    this.text = "Restart";
-    this.textX = gameWidth ? gameWidth * 0.5 - 55 : 0;
+    this.text = "Next Level";
+    this.textX = gameWidth ? gameWidth * 0.32 : 0;
     this.textY = gameHeight ? gameHeight * 0.5 : 0;
     this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({
@@ -34,7 +35,7 @@ class Restart extends UI {
         this.color = "grey";
         this.shadowColor = "black";
 
-        gameStates.status = GameStatus.RESTART;
+        gameStates.status = GameStatus.NEXT_LEVEL;
       }
     } else {
       this.color = "black";
@@ -43,4 +44,4 @@ class Restart extends UI {
   }
 }
 
-export default Restart;
+export default NextLevel;

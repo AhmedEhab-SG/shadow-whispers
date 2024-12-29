@@ -15,7 +15,7 @@ class Died extends UI {
     this.textY = gameHeight ? gameHeight * 0.35 : 0;
     this.fontSize = 60;
     this.color = "rgb(168, 0, 0)";
-    this.shdowColor = "rgb(0,0,0)";
+    this.shadowColor = "rgb(0,0,0)";
   }
 
   public update({}): void {}

@@ -11,7 +11,7 @@ class ShadowDog {
   public static height: number = 91.3;
   public static weight: number = 1;
   public static speed: number = 1;
-  public static lives: number = 3;
+  public static lives: number = 5;
   public static energy: number = 100;
   public static fps: number = 20;
   public static sprite = {

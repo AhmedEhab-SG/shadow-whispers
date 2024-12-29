@@ -8,9 +8,12 @@ type PauseUIInstance = InstanceType<(typeof UI.PauseUI)[number]>;
 
 type OverUIInstance = InstanceType<(typeof UI.OverUIs)[number]>;
 
+type NextUIInstance = InstanceType<(typeof UI.NextUIs)[number]>;
+
 export type {
   PlayingUIInstance,
   MenuUIInstance,
   PauseUIInstance,
   OverUIInstance,
+  NextUIInstance,
 };

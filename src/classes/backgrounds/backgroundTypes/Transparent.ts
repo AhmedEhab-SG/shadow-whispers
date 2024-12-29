@@ -5,7 +5,11 @@ class Transparent extends Background {
   public static readonly unquieName = Backgrounds.TRNASPARENT;
   public readonly unquieName = Transparent.unquieName;
 
-  public constructor(gameWidth: number, gameHeight: number) {
+  public constructor(
+    protected gameWidth: number,
+    protected gameHeight: number,
+    private color = "rgba(0, 0, 0, 0.5)"
+  ) {
     super(gameWidth, gameHeight);
   }
 
@@ -13,7 +17,7 @@ class Transparent extends Background {
 
   public draw(ctx: CanvasRenderingContext2D): void {
     ctx.save();
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillStyle = this.color;
     ctx.fillRect(0, 0, this.gameWidth, this.gameHeight);
     ctx.restore();
   }

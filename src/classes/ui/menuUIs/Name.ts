@@ -14,7 +14,7 @@ class Name extends UI {
     this.textY = gameHeight ? gameHeight * 0.25 : 0;
     this.text = "Shadow Wispers";
     this.color = "white";
-    this.shdowColor = "grey";
+    this.shadowColor = "grey";
     this.fontSize = 70;
   }
 

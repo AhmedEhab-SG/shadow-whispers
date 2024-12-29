@@ -2,8 +2,10 @@ import {
   PlayingUIInstance,
   MenuUIInstance,
   PauseUIInstance,
+  NextUIInstance,
 } from "../../types/ui.ts";
 import Energy from "./PlayingUIs/Energy.ts";
+import Level from "./PlayingUIs/Level.ts";
 import Lives from "./PlayingUIs/Lives.ts";
 import Pause from "./PlayingUIs/Pause.ts";
 import Score from "./PlayingUIs/Score.ts";
@@ -11,6 +13,8 @@ import Time from "./PlayingUIs/Time.ts";
 import Exit from "./menuUIs/Exit.ts";
 import Name from "./menuUIs/Name.ts";
 import Start from "./menuUIs/Start.ts";
+import NextLevel from "./nextUIs/NextLevel.ts";
+import Win from "./nextUIs/Win.ts";
 import Died from "./overUIs/Died.ts";
 import ExitGame from "./overUIs/ExitGame.ts";
 import GameOver from "./overUIs/GameOver.ts";
@@ -22,7 +26,14 @@ import Restart from "./pauseUIs/Restart.ts";
 import Resume from "./pauseUIs/Resume.ts";
 
 class UI {
-  public static readonly PlayingUIs = [Energy, Score, Time, Lives, Pause];
+  public static readonly PlayingUIs = [
+    Energy,
+    Score,
+    Time,
+    Lives,
+    Pause,
+    Level,
+  ];
   public static readonly MenuUIs = [Name, Start, Exit];
   public static readonly PauseUI = [Paused, Resume, Restart, Menu];
   public static readonly OverUIs = [
@@ -32,6 +43,7 @@ class UI {
     MainMenu,
     ExitGame,
   ];
+  public static readonly NextUIs = [NextLevel, Win, ExitGame, MainMenu];
 
   private gameWidth: number | undefined;
   private timeLimit: number | undefined;
@@ -83,6 +95,16 @@ class UI {
     return UI.OverUIs.map(
       (OverUI) =>
         new OverUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+        })
+    );
+  }
+
+  public getAllNextUIs(): NextUIInstance[] {
+    return UI.NextUIs.map(
+      (NextUI) =>
+        new NextUI({
           gameWidth: this.gameWidth,
           gameHeight: this.gameHeight,
         })

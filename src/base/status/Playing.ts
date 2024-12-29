@@ -21,6 +21,7 @@ class Playing extends Interval implements IDrawable {
   private level = 1;
 
   private score = 0;
+  private scorePerLevel = 50;
 
   private speed = 0;
   private maxSpeed = 3;
@@ -47,6 +48,14 @@ class Playing extends Interval implements IDrawable {
   private collectables?: Collectables;
   private activeCollectables: CollectableInstance[] = [];
   private collectableTimerRef = { timer: 0 };
+
+  private drawingStatus = [
+    GameStatus.PLAYING,
+    GameStatus.PAUSED,
+    GameStatus.OVER,
+    GameStatus.TIMES_UP,
+    GameStatus.NEXT,
+  ];
 
   public constructor(
     private width: number,
@@ -152,6 +161,10 @@ class Playing extends Interval implements IDrawable {
     keys: BaseKeys[];
     controlActions: ControlActions;
   }): void {
+    if (this.isLevelWin()) this.gameStates.status = GameStatus.NEXT;
+
+    if (this.gameStates.status === GameStatus.NEXT_LEVEL) this.nextLevelStart();
+
     if (this.gameStates.status === GameStatus.RESTART) this.restart();
 
     if (this.gameStates.status === GameStatus.RESTART_LEVEL)
@@ -200,7 +213,9 @@ class Playing extends Interval implements IDrawable {
       ui.update({
         deltaTime,
         score: this.score,
+        scorePerLevel: this.scorePerLevel,
         gameStates: this.gameStates,
+        level: this.level,
         controlActions,
         hero: {
           energy: this.hero?.energy ?? 0,
@@ -215,13 +230,7 @@ class Playing extends Interval implements IDrawable {
   }
 
   public draw(ctx: CanvasRenderingContext2D, debugMode: boolean): void {
-    if (
-      this.gameStates.status !== GameStatus.PLAYING &&
-      this.gameStates.status !== GameStatus.PAUSED &&
-      this.gameStates.status !== GameStatus.OVER &&
-      this.gameStates.status !== GameStatus.TIMES_UP
-    )
-      return;
+    if (!this.isKeepDrawing()) return;
 
     // draw environment
     this.currentEnvironment?.draw(ctx);
@@ -243,6 +252,12 @@ class Playing extends Interval implements IDrawable {
 
     // draw collectable
     this.activeCollectables.forEach((collectable) => collectable.draw(ctx));
+  }
+
+  private isKeepDrawing() {
+    return this.drawingStatus.some(
+      (status) => status === this.gameStates.status
+    );
   }
 
   private isTimesUp(deltaTime: number): boolean {
@@ -267,6 +282,17 @@ class Playing extends Interval implements IDrawable {
     this.floatingMessages = [];
     this.gameStates.status = GameStatus.PLAYING;
     this.init();
+  }
+
+  private nextLevelStart(): void {
+    this.level++;
+    this.score += this.scorePerLevel;
+    this.scorePerLevel += 50;
+    this.restartLevel();
+  }
+
+  private isLevelWin(): boolean {
+    return this.score >= this.scorePerLevel;
   }
 }
 

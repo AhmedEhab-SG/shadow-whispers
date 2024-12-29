@@ -16,7 +16,7 @@ abstract class UI extends Sprite {
   private _imgY: number = 0;
   private _imgSize: number = 0;
   private _drawImg: boolean = false;
-  private _shdowColor: string = "white";
+  private _shadowColor: string = "white";
 
   private _textWidth: number = 0;
   private _textHeight: number = 0;
@@ -62,13 +62,15 @@ abstract class UI extends Sprite {
     controlActions: ControlActions;
     gameSpeed: number;
     score: number;
+    scorePerLevel: number;
+    level: number;
     hero: { energy: number; lives: number };
     gameStates: GameStates;
   }): void;
 
   public draw(ctx: CanvasRenderingContext2D): void {
     ctx.save();
-    ctx.shadowColor = this._shdowColor;
+    ctx.shadowColor = this._shadowColor;
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
     ctx.shadowBlur = 5;
@@ -177,12 +179,12 @@ abstract class UI extends Sprite {
     this._imgSize = imgSize;
   }
 
-  protected get shdowColor(): string {
-    return this._shdowColor;
+  protected get shadowColor(): string {
+    return this._shadowColor;
   }
 
-  protected set shdowColor(shdowColor: string) {
-    this._shdowColor = shdowColor;
+  protected set shadowColor(shadowColor: string) {
+    this._shadowColor = shadowColor;
   }
 
   protected get drawImg(): boolean {

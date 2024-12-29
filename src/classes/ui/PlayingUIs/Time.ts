@@ -15,17 +15,15 @@ class Time extends UI {
   }) {
     super();
     this.timeLimit = timeLimit || 0;
-    this.textX = gameWidth ? gameWidth * 0.75 - 50 : 0;
+    this.textX = gameWidth ? gameWidth * 0.8 - 50 : 0;
     this.textY = gameHeight ? gameHeight * 0.05 : 0;
-  }
-
-  private getTime(time: number, maxTime: number): string {
-    return `${(time * 0.001).toFixed(1)}/${(maxTime * 0.001).toFixed(0)}`;
   }
 
   public update({ deltaTime }: { deltaTime: number }): void {
     this.time += deltaTime;
-    this.text = `Time: ${this.getTime(this.time, this.timeLimit)}`;
+    this.text = `Time: ${this.formatTime(
+      Math.floor(this.time * 0.001)
+    )}/${this.formatTime(this.timeLimit * 0.001)}`;
   }
 }
 

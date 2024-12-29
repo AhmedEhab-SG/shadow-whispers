@@ -29,17 +29,17 @@ class MenuOver extends UI {
   }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shdowColor = "black";
+      this.shadowColor = "black";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shdowColor = "black";
+        this.shadowColor = "black";
 
         gameStates.status = GameStatus.MENU;
       }
     } else {
       this.color = "black";
-      this.shdowColor = "white";
+      this.shadowColor = "white";
     }
   }
 }

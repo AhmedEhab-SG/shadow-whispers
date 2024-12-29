@@ -45,7 +45,7 @@ class ControlInput extends Event {
     window.removeEventListener("touchcancel", this.touchCancelHandler);
   }
 
-  private getMousePos(e: MouseEvent | TouchEvent): { x: number; y: number } {
+  private getActionPos(e: MouseEvent | TouchEvent): { x: number; y: number } {
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
 
@@ -58,7 +58,7 @@ class ControlInput extends Event {
     };
   }
 
-  private isMouseInCanvas(e: MouseEvent | TouchEvent): boolean {
+  private isActionInCanvas(e: MouseEvent | TouchEvent): boolean {
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
 
@@ -74,11 +74,11 @@ class ControlInput extends Event {
   private mouseDownHandler = (e: MouseEvent): void => {
     this._canvasRect = this.canvas.getBoundingClientRect();
 
-    if (this.isMouseInCanvas(e)) {
+    if (this.isActionInCanvas(e)) {
       return;
     }
 
-    const { x, y } = this.getMousePos(e);
+    const { x, y } = this.getActionPos(e);
     this._controlActions = {
       x,
       y,
@@ -96,7 +96,7 @@ class ControlInput extends Event {
   private mouseMoveHandler = (e: MouseEvent): void => {
     this._canvasRect = this.canvas.getBoundingClientRect();
 
-    if (this.isMouseInCanvas(e)) {
+    if (this.isActionInCanvas(e)) {
       this._controlActions = {
         ...this._controlActions,
         x: 0,
@@ -105,7 +105,7 @@ class ControlInput extends Event {
       return;
     }
 
-    const { x, y } = this.getMousePos(e);
+    const { x, y } = this.getActionPos(e);
     this._controlActions = {
       ...this._controlActions,
       x,
@@ -146,11 +146,11 @@ class ControlInput extends Event {
   private touchStartHandler = (e: TouchEvent): void => {
     this._canvasRect = this.canvas.getBoundingClientRect();
 
-    if (this.isMouseInCanvas(e)) {
+    if (this.isActionInCanvas(e)) {
       return;
     }
 
-    const { x, y } = this.getMousePos(e);
+    const { x, y } = this.getActionPos(e);
     this._controlActions = {
       x,
       y,
@@ -168,7 +168,7 @@ class ControlInput extends Event {
   private touchMoveHandler = (e: TouchEvent): void => {
     this._canvasRect = this.canvas.getBoundingClientRect();
 
-    if (this.isMouseInCanvas(e)) {
+    if (this.isActionInCanvas(e)) {
       this._controlActions = {
         ...this._controlActions,
         x: 0,
@@ -177,7 +177,7 @@ class ControlInput extends Event {
       return;
     }
 
-    const { x, y } = this.getMousePos(e);
+    const { x, y } = this.getActionPos(e);
     this._controlActions = {
       ...this._controlActions,
       x,

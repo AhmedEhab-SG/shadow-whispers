@@ -17,7 +17,7 @@ class Start extends UI {
     this.textY = gameHeight ? gameHeight * 0.5 : 0;
     this.text = "Start";
     this.color = "grey";
-    this.shdowColor = "white";
+    this.shadowColor = "white";
     this.fontSize = 50;
     this.fontFamily = "Bangers, cursive";
   }
@@ -31,17 +31,17 @@ class Start extends UI {
   }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shdowColor = "grey";
+      this.shadowColor = "grey";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shdowColor = "white";
+        this.shadowColor = "white";
 
         gameStates.status = GameStatus.RESTART;
       }
     } else {
       this.color = "grey";
-      this.shdowColor = "white";
+      this.shadowColor = "white";
     }
   }
 }

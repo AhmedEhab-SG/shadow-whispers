@@ -14,7 +14,7 @@ class Pause extends UI {
     super();
 
     this.text = "Pause";
-    this.textX = gameWidth ? gameWidth * 0.5 : 0;
+    this.textX = gameWidth ? gameWidth * 0.6 : 0;
     this.textY = gameHeight ? gameHeight * 0.05 : 0;
   }
 
@@ -27,16 +27,16 @@ class Pause extends UI {
   }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shdowColor = "black";
+      this.shadowColor = "black";
 
       if (this.isClicked(controlActions)) {
         this.color = "white";
-        this.shdowColor = "black";
+        this.shadowColor = "black";
         gameStates.status = GameStatus.PAUSED;
       }
     } else {
       this.color = "black";
-      this.shdowColor = "white";
+      this.shadowColor = "white";
     }
   }
 }

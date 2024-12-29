@@ -10,10 +10,17 @@ class Backgrounds {
     protected gameHeight: number
   ) {}
 
-  getBackgroundsByName(unquieName: BackgroundsEnum): BackgroundInstance {
+  getBackgroundsByName(
+    unquieName: BackgroundsEnum,
+    {
+      color,
+    }: {
+      color?: string;
+    } = {}
+  ): BackgroundInstance {
     return new (Backgrounds.backgrounds.find(
       (background) => background.unquieName === unquieName
-    )!)(this.gameWidth, this.gameHeight);
+    )!)(this.gameWidth, this.gameHeight, color);
   }
 }
 
