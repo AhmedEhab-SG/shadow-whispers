@@ -1,29 +1,36 @@
 import UI from "../UI";
 
 class Time extends UI {
-  private time = 0;
-  private timeLimit: number;
-
   public constructor({
     gameWidth,
-    timeLimit,
+
     gameHeight,
   }: {
     gameWidth?: number;
     gameHeight?: number;
-    timeLimit?: number;
   }) {
     super();
-    this.timeLimit = timeLimit || 0;
+
     this.textX = gameWidth ? gameWidth * 0.8 - 50 : 0;
     this.textY = gameHeight ? gameHeight * 0.05 : 0;
   }
 
-  public update({ deltaTime }: { deltaTime: number }): void {
-    this.time += deltaTime;
+  public update({
+    time,
+    timeLimit,
+  }: {
+    time: number;
+    timeLimit: number;
+  }): void {
     this.text = `Time: ${this.formatTime(
-      Math.floor(this.time * 0.001)
-    )}/${this.formatTime(this.timeLimit * 0.001)}`;
+      Math.floor(time * 0.001)
+    )}/${this.formatTime(timeLimit * 0.001)}`;
+
+    if (time + 30 * 1000 >= timeLimit) {
+      this.color = "rgb(168, 0, 0)";
+    } else {
+      this.color = "rgb(0, 0, 0)";
+    }
   }
 }
 

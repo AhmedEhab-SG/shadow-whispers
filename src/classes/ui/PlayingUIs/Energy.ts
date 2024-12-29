@@ -10,6 +10,11 @@ class Energy extends UI {
 
   public update({ hero }: { hero: { energy: number } }): void {
     this.text = `Energy: ${hero.energy.toFixed(0)}`;
+    if (hero.energy < 20) {
+      this.color = "rgb(168, 0, 0)";
+    } else {
+      this.color = "rgb(0, 0, 0)";
+    }
   }
 }
 

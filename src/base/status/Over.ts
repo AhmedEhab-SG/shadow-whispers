@@ -12,6 +12,8 @@ class Over extends Interval implements IDrawable {
   private backgrounds: Backgrounds;
   private ui: OverUIInstance[] = [];
 
+  private onRunStates = [GameStatus.OVER, GameStatus.TIMES_UP];
+
   public constructor(
     private width: number,
     private height: number,
@@ -28,7 +30,7 @@ class Over extends Interval implements IDrawable {
   }
 
   public update({ controlActions }: { controlActions: ControlActions }): void {
-    if (this.gameStates.status !== GameStatus.OVER) return;
+    if (!this.isToKeepRuning()) return;
 
     // update each UI
     this.ui.forEach((ui) =>
@@ -40,7 +42,7 @@ class Over extends Interval implements IDrawable {
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {
-    if (this.gameStates.status !== GameStatus.OVER) return;
+    if (!this.isToKeepRuning()) return;
 
     // Draw background
     this.backgrounds
@@ -49,6 +51,10 @@ class Over extends Interval implements IDrawable {
       .draw(ctx);
     // Draw UI
     this.ui.forEach((ui) => ui.draw(ctx));
+  }
+
+  private isToKeepRuning() {
+    return this.onRunStates.some((status) => status === this.gameStates.status);
   }
 }
 

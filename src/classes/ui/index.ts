@@ -15,7 +15,7 @@ import Name from "./menuUIs/Name.ts";
 import Start from "./menuUIs/Start.ts";
 import NextLevel from "./nextUIs/NextLevel.ts";
 import Win from "./nextUIs/Win.ts";
-import Died from "./overUIs/Died.ts";
+import Reason from "./overUIs/Reason.ts";
 import ExitGame from "./overUIs/ExitGame.ts";
 import GameOver from "./overUIs/GameOver.ts";
 import MainMenu from "./overUIs/MainMenu.ts";
@@ -38,7 +38,7 @@ class UI {
   public static readonly PauseUI = [Paused, Resume, Restart, Menu];
   public static readonly OverUIs = [
     GameOver,
-    Died,
+    Reason,
     RestartLevel,
     MainMenu,
     ExitGame,
@@ -46,21 +46,18 @@ class UI {
   public static readonly NextUIs = [NextLevel, Win, ExitGame, MainMenu];
 
   private gameWidth: number | undefined;
-  private timeLimit: number | undefined;
+
   private gameHeight: number | undefined;
 
   public constructor({
     gameWidth,
     gameHeight,
-    timeLimit,
   }: {
     gameWidth?: number;
     gameHeight?: number;
-    timeLimit?: number;
   }) {
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
-    this.timeLimit = timeLimit;
   }
 
   public getAllPlayingUIs(): PlayingUIInstance[] {
@@ -68,7 +65,6 @@ class UI {
       (InGameUI) =>
         new InGameUI({
           gameWidth: this.gameWidth,
-          timeLimit: this.timeLimit,
           gameHeight: this.gameHeight,
         })
     );

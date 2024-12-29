@@ -64,6 +64,8 @@ abstract class UI extends Sprite {
     score: number;
     scorePerLevel: number;
     level: number;
+    time: number;
+    timeLimit: number;
     hero: { energy: number; lives: number };
     gameStates: GameStates;
   }): void;
