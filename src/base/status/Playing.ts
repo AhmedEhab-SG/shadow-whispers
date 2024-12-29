@@ -21,7 +21,7 @@ class Playing extends Interval implements IDrawable {
   private level = 1;
 
   private score = 0;
-  private scorePerLevel = 50;
+  private scorePerLevel = 1;
 
   private speed = 0;
   private maxSpeed = 3;
@@ -29,7 +29,7 @@ class Playing extends Interval implements IDrawable {
   //private highScore = 0;
 
   private time = 0;
-  private maxTime = 5 * 60 * 60 * 1000;
+  private maxTime = 5 * 60 * 1000;
 
   private environments: Environments;
   private currentEnvironment?: EnvironmentsInstance;
@@ -110,7 +110,7 @@ class Playing extends Interval implements IDrawable {
       deltaTime,
       this.collectableTimerRef,
       {
-        interval: 60 * 1000,
+        interval: (60 * 1000) / this.level,
       }
     );
   }
@@ -134,7 +134,7 @@ class Playing extends Interval implements IDrawable {
       deltaTime,
       this.enemyTimerRef,
       {
-        interval: this.level * 1000,
+        interval: 1000 / this.level,
       }
     );
   }
@@ -161,14 +161,14 @@ class Playing extends Interval implements IDrawable {
     keys: BaseKeys[];
     controlActions: ControlActions;
   }): void {
-    if (this.isLevelWin()) this.gameStates.status = GameStatus.NEXT;
-
     if (this.gameStates.status === GameStatus.NEXT_LEVEL) this.nextLevelStart();
 
     if (this.gameStates.status === GameStatus.RESTART) this.restart();
 
     if (this.gameStates.status === GameStatus.RESTART_LEVEL)
       this.restartLevel();
+
+    if (this.isLevelWin()) this.gameStates.status = GameStatus.NEXT;
 
     if (this.gameStates.status !== GameStatus.PLAYING) return;
 
@@ -270,8 +270,8 @@ class Playing extends Interval implements IDrawable {
   }
 
   private restart(): void {
-    this.level = 1;
     this.restartLevel();
+    this.level = 1;
   }
 
   private restartLevel(): void {
@@ -286,8 +286,8 @@ class Playing extends Interval implements IDrawable {
 
   private nextLevelStart(): void {
     this.level++;
-    this.score += this.scorePerLevel;
-    this.scorePerLevel += 50;
+    this.scorePerLevel += this.level * 50;
+    this.maxTime += this.level * 2 * 60 * 1000;
     this.restartLevel();
   }
 
