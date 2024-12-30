@@ -109,7 +109,7 @@ class Playing extends Interval implements IDrawable {
       deltaTime,
       this.collectableTimerRef,
       {
-        interval: 60 * 1000,
+        interval: (60 * 1000) / this.level,
       }
     );
   }
@@ -133,7 +133,7 @@ class Playing extends Interval implements IDrawable {
       deltaTime,
       this.enemyTimerRef,
       {
-        interval: this.level * 1000,
+        interval: 1000 / this.level,
       }
     );
   }
@@ -279,7 +279,7 @@ class Playing extends Interval implements IDrawable {
   private nextLevelStart(): void {
     this.level++;
     this.score += this.scorePerLevel;
-    this.maxTime += (10 * 1000) / this.level;
+    this.maxTime /= 0.1 * this.level;
     this.scorePerLevel += 50;
     this.restartLevel();
   }

@@ -22,9 +22,9 @@ class Time extends UI {
     time: number;
     timeLimit: number;
   }): void {
-    this.text = `Time: ${this.formatTime(
-      Math.floor(time * 0.001)
-    )}/${this.formatTime(timeLimit * 0.001)}`;
+    this.text = `Time: ${this.formatTime(time * 0.001)}/${this.formatTime(
+      timeLimit * 0.001
+    )}`;
 
     if (time + 30 * 1000 >= timeLimit) {
       this.color = "rgb(168, 0, 0)";
