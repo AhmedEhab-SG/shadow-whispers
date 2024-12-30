@@ -26,6 +26,8 @@ class Playing extends Interval implements IDrawable {
   private speed = 0;
   private maxSpeed = 3;
 
+  private heroLives = 0;
+
   //private highScore = 0;
 
   private time = 0;
@@ -86,6 +88,9 @@ class Playing extends Interval implements IDrawable {
       this.score,
       this.gameStates
     ).getRandomHero();
+
+    if (this.gameStates.status === GameStatus.NEXT_LEVEL)
+      this.hero.lives = this.heroLives; // Restore hero lives
 
     this.enemies = new Enemies(this.width, this.height, {
       enviGroundMargin: this.currentEnvironment.groundMargin,
@@ -188,6 +193,7 @@ class Playing extends Interval implements IDrawable {
     });
     this.speed = this.hero?.gameSpeed ?? this.speed;
     this.score = this.hero?.score ?? this.score;
+    this.heroLives = this.hero?.lives ?? this.heroLives;
 
     // enemy update
     this.addEnemy(deltaTime);
@@ -272,13 +278,12 @@ class Playing extends Interval implements IDrawable {
     this.speed = 0;
     this.activeEnemies = [];
     this.floatingMessages = [];
-    this.gameStates.status = GameStatus.PLAYING;
     this.init();
+    this.gameStates.status = GameStatus.PLAYING;
   }
 
   private nextLevelStart(): void {
     this.level++;
-    this.score += this.scorePerLevel;
     this.maxTime -= this.maxTime * 0.015 * this.level;
     this.scorePerLevel += this.scorePerLevel * 0.1 * this.level;
     this.restartLevel();
