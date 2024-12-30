@@ -10,7 +10,7 @@ class Controls extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.24 : 0;
+    this.textX = gameWidth ? gameWidth * 0.26 : 0;
     this.textY = gameHeight ? gameHeight * 0.8 : 0;
     this.text = `Controls: 🡱🡰🡲🡳 or WASD to move, 𓈙 Space to Attack `;
     this.color = "white";
