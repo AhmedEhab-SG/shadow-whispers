@@ -64,7 +64,7 @@ abstract class Hero extends Character {
     if (input.includes(BaseKeys.RIGHT) && !input.includes(BaseKeys.LEFT)) {
       this.vx = this.heroObj.speed;
       this.reverseImg = false;
-      if (this.x > (this.gameWidth - this.width) * 0.6) this.vx = 0;
+      if (this.x > (this.gameWidth - this.width) * 0.5) this.vx = 0;
     } else if (
       input.includes(BaseKeys.LEFT) &&
       !input.includes(BaseKeys.RIGHT)

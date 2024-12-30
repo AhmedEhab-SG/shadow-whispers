@@ -17,6 +17,12 @@ class Lives extends UI {
   public update({ hero }: { hero: { lives: number } }): void {
     this.lives = hero.lives;
     this.text = `Lives: x${this.lives}`;
+
+    if (this.lives <= 1) {
+      this.color = "rgb(168, 0, 0)";
+    } else {
+      this.color = "rgb(0, 0, 0)";
+    }
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {

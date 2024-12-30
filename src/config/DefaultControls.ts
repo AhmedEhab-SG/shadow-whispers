@@ -8,6 +8,7 @@ class DefaultControls {
     [BaseKeys.DOWN, ["ArrowDown", "KeyS"]],
     [BaseKeys.ACTION, ["Space"]],
     [BaseKeys.DEBUG, ["KeyP"]],
+    [BaseKeys.ESC, ["Escape"]],
   ];
 
   public static map = new Map<BaseKeys, string[]>(DefaultControls.controls);

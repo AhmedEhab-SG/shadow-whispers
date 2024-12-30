@@ -24,8 +24,11 @@ import Menu from "./pauseUIs/Menu.ts";
 import Paused from "./pauseUIs/Paused.ts";
 import Restart from "./pauseUIs/Restart.ts";
 import Resume from "./pauseUIs/Resume.ts";
+import RestartLevelPS from "./pauseUIs/RestartLevelPS.ts";
+import Controls from "./menuUIs/Controls.ts";
 
 class UI {
+  public static readonly MenuUIs = [Name, Start, Exit, Controls];
   public static readonly PlayingUIs = [
     Energy,
     Score,
@@ -34,8 +37,13 @@ class UI {
     Pause,
     Level,
   ];
-  public static readonly MenuUIs = [Name, Start, Exit];
-  public static readonly PauseUI = [Paused, Resume, Restart, Menu];
+  public static readonly PauseUI = [
+    Paused,
+    Resume,
+    Restart,
+    Menu,
+    RestartLevelPS,
+  ];
   public static readonly OverUIs = [
     GameOver,
     Reason,

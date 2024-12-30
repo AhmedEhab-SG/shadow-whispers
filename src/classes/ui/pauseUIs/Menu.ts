@@ -15,8 +15,9 @@ class Menu extends UI {
 
     this.text = "Menu";
     this.textX = gameWidth ? gameWidth * 0.5 - 42 : 0;
-    this.textY = gameHeight ? gameHeight * 0.58 : 0;
+    this.textY = gameHeight ? gameHeight * 0.75 : 0;
     this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({

@@ -211,6 +211,7 @@ class Playing extends Interval implements IDrawable {
     this.ui.forEach((ui) =>
       ui.update({
         score: this.score,
+        keys,
         scorePerLevel: this.scorePerLevel,
         gameStates: this.gameStates,
         level: this.level,

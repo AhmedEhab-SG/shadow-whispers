@@ -30,8 +30,8 @@ class EnemiesCollision extends Collision {
 
         floatingMessages.push(
           new FloatingMessage("+1", enemy.x, enemy.y, {
-            targetX: 400,
-            targetY: 50,
+            targetX: 405,
+            targetY: 55,
           })
         );
 

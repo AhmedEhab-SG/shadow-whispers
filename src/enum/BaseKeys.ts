@@ -5,6 +5,7 @@ enum BaseKeys {
   DOWN = "down",
   ACTION = "action",
   DEBUG = "debug",
+  ESC = "esc",
 }
 
 export default BaseKeys;

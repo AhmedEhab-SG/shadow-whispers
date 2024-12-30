@@ -1,4 +1,5 @@
 import GameStatus from "../../../config/GameStatus";
+import BaseKeys from "../../../enum/BaseKeys";
 import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
@@ -16,15 +17,21 @@ class Pause extends UI {
     this.text = "Pause";
     this.textX = gameWidth ? gameWidth * 0.6 : 0;
     this.textY = gameHeight ? gameHeight * 0.05 : 0;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({
     controlActions,
     gameStates,
+    keys,
   }: {
     controlActions: ControlActions;
     gameStates: GameStates;
+    keys: BaseKeys[];
   }): void {
+    if (keys.includes(BaseKeys.ESC) && gameStates.status === GameStatus.PLAYING)
+      gameStates.status = GameStatus.PAUSED;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "black";

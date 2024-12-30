@@ -15,8 +15,9 @@ class Resume extends UI {
 
     this.text = "Resume";
     this.textX = gameWidth ? gameWidth * 0.5 - 50 : 0;
-    this.textY = gameHeight ? gameHeight * 0.42 : 0;
+    this.textY = gameHeight ? gameHeight * 0.45 : 0;
     this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({

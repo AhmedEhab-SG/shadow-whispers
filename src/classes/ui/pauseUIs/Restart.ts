@@ -15,8 +15,9 @@ class Restart extends UI {
 
     this.text = "Restart";
     this.textX = gameWidth ? gameWidth * 0.5 - 55 : 0;
-    this.textY = gameHeight ? gameHeight * 0.5 : 0;
+    this.textY = gameHeight ? gameHeight * 0.65 : 0;
     this.fontSize = 30;
+    this.fontFamily = "Bangers, cursive";
   }
 
   public update({
