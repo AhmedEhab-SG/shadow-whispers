@@ -279,8 +279,8 @@ class Playing extends Interval implements IDrawable {
   private nextLevelStart(): void {
     this.level++;
     this.score += this.scorePerLevel;
-    this.maxTime /= 0.1 * this.level;
-    this.scorePerLevel += 50;
+    this.maxTime -= this.maxTime * 0.015 * this.level;
+    this.scorePerLevel += this.scorePerLevel * 0.1 * this.level;
     this.restartLevel();
   }
 

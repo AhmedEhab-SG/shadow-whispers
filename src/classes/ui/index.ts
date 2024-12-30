@@ -26,9 +26,10 @@ import Restart from "./pauseUIs/Restart.ts";
 import Resume from "./pauseUIs/Resume.ts";
 import RestartLevelPS from "./pauseUIs/RestartLevelPS.ts";
 import Controls from "./menuUIs/Controls.ts";
+import CopyRight from "./menuUIs/CopyRight.ts";
 
 class UI {
-  public static readonly MenuUIs = [Name, Start, Exit, Controls];
+  public static readonly MenuUIs = [Name, Start, Exit, Controls, CopyRight];
   public static readonly PlayingUIs = [
     Energy,
     Score,
