@@ -9,9 +9,8 @@ class Lives extends UI {
     this.textX = 15;
     this.textY = 35;
     this.imgSize = 25;
-    this.imgX = this.textX + this.imgSize + 80;
     this.imgY = this.textY - this.imgSize + 2;
-    this.image.src = heartImg;
+    this.loadImage(heartImg);
   }
 
   public update({ hero }: { hero: { lives: number } }): void {
@@ -23,6 +22,7 @@ class Lives extends UI {
     } else {
       this.color = "rgb(0, 0, 0)";
     }
+    this.imgX = this.textX + this.textWidth + 5;
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {
@@ -36,7 +36,7 @@ class Lives extends UI {
     for (let i = 0; i < this.lives; i++) {
       ctx.drawImage(
         this.image,
-        this.imgX + i * this.imgSize * 1.1,
+        this.imgX + i * this.imgSize * 1.2,
         this.imgY,
         this.imgSize,
         this.imgSize

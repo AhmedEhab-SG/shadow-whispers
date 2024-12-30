@@ -13,6 +13,7 @@ class LivePlus extends Collectable {
   ) {
     super(gameWidth, gameHeight, enviGroundMargin, LivePlusObj.collectableObj);
 
+    this.strokeColor = "rgb(84, 207, 46)";
     this.strokeOffsetY = -1;
     this.storkeSizeScale = 6;
   }

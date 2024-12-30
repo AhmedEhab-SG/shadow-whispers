@@ -76,6 +76,13 @@ abstract class UI extends Sprite {
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
     ctx.shadowBlur = 5;
+    ctx.font = `${this._fontSize}px ${this._fontFamily}`;
+    ctx.fillStyle = this._color;
+    ctx.fillText(this._text, this._textX, this._textY);
+
+    this._textWidth = ctx.measureText(this.text).width;
+    this._textHeight = ctx.measureText(this.text).actualBoundingBoxAscent;
+
     if (this.imgLoaded && this.image.src && this._drawImg)
       ctx.drawImage(
         this.image,
@@ -84,11 +91,6 @@ abstract class UI extends Sprite {
         this._imgSize,
         this._imgSize
       );
-    ctx.font = `${this._fontSize}px ${this._fontFamily}`;
-    ctx.fillStyle = this._color;
-    ctx.fillText(this._text, this._textX, this._textY);
-    this._textWidth = ctx.measureText(this.text).width;
-    this._textHeight = ctx.measureText(this.text).actualBoundingBoxAscent;
 
     ctx.restore();
   }

@@ -1,4 +1,5 @@
 import UI from "../UI";
+import fireImg from "../../../assets/imgs/vfx/fire.png";
 
 class Energy extends UI {
   public constructor({ gameHeight }: { gameHeight?: number }) {
@@ -6,6 +7,10 @@ class Energy extends UI {
     this.textX = 15;
     this.text = "Energy: 0";
     this.textY = gameHeight ? gameHeight * 0.05 + 30 : 0;
+    this.imgSize = 40;
+    this.imgY = this.textY - this.imgSize + 5;
+    this.loadImage(fireImg);
+    this.drawImg = true;
   }
 
   public update({ hero }: { hero: { energy: number } }): void {
@@ -15,6 +20,7 @@ class Energy extends UI {
     } else {
       this.color = "rgb(0, 0, 0)";
     }
+    this.imgX = this.textX + this.textWidth ;
   }
 }
 
