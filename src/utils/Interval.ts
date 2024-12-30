@@ -4,7 +4,7 @@ abstract class Interval {
   protected runInterval(
     fun: (deltaTime: number) => void,
     condition = true,
-    timeStamp = performance.now()
+    timeStamp = 0
   ): void {
     let deltaTime = timeStamp - this._lastTime;
     this._lastTime = timeStamp;
