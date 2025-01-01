@@ -26,6 +26,8 @@ class Attack extends UI {
     keys: DefaultKeys[];
     controlActions: ControlActions;
   }): void {
+    if (!this.isMobileDevice()) return;
+
     if (this.isHover(controlActions)) {
       this.color = "gray";
       this.shadowColor = "white";
@@ -47,6 +49,7 @@ class Attack extends UI {
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {
+    if (!this.isMobileDevice()) return;
     super.draw(ctx);
   }
 }
