@@ -29,30 +29,56 @@ abstract class UI extends Sprite {
 
   protected isClicked(controlActions: ControlActions): boolean {
     return (
-      controlActions.x > this.textX &&
-      controlActions.x < this.textX + this.textWidth &&
-      controlActions.y > this.textY - this.textHeight &&
-      controlActions.y < this.textY &&
-      controlActions.isClick
+      (controlActions.x > this.textX &&
+        controlActions.x < this.textX + this.textWidth &&
+        controlActions.y > this.textY - this.textHeight &&
+        controlActions.y < this.textY &&
+        controlActions.isClick) ||
+      controlActions.touches?.some(
+        (position) =>
+          position.x > this.textX &&
+          position.x < this.textX + this.textWidth &&
+          position.y > this.textY - this.textHeight &&
+          position.y < this.textY &&
+          controlActions.isClick
+      ) ||
+      false
     );
   }
 
   protected isHover(controlActions: ControlActions): boolean {
     return (
-      controlActions.x > this.textX &&
-      controlActions.x < this.textX + this.textWidth &&
-      controlActions.y > this.textY - this.textHeight &&
-      controlActions.y < this.textY
+      (controlActions.x > this.textX &&
+        controlActions.x < this.textX + this.textWidth &&
+        controlActions.y > this.textY - this.textHeight &&
+        controlActions.y < this.textY) ||
+      controlActions.touches?.some(
+        (position) =>
+          position.x > this.textX &&
+          position.x < this.textX + this.textWidth &&
+          position.y > this.textY - this.textHeight &&
+          position.y < this.textY
+      ) ||
+      false
     );
   }
 
   protected isHold(controlActions: ControlActions): boolean {
     return (
-      controlActions.x > this.textX &&
-      controlActions.x < this.textX + this.textWidth &&
-      controlActions.y > this.textY - this.textHeight &&
-      controlActions.y < this.textY &&
-      controlActions.isHold
+      (controlActions.x > this.textX &&
+        controlActions.x < this.textX + this.textWidth &&
+        controlActions.y > this.textY - this.textHeight &&
+        controlActions.y < this.textY &&
+        controlActions.isHold) ||
+      controlActions.touches?.some(
+        (position) =>
+          position.x > this.textX &&
+          position.x < this.textX + this.textWidth &&
+          position.y > this.textY - this.textHeight &&
+          position.y < this.textY &&
+          controlActions.isHold
+      ) ||
+      false
     );
   }
 

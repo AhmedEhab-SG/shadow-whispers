@@ -7,6 +7,7 @@ class ControlInput extends Event {
     isClick: false,
     isHold: false,
     isTouch: false,
+
     startCord: { x: 0, y: 0 },
   };
 
@@ -47,7 +48,11 @@ class ControlInput extends Event {
     window.removeEventListener("touchcancel", this.touchCancelHandler);
   }
 
-  private getActionPos(e: MouseEvent | TouchEvent): { x: number; y: number } {
+  private getActionPos(e: MouseEvent | TouchEvent): {
+    x: number;
+    y: number;
+    touches?: { x: number; y: number }[];
+  } {
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
 
@@ -57,6 +62,10 @@ class ControlInput extends Event {
     return {
       x: (clientX - this._canvasRect.left) * scaleX,
       y: (clientY - this._canvasRect.top) * scaleY,
+      touches:
+        e instanceof TouchEvent
+          ? [...e.touches].map((t) => ({ x: t.clientX, y: t.clientY }))
+          : undefined,
     };
   }
 
@@ -82,6 +91,7 @@ class ControlInput extends Event {
       isHold: false,
       isTouch: false,
       startCord: { x: 0, y: 0 },
+      touches: undefined,
     };
   }
 
@@ -149,7 +159,7 @@ class ControlInput extends Event {
 
     if (this.isActionInCanvas(e)) return this.resetControlActions();
 
-    const { x, y } = this.getActionPos(e);
+    const { x, y, touches } = this.getActionPos(e);
     this._controlActions = {
       x,
       y,
@@ -157,6 +167,7 @@ class ControlInput extends Event {
       isHold: false,
       isTouch: true,
       startCord: { x, y },
+      touches,
     };
 
     // Start the hold timer
@@ -171,11 +182,12 @@ class ControlInput extends Event {
 
     if (this.isActionInCanvas(e)) return this.resetControlActions();
 
-    const { x, y } = this.getActionPos(e);
+    const { x, y, touches } = this.getActionPos(e);
     this._controlActions = {
       ...this._controlActions,
       x,
       y,
+      touches,
     };
   };
 
