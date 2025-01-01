@@ -3,6 +3,10 @@ import DefaultKeys from "../../../enum/BaseKeys";
 import { ControlActions } from "../../../types/events";
 
 class Attack extends UI {
+  private x: number;
+  private y: number;
+  private size: number = 80;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,9 +17,9 @@ class Attack extends UI {
     super();
 
     this.text = "Attack";
-    this.textX = gameWidth ? gameWidth - 70 - 100 : 0;
-    this.textY = gameHeight ? gameHeight - 70 : 0;
-    this.fontSize = 30;
+    this.x = gameWidth ? gameWidth - 50 - 100 : 0;
+    this.y = gameHeight ? gameHeight - 110 : 0;
+    this.fontSize = 25;
     this.fontFamily = "Bangers, cursive";
   }
 
@@ -28,29 +32,52 @@ class Attack extends UI {
   }): void {
     if (!this.isMobileDevice()) return;
 
-    if (this.isHover(controlActions)) {
-      this.color = "gray";
-      this.shadowColor = "white";
+    if (
+      controlActions.touches?.some(
+        ({ x, y }) =>
+          Math.sqrt(
+            (x - (this.x + this.size / 2)) ** 2 +
+              (y - (this.y + this.size / 2)) ** 2
+          ) <=
+          this.size / 2
+      )
+    ) {
+      this.color = "red";
 
-      if (this.isClicked(controlActions) || this.isHold(controlActions)) {
-        this.color = "black";
-        this.shadowColor = "white";
+      if (!keys.includes(DefaultKeys.ACTION)) keys.push(DefaultKeys.ACTION);
 
-        if (!keys.includes(DefaultKeys.ACTION)) keys.push(DefaultKeys.ACTION);
-      }
-    } else {
-      this.color = "white";
-      this.shadowColor = "black";
+      return;
+    }
 
-      if (keys.includes(DefaultKeys.ACTION)) {
-        keys.splice(keys.indexOf(DefaultKeys.ACTION), 1);
-      }
+    this.color = "white";
+    if (keys.includes(DefaultKeys.ACTION)) {
+      keys.splice(keys.indexOf(DefaultKeys.ACTION), 1);
     }
   }
 
   public draw(ctx: CanvasRenderingContext2D): void {
     if (!this.isMobileDevice()) return;
-    super.draw(ctx);
+
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(
+      this.x + this.size / 2,
+      this.y + this.size / 2,
+      this.size / 2,
+      0,
+      Math.PI * 2
+    );
+    ctx.lineWidth = 3;
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.font = `${this.fontSize}px ${this.fontFamily}`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = this.color;
+    ctx.fillText(this.text, this.x + this.size / 2, this.y + this.size / 2);
+    ctx.restore();
   }
 }
 

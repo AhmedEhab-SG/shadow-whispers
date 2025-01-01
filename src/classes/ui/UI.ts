@@ -29,56 +29,30 @@ abstract class UI extends Sprite {
 
   protected isClicked(controlActions: ControlActions): boolean {
     return (
-      (controlActions.x > this.textX &&
-        controlActions.x < this.textX + this.textWidth &&
-        controlActions.y > this.textY - this.textHeight &&
-        controlActions.y < this.textY &&
-        controlActions.isClick) ||
-      controlActions.touches?.some(
-        (position) =>
-          position.x > this.textX &&
-          position.x < this.textX + this.textWidth &&
-          position.y > this.textY - this.textHeight &&
-          position.y < this.textY &&
-          controlActions.isClick
-      ) ||
-      false
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY &&
+      controlActions.isClick
     );
   }
 
   protected isHover(controlActions: ControlActions): boolean {
     return (
-      (controlActions.x > this.textX &&
-        controlActions.x < this.textX + this.textWidth &&
-        controlActions.y > this.textY - this.textHeight &&
-        controlActions.y < this.textY) ||
-      controlActions.touches?.some(
-        (position) =>
-          position.x > this.textX &&
-          position.x < this.textX + this.textWidth &&
-          position.y > this.textY - this.textHeight &&
-          position.y < this.textY
-      ) ||
-      false
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY
     );
   }
 
   protected isHold(controlActions: ControlActions): boolean {
     return (
-      (controlActions.x > this.textX &&
-        controlActions.x < this.textX + this.textWidth &&
-        controlActions.y > this.textY - this.textHeight &&
-        controlActions.y < this.textY &&
-        controlActions.isHold) ||
-      controlActions.touches?.some(
-        (position) =>
-          position.x > this.textX &&
-          position.x < this.textX + this.textWidth &&
-          position.y > this.textY - this.textHeight &&
-          position.y < this.textY &&
-          controlActions.isHold
-      ) ||
-      false
+      controlActions.x > this.textX &&
+      controlActions.x < this.textX + this.textWidth &&
+      controlActions.y > this.textY - this.textHeight &&
+      controlActions.y < this.textY &&
+      controlActions.isHold
     );
   }
 
@@ -175,6 +149,10 @@ abstract class UI extends Sprite {
 
   protected set fontSize(fontSize: number) {
     this._fontSize = fontSize;
+  }
+
+  protected get color(): string {
+    return this._color;
   }
 
   protected set color(color: string) {

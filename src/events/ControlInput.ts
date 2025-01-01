@@ -7,8 +7,8 @@ class ControlInput extends Event {
     isClick: false,
     isHold: false,
     isTouch: false,
-
     startCord: { x: 0, y: 0 },
+    touches: undefined,
   };
 
   private _holdThreshold = 200; // Threshold in milliseconds
@@ -64,7 +64,10 @@ class ControlInput extends Event {
       y: (clientY - this._canvasRect.top) * scaleY,
       touches:
         e instanceof TouchEvent
-          ? [...e.touches].map((t) => ({ x: t.clientX, y: t.clientY }))
+          ? [...e.changedTouches].map((t) => ({
+              x: (t.clientX - this._canvasRect.left) * scaleX,
+              y: (t.clientY - this._canvasRect.top) * scaleY,
+            }))
           : undefined,
     };
   }
@@ -183,6 +186,7 @@ class ControlInput extends Event {
     if (this.isActionInCanvas(e)) return this.resetControlActions();
 
     const { x, y, touches } = this.getActionPos(e);
+
     this._controlActions = {
       ...this._controlActions,
       x,
