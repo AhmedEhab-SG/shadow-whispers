@@ -10,10 +10,13 @@ type OverUIInstance = InstanceType<(typeof UI.OverUIs)[number]>;
 
 type NextUIInstance = InstanceType<(typeof UI.NextUIs)[number]>;
 
+type MobileUIInstance = InstanceType<(typeof UI.MobileUIs)[number]>;
+
 export type {
   PlayingUIInstance,
   MenuUIInstance,
   PauseUIInstance,
   OverUIInstance,
   NextUIInstance,
+  MobileUIInstance,
 };

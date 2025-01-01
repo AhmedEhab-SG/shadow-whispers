@@ -3,6 +3,7 @@ import {
   MenuUIInstance,
   PauseUIInstance,
   NextUIInstance,
+  MobileUIInstance,
 } from "../../types/ui.ts";
 import Energy from "./PlayingUIs/Energy.ts";
 import Level from "./PlayingUIs/Level.ts";
@@ -27,6 +28,8 @@ import Resume from "./pauseUIs/Resume.ts";
 import RestartLevelPS from "./pauseUIs/RestartLevelPS.ts";
 import Controls from "./menuUIs/Controls.ts";
 import CopyRight from "./menuUIs/CopyRight.ts";
+import JoyStick from "./mobile/joystick/index.ts";
+import Attack from "./mobile/Attack.ts";
 
 class UI {
   public static readonly MenuUIs = [Name, Start, Exit, Controls, CopyRight];
@@ -53,6 +56,8 @@ class UI {
     ExitGame,
   ];
   public static readonly NextUIs = [NextLevel, Win, ExitGame, MainMenu];
+
+  public static readonly MobileUIs = [JoyStick, Attack];
 
   private gameWidth: number | undefined;
 
@@ -110,6 +115,42 @@ class UI {
     return UI.NextUIs.map(
       (NextUI) =>
         new NextUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+        })
+    );
+  }
+
+  public getAllMobileUIs({
+    x,
+    y,
+    radius,
+    handleRadius,
+    handleColor,
+    handleFriction,
+    originColor,
+    touchThreshold,
+  }: {
+    x?: number;
+    y?: number;
+    radius?: number;
+    handleRadius?: number;
+    handleColor?: string;
+    handleFriction?: number;
+    originColor?: string;
+    touchThreshold?: number;
+  } = {}): MobileUIInstance[] {
+    return UI.MobileUIs.map(
+      (MobileUI) =>
+        new MobileUI({
+          x,
+          y,
+          radius,
+          handleRadius,
+          handleFriction,
+          touchThreshold,
+          handleColor,
+          originColor,
           gameWidth: this.gameWidth,
           gameHeight: this.gameHeight,
         })

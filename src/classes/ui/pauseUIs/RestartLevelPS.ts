@@ -1,7 +1,7 @@
 import RestartLevel from "../overUIs/RestartLevel";
 
 class RestartLevelPS extends RestartLevel {
-  constructor({
+  public constructor({
     gameWidth,
     gameHeight,
   }: {

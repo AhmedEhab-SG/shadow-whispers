@@ -10,7 +10,7 @@ import Interval from "../../utils/Interval.ts";
 import { EnvironmentsInstance } from "../../types/environment.ts";
 import FloatingMessage from "../../classes/ui/FloatingMessage.ts";
 import UI from "../../classes/ui/index.ts";
-import { PlayingUIInstance } from "../../types/ui.ts";
+import { MobileUIInstance, PlayingUIInstance } from "../../types/ui.ts";
 import Heroes from "../../classes/characters/heroes/index.ts";
 import { CollectableInstance } from "../../types/collectable.ts";
 import Collectables from "../../classes/collectables/index.ts";
@@ -43,6 +43,7 @@ class Playing extends Interval implements IDrawable {
   private enemyTimerRef = { timer: 0 };
 
   private ui: PlayingUIInstance[] = [];
+  private mobileUi: MobileUIInstance[] = [];
 
   private booms: Boom[] = [];
   private floatingMessages: FloatingMessage[] = [];
@@ -78,6 +79,13 @@ class Playing extends Interval implements IDrawable {
       gameHeight: this.height,
     }).getAllPlayingUIs();
 
+    this.mobileUi = new UI({
+      gameWidth: this.width,
+      gameHeight: this.height,
+    }).getAllMobileUIs({
+      y: this.height - 75,
+    });
+
     this.hero = new Heroes(
       this.width,
       this.height,
@@ -89,7 +97,10 @@ class Playing extends Interval implements IDrawable {
       this.gameStates
     ).getRandomHero();
 
-    if (this.gameStates.status === GameStatus.NEXT_LEVEL)
+    if (
+      this.gameStates.status === GameStatus.NEXT_LEVEL &&
+      this.hero.lives < this.heroLives
+    )
       this.hero.lives = this.heroLives; // Restore hero lives
 
     this.enemies = new Enemies(this.width, this.height, {
@@ -231,6 +242,14 @@ class Playing extends Interval implements IDrawable {
       })
     );
 
+    // update mobile UI
+    this.mobileUi.forEach((ui) =>
+      ui.update({
+        controlActions,
+        keys,
+      })
+    );
+
     // update collectable
     this.addCollectable(deltaTime);
     this.destroyCollectable(deltaTime);
@@ -256,6 +275,9 @@ class Playing extends Interval implements IDrawable {
 
     // draw UI
     this.ui.forEach((ui) => ui.draw(ctx));
+
+    // draw mobile UI
+    this.mobileUi.forEach((ui) => ui.draw(ctx));
 
     // draw collectable
     this.activeCollectables.forEach((collectable) => collectable.draw(ctx));

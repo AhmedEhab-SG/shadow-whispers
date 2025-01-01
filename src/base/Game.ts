@@ -83,7 +83,6 @@ class Game extends GameUtils implements IGame {
 
   protected update({ deltaTime }: { deltaTime: number }): void {
     // start menu update
-
     this.menu?.update({
       deltaTime,
       keys: this.controlKeys.keys,
