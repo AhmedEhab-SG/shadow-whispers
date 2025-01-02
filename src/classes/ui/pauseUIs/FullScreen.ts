@@ -1,5 +1,7 @@
 import UI from "../UI";
 import { ControlActions } from "../../../types/events";
+import { GameStates } from "../../../types/game";
+import GameStatus from "../../../config/GameStatus";
 
 class FullScreen extends UI {
   private gameWidth?: number;
@@ -25,7 +27,13 @@ class FullScreen extends UI {
     this.fontFamily = "Bangers, cursive";
   }
 
-  public update({ controlActions }: { controlActions: ControlActions }): void {
+  public update({
+    controlActions,
+    gameStates,
+  }: {
+    controlActions: ControlActions;
+    gameStates: GameStates;
+  }): void {
     if (document.fullscreenElement) {
       this.text = "Exit Full Screen";
       this.textX = this.gameWidth ? this.gameWidth * 0.5 - 95 : 0;
@@ -54,6 +62,9 @@ class FullScreen extends UI {
         } else {
           this.canvas
             ?.requestFullscreen()
+            .then(() => {
+              gameStates.status = GameStatus.PLAYING;
+            })
             .catch((err) =>
               console.log(
                 "Error attempting to enable full-screen mode:",
