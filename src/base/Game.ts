@@ -22,7 +22,7 @@ class Game extends GameUtils implements IGame {
 
   private gameStates: GameStates = {
     debugMode: false,
-    status: GameStatus.PAUSED,
+    status: GameStatus.MENU,
   };
 
   // Canvas
