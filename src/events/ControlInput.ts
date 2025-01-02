@@ -62,18 +62,19 @@ class ControlInput extends Event {
     const scaleX = this.canvas.width / this._canvasRect.width;
     const scaleY = this.canvas.height / this._canvasRect.height;
 
-    return {
-      x: (clientX - this._canvasRect.left) * scaleX,
-      y: (clientY - this._canvasRect.top) * scaleY,
-      touches:
-        e instanceof TouchEvent
-          ? [...e.changedTouches].map((t) => ({
-              x: (t.clientX - this._canvasRect.left) * scaleX,
-              y: (t.clientY - this._canvasRect.top) * scaleY,
-              identifier: t.identifier,
-            }))
-          : [],
-    };
+    const x = (clientX - this._canvasRect.left) * scaleX;
+    const y = (clientY - this._canvasRect.top) * scaleY;
+
+    const touches =
+      e instanceof TouchEvent
+        ? [...e.changedTouches].map((t) => ({
+            x: (t.clientX - this._canvasRect.left) * scaleX,
+            y: (t.clientY - this._canvasRect.top) * scaleY,
+            identifier: t.identifier,
+          }))
+        : [];
+
+    return { x, y, touches };
   }
 
   private isActionInCanvas(e: MouseEvent | TouchEvent): boolean {
