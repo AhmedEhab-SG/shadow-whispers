@@ -83,7 +83,7 @@ class Playing extends Interval implements IDrawable {
       gameWidth: this.width,
       gameHeight: this.height,
     }).getAllMobileUIs({
-      y: this.height - 75,
+      y: this.height - 90,
     });
 
     this.hero = new Heroes(

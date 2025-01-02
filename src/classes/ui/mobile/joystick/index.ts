@@ -20,10 +20,10 @@ class JoyStick extends UI {
   private touchCord: Vector = new Vector(0, 0);
 
   public constructor({
-    x = 75,
-    y = 75,
-    radius = 60,
-    handleRadius = 30,
+    x = 110,
+    y = 90,
+    radius = 80,
+    handleRadius = 40,
     handleFriction = 0.25,
     touchThreshold = 25,
     handleColor = "gray",

@@ -5,7 +5,7 @@ import { ControlActions } from "../../../types/events";
 class Attack extends UI {
   private x: number;
   private y: number;
-  private size: number = 80;
+  private size: number = 120;
 
   public constructor({
     gameWidth,
@@ -17,9 +17,9 @@ class Attack extends UI {
     super();
 
     this.text = "Attack";
-    this.x = gameWidth ? gameWidth - 50 - 100 : 0;
-    this.y = gameHeight ? gameHeight - 110 : 0;
-    this.fontSize = 25;
+    this.x = gameWidth ? gameWidth - 70 - 100 : 0;
+    this.y = gameHeight ? gameHeight - 135 : 0;
+    this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
 
