@@ -53,11 +53,10 @@ class ControlInput extends Event {
     x: number;
     y: number;
     touches: { x: number; y: number; identifier: number }[];
+    startCords: { x: number; y: number; identifier: number }[];
   } {
-    const clientX =
-      e instanceof MouseEvent ? e.clientX : e.changedTouches[0].clientX;
-    const clientY =
-      e instanceof MouseEvent ? e.clientY : e.changedTouches[0].clientY;
+    const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
+    const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
 
     const scaleX = this.canvas.width / this._canvasRect.width;
     const scaleY = this.canvas.height / this._canvasRect.height;
@@ -67,14 +66,42 @@ class ControlInput extends Event {
 
     const touches =
       e instanceof TouchEvent
-        ? [...e.changedTouches].map((t) => ({
+        ? [...e.touches].map((t) => ({
             x: (t.clientX - this._canvasRect.left) * scaleX,
             y: (t.clientY - this._canvasRect.top) * scaleY,
             identifier: t.identifier,
           }))
         : [];
 
-    return { x, y, touches };
+    const startCords =
+      e instanceof TouchEvent
+        ? this._controlActions.startCords
+            .map((startCord) =>
+              [...e.touches].find((t) => t.identifier === startCord.identifier)
+                ? startCord
+                : {
+                    ...startCord,
+                    x: (startCord.x - this._canvasRect.left) * scaleX,
+                    y: (startCord.y - this._canvasRect.top) * scaleY,
+                  }
+            )
+            .concat(
+              [...e.touches]
+                .filter(
+                  (t) =>
+                    !this._controlActions.startCords.some(
+                      ({ identifier }) => identifier === t.identifier
+                    )
+                )
+                .map((t) => ({
+                  identifier: t.identifier,
+                  x: (t.clientX - this._canvasRect.left) * scaleX,
+                  y: (t.clientY - this._canvasRect.top) * scaleY,
+                }))
+            )
+        : [];
+
+    return { x, y, touches, startCords };
   }
 
   private isActionInCanvas(e: MouseEvent | TouchEvent): boolean {
@@ -172,7 +199,7 @@ class ControlInput extends Event {
 
     if (this.isActionInCanvas(e)) return this.resetControlActions();
 
-    const { x, y, touches } = this.getActionPos(e);
+    const { x, y, touches, startCords } = this.getActionPos(e);
     this._controlActions = {
       x,
       y,
@@ -181,7 +208,7 @@ class ControlInput extends Event {
       isTouch: true,
       startCord: { x, y },
       touches,
-      startCords: touches,
+      startCords: startCords,
     };
 
     // Start the hold timer

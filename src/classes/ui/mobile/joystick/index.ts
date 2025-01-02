@@ -84,13 +84,16 @@ class JoyStick extends UI {
     const touch = controlActions.startCords.find(({ x, y }) =>
       this.isTouchInsideJoystick(x, y)
     );
-    if (touch) {
-      this.touchCord = new Vector(
-        controlActions.touches[touch.identifier].x,
-        controlActions.touches[touch.identifier].y
-      );
 
-      this.movementHandler(this.touchCord, keys);
+    if (touch) {
+      // Update the touch cord
+      const activeTouch = controlActions.touches.find(
+        ({ identifier }) => identifier === touch.identifier
+      );
+      if (activeTouch) {
+        this.touchCord = new Vector(activeTouch.x, activeTouch.y);
+        this.movementHandler(this.touchCord, keys);
+      }
     }
   }
 
