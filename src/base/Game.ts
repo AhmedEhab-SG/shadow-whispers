@@ -70,12 +70,7 @@ class Game extends GameUtils implements IGame {
     // game status init
     this.menu = new Menu(this.width, this.height, this.gameStates);
     this.playing = new Playing(this.width, this.height, this.gameStates);
-    this.pause = new Pause(
-      this.canvas.tag,
-      this.width,
-      this.height,
-      this.gameStates
-    );
+    this.pause = new Pause(this.width, this.height, this.gameStates);
     this.over = new Over(this.width, this.height, this.gameStates);
     this.next = new Next(this.width, this.height, this.gameStates);
   }

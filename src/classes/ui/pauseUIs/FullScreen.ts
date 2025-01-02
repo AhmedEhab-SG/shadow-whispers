@@ -5,10 +5,8 @@ import GameStatus from "../../../config/GameStatus";
 
 class FullScreen extends UI {
   private gameWidth?: number;
-  private canvas?: HTMLCanvasElement;
 
   public constructor({
-    canvas,
     gameWidth,
     gameHeight,
   }: {
@@ -18,7 +16,6 @@ class FullScreen extends UI {
   }) {
     super(); // Call the super constructor without arguments
 
-    this.canvas = canvas;
     this.gameWidth = gameWidth;
     this.text = "Full Screen";
     this.textX = gameWidth ? gameWidth * 0.5 - 72 : 0;
@@ -60,7 +57,7 @@ class FullScreen extends UI {
               )
             );
         } else {
-          this.canvas
+          document.documentElement
             ?.requestFullscreen()
             .then(() => {
               gameStates.status = GameStatus.PLAYING;

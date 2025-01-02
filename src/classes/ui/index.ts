@@ -62,20 +62,16 @@ class UI {
 
   public static readonly MobileUIs = [JoyStick, Attack];
 
-  private canvas?: HTMLCanvasElement;
   private gameWidth?: number;
   private gameHeight?: number;
 
   public constructor({
-    canvas,
     gameWidth,
     gameHeight,
   }: {
-    canvas?: HTMLCanvasElement;
     gameWidth?: number;
     gameHeight?: number;
   }) {
-    this.canvas = canvas;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
   }
@@ -103,8 +99,6 @@ class UI {
         new PauseUI({
           gameWidth: this.gameWidth,
           gameHeight: this.gameHeight,
-          // @ts-ignore
-          canvas: this.canvas,
         })
     );
   }
