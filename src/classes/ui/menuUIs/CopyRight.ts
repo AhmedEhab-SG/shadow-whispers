@@ -1,6 +1,7 @@
 import { ControlActions } from "../../../types/events";
 import logoImg from "../../../assets/imgs/ui/logo.png";
 import UI from "../UI";
+import { GameStates } from "../../../types/game";
 
 class CopyRight extends UI {
   public constructor({
@@ -22,7 +23,12 @@ class CopyRight extends UI {
     this.drawImg = true;
   }
 
-  public update({ controlActions }: { controlActions: ControlActions }): void {
+  public update({
+    controlActions,
+  }: {
+    controlActions: ControlActions;
+    gameStates: GameStates;
+  }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "none";

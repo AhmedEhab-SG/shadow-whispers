@@ -5,6 +5,8 @@ import {
   OverUIInstance,
   NextUIInstance,
   MobileUIInstance,
+  OptionsUIInstance,
+  ControlsUIInstance,
 } from "../../types/ui.ts";
 import Energy from "./PlayingUIs/Energy.ts";
 import Level from "./PlayingUIs/Level.ts";
@@ -21,20 +23,50 @@ import Reason from "./overUIs/Reason.ts";
 import ExitGame from "./overUIs/ExitGame.ts";
 import GameOver from "./overUIs/GameOver.ts";
 import MainMenu from "./overUIs/MainMenu.ts";
-import RestartLevel from "./overUIs/RestartLevel.ts";
+import Restart from "./overUIs/Restart.ts";
 import Menu from "./pauseUIs/Menu.ts";
 import Paused from "./pauseUIs/Paused.ts";
-import Restart from "./pauseUIs/Restart.ts";
+import RestartPs from "./pauseUIs/RestartPS.ts";
 import Resume from "./pauseUIs/Resume.ts";
-import RestartLevelPS from "./pauseUIs/RestartLevelPS.ts";
 import Controls from "./menuUIs/Controls.ts";
 import CopyRight from "./menuUIs/CopyRight.ts";
 import JoyStick from "./mobile/joystick/index.ts";
 import Attack from "./mobile/Attack.ts";
 import FullScreen from "./pauseUIs/FullScreen.ts";
+import Options from "./menuUIs/Options.ts";
+import OptionsName from "./optionsUIs/OptionsName.ts";
+import ScreenAspect from "./optionsUIs/ScreenAspect.ts";
+import UltraWide from "./optionsUIs/UltraWide.ts";
+import Wide from "./optionsUIs/Wide.ts";
+import Full from "./optionsUIs/Full.ts";
+import MenuBack from "./optionsUIs/Menu.ts";
+import ScreenMode from "./optionsUIs/ScreenMode.ts";
+import Windowed from "./optionsUIs/Windowed.ts";
+import FullScreenMenu from "./optionsUIs/FullScreen.ts";
 
 class UI {
-  public static readonly MenuUIs = [Name, Start, Exit, Controls, CopyRight];
+  public static readonly MenuUIs = [
+    Name,
+    Start,
+    Exit,
+    Controls,
+    CopyRight,
+    Options,
+  ];
+  public static readonly OptionsUIs = [
+    OptionsName,
+    Name,
+    CopyRight,
+    ScreenAspect,
+    ScreenMode,
+    UltraWide,
+    Wide,
+    Full,
+    MenuBack,
+    FullScreenMenu,
+    Windowed,
+  ];
+  public static readonly ControlsUIs = [Name, CopyRight, MenuBack];
   public static readonly PlayingUIs = [
     Energy,
     Score,
@@ -46,15 +78,14 @@ class UI {
   public static readonly PauseUI = [
     Paused,
     Resume,
-    Restart,
-    RestartLevelPS,
+    RestartPs,
     FullScreen,
     Menu,
   ];
   public static readonly OverUIs = [
     GameOver,
     Reason,
-    RestartLevel,
+    Restart,
     MainMenu,
     ExitGame,
   ];
@@ -90,6 +121,26 @@ class UI {
     return UI.MenuUIs.map(
       (MenuUI) =>
         new MenuUI({ gameWidth: this.gameWidth, gameHeight: this.gameHeight })
+    );
+  }
+
+  public getAllOptionsUIs(): OptionsUIInstance[] {
+    return UI.OptionsUIs.map(
+      (OptionsUI) =>
+        new OptionsUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+        })
+    );
+  }
+
+  public getAllControlsUIs(): ControlsUIInstance[] {
+    return UI.ControlsUIs.map(
+      (ControlsUI) =>
+        new ControlsUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+        })
     );
   }
 

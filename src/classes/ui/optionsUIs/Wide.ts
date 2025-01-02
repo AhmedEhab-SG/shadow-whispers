@@ -1,9 +1,9 @@
-import GameStatus from "../../../config/GameStatus";
+import AspectRatio from "../../../enum/AspectRatio";
 import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class NextLevel extends UI {
+class Wide extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,13 +13,14 @@ class NextLevel extends UI {
   }) {
     super();
 
-    this.text = "Next Level";
-    this.textX = gameWidth ? gameWidth * 0.45 : 0;
+    this.textX = gameWidth ? gameWidth * 0.6 : 0;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.text = "Wide";
+    this.color = "grey";
+    this.shadowColor = "white";
     this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
-
   public update({
     controlActions,
     gameStates,
@@ -27,21 +28,26 @@ class NextLevel extends UI {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
+    const isAspectWideScreen =
+      gameStates.aspectRatio === AspectRatio.WIDE_SCREEN;
+
+    this.color = isAspectWideScreen ? "green" : "grey";
+    this.shadowColor = "white";
+
+    if (isAspectWideScreen) return;
+
     if (this.isHover(controlActions)) {
-      this.color = "white";
-      this.shadowColor = "black";
+      this.color = "black";
+      this.shadowColor = "white";
 
       if (this.isClicked(controlActions)) {
-        this.color = "grey";
-        this.shadowColor = "black";
+        this.color = "white";
+        this.shadowColor = "grey";
 
-        gameStates.status = GameStatus.NEXT_LEVEL;
+        gameStates.aspectRatio = AspectRatio.WIDE_SCREEN;
       }
-    } else {
-      this.color = "rgb(50,205,50)";
-      this.shadowColor = "black";
     }
   }
 }
 
-export default NextLevel;
+export default Wide;

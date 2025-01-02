@@ -14,9 +14,9 @@ class Restart extends UI {
     super();
 
     this.text = "Restart";
-    this.textX = gameWidth ? gameWidth * 0.5 - 55 : 0;
-    this.textY = gameHeight ? gameHeight * 0.65 : 0;
-    this.fontSize = 30;
+    this.textX = gameWidth ? gameWidth * 0.45 : 0;
+    this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
 
@@ -35,11 +35,11 @@ class Restart extends UI {
         this.color = "grey";
         this.shadowColor = "black";
 
-        gameStates.status = GameStatus.RESTART;
+        gameStates.status = GameStatus.RESTART_LEVEL;
       }
     } else {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "rgb(168, 165, 0)";
+      this.shadowColor = "black";
     }
   }
 }

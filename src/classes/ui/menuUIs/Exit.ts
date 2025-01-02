@@ -12,7 +12,7 @@ class Exit extends UI {
     super();
 
     this.textX = gameWidth ? gameWidth * 0.455 : 0;
-    this.textY = gameHeight ? gameHeight * 0.65 : 0;
+    this.textY = gameHeight ? gameHeight * 0.85 : 0;
     this.text = "Exit";
     this.color = "grey";
     this.shadowColor = "white";

@@ -27,7 +27,7 @@ class Canvas {
 
     if (!defaultStyles) return;
     this._tag.style.position = "absolute";
-    this._tag.style.border = "3px solid white";
+    // this._tag.style.border = "3px solid gray";
     this._tag.style.top = "50%";
     this._tag.style.left = "50%";
     this._tag.style.transform = "translate(-50%, -50%)";

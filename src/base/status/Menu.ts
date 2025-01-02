@@ -6,13 +6,25 @@ import BaseKeys from "../../enum/BaseKeys";
 import IDrawable from "../../interfaces/IDrawable";
 import { ControlActions } from "../../types/events";
 import { GameStates } from "../../types/game";
-import { MenuUIInstance } from "../../types/ui";
+import {
+  ControlsUIInstance,
+  MenuUIInstance,
+  OptionsUIInstance,
+} from "../../types/ui";
 import Interval from "../../utils/Interval";
 
 class Menu extends Interval implements IDrawable {
   private canvasSpeed: number = 0;
   private particles: Particle[] = [];
-  private ui: MenuUIInstance[] = [];
+  private menUi: MenuUIInstance[] = [];
+  private optionsUi: OptionsUIInstance[] = [];
+  private controlsUi: ControlsUIInstance[] = [];
+
+  private activeStates = [
+    GameStatus.MENU,
+    GameStatus.OPTIONS,
+    GameStatus.CONTROLS,
+  ];
 
   public constructor(
     private width: number,
@@ -30,10 +42,20 @@ class Menu extends Interval implements IDrawable {
 
     // create UI
 
-    this.ui = new UI({
+    this.menUi = new UI({
       gameWidth: this.width,
       gameHeight: this.height,
     }).getAllMenuUIs();
+
+    this.optionsUi = new UI({
+      gameWidth: this.width,
+      gameHeight: this.height,
+    }).getAllOptionsUIs();
+
+    this.controlsUi = new UI({
+      gameWidth: this.width,
+      gameHeight: this.height,
+    }).getAllControlsUIs();
   }
 
   private createParticles() {
@@ -49,7 +71,7 @@ class Menu extends Interval implements IDrawable {
     keys: BaseKeys[];
     controlActions: ControlActions;
   }): void {
-    if (this.gameStates.status !== GameStatus.MENU) return;
+    if (!this.isKeepActive()) return;
 
     // update the particles
     this.particles.forEach((particle) =>
@@ -58,19 +80,52 @@ class Menu extends Interval implements IDrawable {
     this.particles = this.particles.filter((particle) => !particle.markDelete);
 
     // update the UI
-    this.ui.forEach((ui) => {
-      ui.update({ controlActions, gameStates: this.gameStates });
-    });
+    if (this.gameStates.status === GameStatus.MENU)
+      this.menUi.forEach((ui) => {
+        ui.update({
+          controlActions,
+          gameStates: this.gameStates,
+        });
+      });
+
+    if (this.gameStates.status === GameStatus.OPTIONS)
+      this.optionsUi.forEach((ui) => {
+        ui.update({
+          controlActions,
+          gameStates: this.gameStates,
+        });
+      });
+
+    if (this.gameStates.status === GameStatus.CONTROLS)
+      this.controlsUi.forEach((ui) => {
+        ui.update({
+          controlActions,
+          gameStates: this.gameStates,
+        });
+      });
   }
 
   public draw(_ctx: CanvasRenderingContext2D): void {
-    if (this.gameStates.status !== GameStatus.MENU) return;
+    if (!this.isKeepActive()) return;
 
     // draw the particles
     this.particles.forEach((particle) => particle.draw(_ctx));
 
     // draw the UI
-    this.ui.forEach((ui) => ui.draw(_ctx));
+    if (this.gameStates.status === GameStatus.MENU)
+      this.menUi.forEach((ui) => ui.draw(_ctx));
+
+    if (this.gameStates.status === GameStatus.OPTIONS)
+      this.optionsUi.forEach((ui) => ui.draw(_ctx));
+
+    if (this.gameStates.status === GameStatus.CONTROLS)
+      this.controlsUi.forEach((ui) => ui.draw(_ctx));
+  }
+
+  private isKeepActive() {
+    return this.activeStates.some(
+      (status) => status === this.gameStates.status
+    );
   }
 }
 

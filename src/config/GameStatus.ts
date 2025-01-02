@@ -1,6 +1,7 @@
 class GameStatus {
   public static readonly MENU = "menu";
   public static readonly OPTIONS = "options";
+  public static readonly CONTROLS = "controls";
   public static readonly PLAYING = "playing";
   public static readonly PAUSED = "paused";
   public static readonly OVER = "over";

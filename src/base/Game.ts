@@ -20,11 +20,6 @@ class Game extends GameUtils implements IGame {
   private width = 0;
   private height = 0;
 
-  private gameStates: GameStates = {
-    debugMode: false,
-    status: GameStatus.MENU,
-  };
-
   // Canvas
   private canvas: Canvas = new Canvas(BaseResolution);
 
@@ -33,12 +28,19 @@ class Game extends GameUtils implements IGame {
     AspectRatio.WIDE_SCREEN
   );
 
+  private gameStates: GameStates = {
+    debugMode: false,
+    status: GameStatus.MENU,
+    aspectRatio: this.screenViewport.aspectRatio,
+  };
+
   // Events
   private controlKeys: ControlKeys = new ControlKeys(
     DefaultControls,
     this.gameStates.debugMode
   );
   private controlInput: ControlInput = new ControlInput(this.canvas.tag);
+  private resize = new Resize(this.screenViewport, this.canvas.tag);
 
   private menu?: Menu;
   private playing?: Playing;
@@ -76,12 +78,22 @@ class Game extends GameUtils implements IGame {
   }
 
   private events(): void {
-    new Resize(this.screenViewport, this.canvas.tag).addHandler();
+    this.resize.addHandler();
     this.controlKeys.addHandlers();
     this.controlInput.addHandlers();
   }
 
+  private updateAspectRatio(): void {
+    if (this.gameStates.aspectRatio !== this.screenViewport.aspectRatio) {
+      this.screenViewport.aspectRatio = this.gameStates.aspectRatio;
+      this.init();
+    }
+  }
+
   protected update({ deltaTime }: { deltaTime: number }): void {
+    // update aspect ratio
+    this.updateAspectRatio();
+
     // start menu update
     this.menu?.update({
       deltaTime,

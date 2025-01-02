@@ -38,8 +38,8 @@ class Resume extends UI {
         gameStates.status = GameStatus.PLAYING;
       }
     } else {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "rgb(50,205,50)";
+      this.shadowColor = "black";
     }
   }
 }

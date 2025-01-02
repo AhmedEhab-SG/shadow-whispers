@@ -3,7 +3,7 @@ import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class RestartLevel extends UI {
+class Options extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,10 +13,12 @@ class RestartLevel extends UI {
   }) {
     super();
 
-    this.text = "Restart Level";
-    this.textX = gameWidth ? gameWidth * 0.3 : 0;
-    this.textY = gameHeight ? gameHeight * 0.5 : 0;
-    this.fontSize = 30;
+    this.textX = gameWidth ? gameWidth * 0.5 - 90 : 0;
+    this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.text = "Options";
+    this.color = "grey";
+    this.shadowColor = "white";
+    this.fontSize = 50;
     this.fontFamily = "Bangers, cursive";
   }
 
@@ -29,19 +31,19 @@ class RestartLevel extends UI {
   }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shadowColor = "black";
+      this.shadowColor = "grey";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shadowColor = "black";
+        this.shadowColor = "white";
 
-        gameStates.status = GameStatus.RESTART_LEVEL;
+        gameStates.status = GameStatus.OPTIONS;
       }
     } else {
-      this.color = "black";
+      this.color = "grey";
       this.shadowColor = "white";
     }
   }
 }
 
-export default RestartLevel;
+export default Options;

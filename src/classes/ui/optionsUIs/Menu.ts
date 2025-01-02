@@ -3,7 +3,7 @@ import { ControlActions } from "../../../types/events";
 import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
-class NextLevel extends UI {
+class Menu extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,10 +13,12 @@ class NextLevel extends UI {
   }) {
     super();
 
-    this.text = "Next Level";
-    this.textX = gameWidth ? gameWidth * 0.45 : 0;
-    this.textY = gameHeight ? gameHeight * 0.55 : 0;
-    this.fontSize = 40;
+    this.textX = gameWidth ? gameWidth * 0.455 : 0;
+    this.textY = gameHeight ? gameHeight * 0.85 : 0;
+    this.text = "Menu";
+    this.color = "grey";
+    this.shadowColor = "white";
+    this.fontSize = 55;
     this.fontFamily = "Bangers, cursive";
   }
 
@@ -29,19 +31,19 @@ class NextLevel extends UI {
   }): void {
     if (this.isHover(controlActions)) {
       this.color = "white";
-      this.shadowColor = "black";
+      this.shadowColor = "grey";
 
       if (this.isClicked(controlActions)) {
         this.color = "grey";
-        this.shadowColor = "black";
+        this.shadowColor = "white";
 
-        gameStates.status = GameStatus.NEXT_LEVEL;
+        gameStates.status = GameStatus.MENU;
       }
     } else {
-      this.color = "rgb(50,205,50)";
-      this.shadowColor = "black";
+      this.color = "grey";
+      this.shadowColor = "white";
     }
   }
 }
 
-export default NextLevel;
+export default Menu;

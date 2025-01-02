@@ -14,7 +14,7 @@ class Start extends UI {
     super();
 
     this.textX = gameWidth ? gameWidth * 0.5 - 70 : 0;
-    this.textY = gameHeight ? gameHeight * 0.5 : 0;
+    this.textY = gameHeight ? gameHeight * 0.4 : 0;
     this.text = "Start";
     this.color = "grey";
     this.shadowColor = "white";

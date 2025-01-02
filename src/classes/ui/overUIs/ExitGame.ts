@@ -12,7 +12,7 @@ class ExitGame extends UI {
     super();
 
     this.text = "Exit Game";
-    this.textX = gameWidth ? gameWidth * 0.45 : 0;
+    this.textX = gameWidth ? gameWidth * 0.65 : 0;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
     this.fontSize = 30;
     this.fontFamily = "Bangers, cursive";

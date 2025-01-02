@@ -1,6 +1,6 @@
-import RestartLevel from "../overUIs/RestartLevel";
+import Restart from "../overUIs/Restart";
 
-class RestartLevelPS extends RestartLevel {
+class RestartPS extends Restart {
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,9 +10,11 @@ class RestartLevelPS extends RestartLevel {
   }) {
     super({ gameWidth, gameHeight });
 
-    this.textX = gameWidth ? gameWidth * 0.435 : 0;
+
+    this.textX = gameWidth ? gameWidth * 0.455 : 0;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.fontSize = 30;
   }
 }
 
-export default RestartLevelPS;
+export default RestartPS;

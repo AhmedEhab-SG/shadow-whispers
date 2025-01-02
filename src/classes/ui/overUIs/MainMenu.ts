@@ -14,8 +14,8 @@ class MenuOver extends UI {
     super();
 
     this.text = "Main Menu";
-    this.textX = gameWidth ? gameWidth * 0.58 : 0;
-    this.textY = gameHeight ? gameHeight * 0.5 : 0;
+    this.textX = gameWidth ? gameWidth * 0.28 : 0;
+    this.textY = gameHeight ? gameHeight * 0.55 : 0;
     this.fontSize = 30;
     this.fontFamily = "Bangers, cursive";
   }
