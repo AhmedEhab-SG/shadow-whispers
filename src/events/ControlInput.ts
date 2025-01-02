@@ -52,7 +52,7 @@ class ControlInput extends Event {
   private getActionPos(e: MouseEvent | TouchEvent): {
     x: number;
     y: number;
-    touches: { x: number; y: number }[];
+    touches: { x: number; y: number; identifier: number }[];
   } {
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
@@ -68,6 +68,7 @@ class ControlInput extends Event {
           ? [...e.changedTouches].map((t) => ({
               x: (t.clientX - this._canvasRect.left) * scaleX,
               y: (t.clientY - this._canvasRect.top) * scaleY,
+              identifier: t.identifier,
             }))
           : [],
     };
@@ -200,24 +201,40 @@ class ControlInput extends Event {
     };
   };
 
-  private touchEndHandler = (): void => {
+  private touchEndHandler = (e: TouchEvent): void => {
     // Clear the hold timer
     if (this._holdTimer !== null) {
       clearTimeout(this._holdTimer);
       this._holdTimer = null;
     }
 
-    this.resetControlActions();
+    // Update touches to remove the ended touch
+    const endedTouchIds = [...e.changedTouches].map((t) => t.identifier);
+    this._controlActions.touches = this._controlActions.touches.filter(
+      (t) => !endedTouchIds.includes(t.identifier)
+    );
+
+    if (this._controlActions.touches.length === 0) {
+      this.resetControlActions();
+    }
   };
 
-  private touchCancelHandler = (): void => {
+  private touchCancelHandler = (e: TouchEvent): void => {
     // Clear the hold timer
     if (this._holdTimer !== null) {
       clearTimeout(this._holdTimer);
       this._holdTimer = null;
     }
 
-    this.resetControlActions();
+    // Update touches to remove the canceled touch
+    const canceledTouchIds = [...e.changedTouches].map((t) => t.identifier);
+    this._controlActions.touches = this._controlActions.touches.filter(
+      (t) => !canceledTouchIds.includes(t.identifier)
+    );
+
+    if (this._controlActions.touches.length === 0) {
+      this.resetControlActions();
+    }
   };
 
   public get controlActions(): ControlActions {
