@@ -19,13 +19,13 @@ class JoyStick extends UI {
 
   private touchCord: Vector = new Vector(0, 0);
 
- public constructor({
+  public constructor({
     x = 75,
     y = 75,
-    radius = 50,
-    handleRadius = 25,
+    radius = 60,
+    handleRadius = 30,
     handleFriction = 0.25,
-    touchThreshold = 20,
+    touchThreshold = 25,
     handleColor = "gray",
     originColor = "rgba(0, 0, 0, 0.25)",
   } = {}) {
@@ -81,13 +81,14 @@ class JoyStick extends UI {
     this.touchCord = this.origin;
 
     // if the touch is within the joystick radius
-    if (
-      this.isTouchInsideJoystick(
-        controlActions.startCord.x,
-        controlActions.startCord.y
-      )
-    ) {
-      this.touchCord = new Vector(controlActions.x, controlActions.y);
+    const touchIndex = controlActions.startCords.findIndex(({ x, y }) =>
+      this.isTouchInsideJoystick(x, y)
+    );
+    if (touchIndex !== -1) {
+      this.touchCord = new Vector(
+        controlActions.touches[touchIndex].x,
+        controlActions.touches[touchIndex].y
+      );
 
       this.movementHandler(this.touchCord, keys);
     }

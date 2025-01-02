@@ -33,7 +33,7 @@ class Attack extends UI {
     if (!this.isMobileDevice()) return;
 
     if (
-      controlActions.touches?.some(
+      controlActions.touches.some(
         ({ x, y }) =>
           Math.sqrt(
             (x - (this.x + this.size / 2)) ** 2 +

@@ -8,7 +8,8 @@ class ControlInput extends Event {
     isHold: false,
     isTouch: false,
     startCord: { x: 0, y: 0 },
-    touches: undefined,
+    startCords: [],
+    touches: [],
   };
 
   private _holdThreshold = 200; // Threshold in milliseconds
@@ -51,7 +52,7 @@ class ControlInput extends Event {
   private getActionPos(e: MouseEvent | TouchEvent): {
     x: number;
     y: number;
-    touches?: { x: number; y: number }[];
+    touches: { x: number; y: number }[];
   } {
     const clientX = e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
     const clientY = e instanceof MouseEvent ? e.clientY : e.touches[0].clientY;
@@ -68,7 +69,7 @@ class ControlInput extends Event {
               x: (t.clientX - this._canvasRect.left) * scaleX,
               y: (t.clientY - this._canvasRect.top) * scaleY,
             }))
-          : undefined,
+          : [],
     };
   }
 
@@ -94,7 +95,8 @@ class ControlInput extends Event {
       isHold: false,
       isTouch: false,
       startCord: { x: 0, y: 0 },
-      touches: undefined,
+      startCords: [],
+      touches: [],
     };
   }
 
@@ -111,6 +113,8 @@ class ControlInput extends Event {
       isHold: false,
       isTouch: false,
       startCord: { x, y },
+      startCords: [],
+      touches: [],
     };
 
     // Start the hold timer
@@ -171,6 +175,7 @@ class ControlInput extends Event {
       isTouch: true,
       startCord: { x, y },
       touches,
+      startCords: touches,
     };
 
     // Start the hold timer
