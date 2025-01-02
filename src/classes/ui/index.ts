@@ -2,6 +2,7 @@ import {
   PlayingUIInstance,
   MenuUIInstance,
   PauseUIInstance,
+  OverUIInstance,
   NextUIInstance,
   MobileUIInstance,
 } from "../../types/ui.ts";
@@ -30,6 +31,7 @@ import Controls from "./menuUIs/Controls.ts";
 import CopyRight from "./menuUIs/CopyRight.ts";
 import JoyStick from "./mobile/joystick/index.ts";
 import Attack from "./mobile/Attack.ts";
+import FullScreen from "./pauseUIs/FullScreen.ts";
 
 class UI {
   public static readonly MenuUIs = [Name, Start, Exit, Controls, CopyRight];
@@ -45,8 +47,9 @@ class UI {
     Paused,
     Resume,
     Restart,
-    Menu,
     RestartLevelPS,
+    FullScreen,
+    Menu,
   ];
   public static readonly OverUIs = [
     GameOver,
@@ -59,17 +62,20 @@ class UI {
 
   public static readonly MobileUIs = [JoyStick, Attack];
 
-  private gameWidth: number | undefined;
-
-  private gameHeight: number | undefined;
+  private canvas?: HTMLCanvasElement;
+  private gameWidth?: number;
+  private gameHeight?: number;
 
   public constructor({
+    canvas,
     gameWidth,
     gameHeight,
   }: {
+    canvas?: HTMLCanvasElement;
     gameWidth?: number;
     gameHeight?: number;
   }) {
+    this.canvas = canvas;
     this.gameWidth = gameWidth;
     this.gameHeight = gameHeight;
   }
@@ -97,11 +103,13 @@ class UI {
         new PauseUI({
           gameWidth: this.gameWidth,
           gameHeight: this.gameHeight,
+          // @ts-ignore
+          canvas: this.canvas,
         })
     );
   }
 
-  public getAllOverUIs(): PauseUIInstance[] {
+  public getAllOverUIs(): OverUIInstance[] {
     return UI.OverUIs.map(
       (OverUI) =>
         new OverUI({

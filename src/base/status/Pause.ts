@@ -13,6 +13,7 @@ class Pause extends Interval implements IDrawable {
   private ui: PauseUIInstance[] = [];
 
   public constructor(
+    private canvas: HTMLCanvasElement,
     private width: number,
     private height: number,
     public gameStates: GameStates
@@ -22,6 +23,7 @@ class Pause extends Interval implements IDrawable {
     this.backgrounds = new Backgrounds(this.width, this.height);
 
     this.ui = new UI({
+      canvas: this.canvas,
       gameWidth: this.width,
       gameHeight: this.height,
     }).getAllPauseUI();
