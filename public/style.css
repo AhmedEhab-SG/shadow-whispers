@@ -1,3 +1,13 @@
+@font-face {
+  font-family: "Creepster";
+  src: url("./fonts//Creepster-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Bangers";
+  src: url("./fonts/Bangers-Regular.ttf") format("truetype");
+}
+
 * {
   margin: 0;
   padding: 0;

@@ -12,14 +12,14 @@ class CopyRight extends UI {
     gameHeight?: number;
   }) {
     super();
-    this.textX = gameWidth ? gameWidth * 0.85 : 0;
+    this.textX = gameWidth ? gameWidth * 0.87 : 0;
     this.textY = gameHeight ? gameHeight * 0.985 : 0;
     this.text = "Ahmed Ehab SG";
-    this.fontFamily = "Inter";
+    this.fontFamily = "Arial";
     this.fontWeight = "bold";
     this.fontStyle = "italic";
-    this.fontSize = 20;
-    this.imgSize = 30;
+    this.fontSize = 18;
+    this.imgSize = 28;
     this.imgX = this.textX - this.imgSize - 5;
     this.imgY = this.textY - this.imgSize + 5;
     this.loadImage(logoImg);

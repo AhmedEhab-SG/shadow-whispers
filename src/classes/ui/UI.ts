@@ -5,7 +5,7 @@ import Sprite from "../../utils/Sprite";
 
 abstract class UI extends Sprite {
   private _text: string = "";
-  private _fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Inter" =
+  private _fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Arial" =
     "Creepster, cursive";
   private _fontSize: number = 30;
   private _fontWeight: "normal" | "bold" | "bolder" | "lighter" | number =
@@ -150,12 +150,12 @@ abstract class UI extends Sprite {
   protected get fontFamily():
     | "Creepster, cursive"
     | "Bangers, cursive"
-    | "Inter" {
+    | "Arial" {
     return this._fontFamily;
   }
 
   protected set fontFamily(
-    fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Inter"
+    fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Arial"
   ) {
     this._fontFamily = fontFamily;
   }

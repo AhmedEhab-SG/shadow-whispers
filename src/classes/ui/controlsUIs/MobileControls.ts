@@ -16,7 +16,7 @@ class MobileControls extends UI {
     this.color = "white";
     this.shadowColor = "grey";
     this.fontSize = 30;
-    this.fontFamily = "Inter";
+    this.fontFamily = "Arial";
   }
   public update(): void {}
 }
