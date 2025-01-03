@@ -5,7 +5,7 @@ import manifest from "./public/manifest.json";
 export default defineConfig({
   plugins: [
     VitePWA({
-      injectRegister: "script-defer",
+      registerType: "autoUpdate",
       manifest: manifest as Partial<ManifestOptions>,
       workbox: {
         globPatterns: ["**/*.{js,css,html,png,svg,ttf,woff2}"],
