@@ -1,6 +1,6 @@
 import UI from "../UI";
 
-class OptionsName extends UI {
+class ControlsName extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,9 +10,9 @@ class OptionsName extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.5 - 75 : 0;
+    this.textX = gameWidth ? gameWidth * 0.5 - 80 : 0;
     this.textY = gameHeight ? gameHeight * 0.37 : 0;
-    this.text = "Options";
+    this.text = "Controls";
     this.color = "white";
     this.shadowColor = "grey";
     this.fontSize = 50;
@@ -36,4 +36,4 @@ class OptionsName extends UI {
   }
 }
 
-export default OptionsName;
+export default ControlsName;

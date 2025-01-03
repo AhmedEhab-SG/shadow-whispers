@@ -22,17 +22,18 @@ class FullScreen extends UI {
   public update({ controlActions }: { controlActions: ControlActions }): void {
     const isFullScreen = document.fullscreenElement;
     this.color = isFullScreen ? "green" : "grey";
+    this.shadowColor = "white";
 
     if (isFullScreen) return;
 
     this.shadowColor = "white";
     if (this.isHover(controlActions)) {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "white";
+      this.shadowColor = "grey";
 
       this.click(controlActions, () => {
-        this.color = "white";
-        this.shadowColor = "grey";
+        this.color = "black";
+        this.shadowColor = "white";
 
         document.documentElement?.requestFullscreen().catch(() => {});
       });

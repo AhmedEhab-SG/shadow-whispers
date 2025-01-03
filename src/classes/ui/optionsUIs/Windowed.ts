@@ -27,12 +27,12 @@ class Windowed extends UI {
 
     this.shadowColor = "white";
     if (this.isHover(controlActions)) {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "white";
+      this.shadowColor = "grey";
 
       this.click(controlActions, () => {
-        this.color = "white";
-        this.shadowColor = "grey";
+        this.color = "black";
+        this.shadowColor = "white";
 
         document.exitFullscreen().catch(() => {});
       });

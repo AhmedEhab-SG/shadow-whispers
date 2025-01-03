@@ -67,7 +67,8 @@ class Game extends GameUtils implements IGame {
   }
 
   private afterInit(): void {
-    this.events();
+    this.removeEvents();
+    this.addEvents();
 
     // game status init
     this.menu = new Menu(this.width, this.height, this.gameStates);
@@ -77,10 +78,16 @@ class Game extends GameUtils implements IGame {
     this.next = new Next(this.width, this.height, this.gameStates);
   }
 
-  private events(): void {
+  private addEvents(): void {
     this.resize.addHandler();
     this.controlKeys.addHandlers();
     this.controlInput.addHandlers();
+  }
+
+  private removeEvents(): void {
+    this.resize.removeHandler();
+    this.controlKeys.removeHandlers();
+    this.controlInput.removeHandlers();
   }
 
   private updateAspectRatio(): void {

@@ -37,12 +37,12 @@ class Wide extends UI {
     if (isAspectWideScreen) return;
 
     if (this.isHover(controlActions)) {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "white";
+      this.shadowColor = "grey";
 
       this.click(controlActions, () => {
-        this.color = "white";
-        this.shadowColor = "grey";
+        this.color = "black";
+        this.shadowColor = "white";
 
         gameStates.aspectRatio = AspectRatio.WIDE_SCREEN;
       });

@@ -43,6 +43,11 @@ import MenuBack from "./optionsUIs/Menu.ts";
 import ScreenMode from "./optionsUIs/ScreenMode.ts";
 import Windowed from "./optionsUIs/Windowed.ts";
 import FullScreenMenu from "./optionsUIs/FullScreen.ts";
+import ControlsName from "./controlsUIs/ControlsName.ts";
+import Computer from "./controlsUIs/Computer.ts";
+import ComputerControls from "./controlsUIs/ComputerControls.ts";
+import Mobile from "./controlsUIs/Mobile.ts";
+import MobileControls from "./controlsUIs/MobileControls.ts";
 
 class UI {
   public static readonly MenuUIs = [
@@ -66,7 +71,16 @@ class UI {
     FullScreenMenu,
     Windowed,
   ];
-  public static readonly ControlsUIs = [Name, CopyRight, MenuBack];
+  public static readonly ControlsUIs = [
+    Name,
+    CopyRight,
+    MenuBack,
+    ControlsName,
+    Computer,
+    ComputerControls,
+    Mobile,
+    MobileControls,
+  ];
   public static readonly PlayingUIs = [
     Energy,
     Score,

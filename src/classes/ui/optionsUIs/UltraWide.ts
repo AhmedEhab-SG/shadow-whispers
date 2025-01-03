@@ -37,12 +37,12 @@ class UltraWide extends UI {
     if (isAspectUltraWideScreen) return;
 
     if (this.isHover(controlActions)) {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "white";
+      this.shadowColor = "grey";
 
       this.click(controlActions, () => {
-        this.color = "white";
-        this.shadowColor = "grey";
+        this.color = "black";
+        this.shadowColor = "white";
 
         gameStates.aspectRatio = AspectRatio.ULTRA_WIDE_SCREEN;
       });

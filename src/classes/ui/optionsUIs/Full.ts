@@ -37,11 +37,11 @@ class Full extends UI {
     if (isAspectRatioFullScreen) return;
 
     if (this.isHover(controlActions)) {
-      this.color = "black";
-      this.shadowColor = "white";
+      this.color = "white";
+      this.shadowColor = "grey";
 
       this.click(controlActions, () => {
-        this.color = "grey";
+        this.color = "black";
         this.shadowColor = "white";
         gameStates.aspectRatio = AspectRatio.FULL_SCREEN;
       });
