@@ -23,12 +23,12 @@ class ExitGame extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "black";
 
         close();
-      }
+      });
     } else {
       this.color = "black";
       this.shadowColor = "white";

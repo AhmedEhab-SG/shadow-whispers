@@ -12,10 +12,13 @@ class CopyRight extends UI {
     gameHeight?: number;
   }) {
     super();
-    this.textX = gameWidth ? gameWidth * 0.86 : 0;
+    this.textX = gameWidth ? gameWidth * 0.85 : 0;
     this.textY = gameHeight ? gameHeight * 0.985 : 0;
     this.text = "Ahmed Ehab SG";
-    this.fontSize = 25;
+    this.fontFamily = "Inter";
+    this.fontWeight = "bold";
+    this.fontStyle = "italic";
+    this.fontSize = 20;
     this.imgSize = 30;
     this.imgX = this.textX - this.imgSize - 5;
     this.imgY = this.textY - this.imgSize + 5;
@@ -33,12 +36,11 @@ class CopyRight extends UI {
       this.color = "white";
       this.shadowColor = "none";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "none";
-
         window.open("https://ahmedehab-sg.com/", "_blank");
-      }
+      });
     } else {
       this.color = "rgb(136, 136, 255)";
       this.shadowColor = "none";

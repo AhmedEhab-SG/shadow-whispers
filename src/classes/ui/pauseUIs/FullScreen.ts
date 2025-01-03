@@ -35,14 +35,14 @@ class FullScreen extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "black";
 
         if (document.fullscreenElement)
           document.exitFullscreen().catch(() => {});
         else document.documentElement?.requestFullscreen().catch(() => {});
-      }
+      });
     } else {
       this.color = "black";
       this.shadowColor = "white";

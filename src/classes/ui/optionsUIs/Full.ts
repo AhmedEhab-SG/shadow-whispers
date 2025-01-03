@@ -40,12 +40,11 @@ class Full extends UI {
       this.color = "black";
       this.shadowColor = "white";
 
-      if (this.isClicked(controlActions)) {
-        this.color = "white";
-        this.shadowColor = "grey";
-
+      this.click(controlActions, () => {
+        this.color = "grey";
+        this.shadowColor = "white";
         gameStates.aspectRatio = AspectRatio.FULL_SCREEN;
-      }
+      });
     }
   }
 }

@@ -31,12 +31,12 @@ class Resume extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "black";
 
         gameStates.status = GameStatus.PLAYING;
-      }
+      });
     } else {
       this.color = "rgb(50,205,50)";
       this.shadowColor = "black";

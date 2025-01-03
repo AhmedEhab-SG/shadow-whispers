@@ -33,12 +33,12 @@ class Options extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "white";
-
         gameStates.status = GameStatus.OPTIONS;
-      }
+      });
+      
     } else {
       this.color = "grey";
       this.shadowColor = "white";

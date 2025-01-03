@@ -25,12 +25,11 @@ class Exit extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "white";
-
         close();
-      }
+      });
     } else {
       this.color = "grey";
       this.shadowColor = "white";

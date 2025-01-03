@@ -5,9 +5,12 @@ import Sprite from "../../utils/Sprite";
 
 abstract class UI extends Sprite {
   private _text: string = "";
-  private _fontFamily: "Creepster, cursive" | "Bangers, cursive" =
+  private _fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Inter" =
     "Creepster, cursive";
   private _fontSize: number = 30;
+  private _fontWeight: "normal" | "bold" | "bolder" | "lighter" | number =
+    "normal";
+  private _fontStyle: "normal" | "italic" | "oblique" = "normal";
   private _color: string = "black";
   private _textX: number = 0;
   private _textY: number = 0;
@@ -27,7 +30,7 @@ abstract class UI extends Sprite {
     this._markForDelete = true;
   }
 
-  protected isClicked(controlActions: ControlActions): boolean {
+  private isClicked(controlActions: ControlActions): boolean {
     return (
       controlActions.x > this.textX &&
       controlActions.x < this.textX + this.textWidth &&
@@ -36,6 +39,17 @@ abstract class UI extends Sprite {
       controlActions.isClick
     );
   }
+
+  private clicked(controlActions: ControlActions): void {
+    controlActions.isClick = false;
+  }
+
+  protected click = (controlActions: ControlActions, fun: () => void): void => {
+    if (this.isClicked(controlActions)) {
+      fun();
+      this.clicked(controlActions);
+    }
+  };
 
   protected isHover(controlActions: ControlActions): boolean {
     return (
@@ -88,7 +102,7 @@ abstract class UI extends Sprite {
     ctx.shadowOffsetX = 2;
     ctx.shadowOffsetY = 2;
     ctx.shadowBlur = 5;
-    ctx.font = `${this._fontSize}px ${this._fontFamily}`;
+    ctx.font = `${this._fontStyle} ${this._fontWeight} ${this._fontSize}px ${this._fontFamily}`;
     ctx.fillStyle = this._color;
     ctx.fillText(this._text, this._textX, this._textY);
 
@@ -133,14 +147,40 @@ abstract class UI extends Sprite {
     this._text = text;
   }
 
-  protected get fontFamily(): "Creepster, cursive" | "Bangers, cursive" {
+  protected get fontFamily():
+    | "Creepster, cursive"
+    | "Bangers, cursive"
+    | "Inter" {
     return this._fontFamily;
   }
 
   protected set fontFamily(
-    fontFamily: "Creepster, cursive" | "Bangers, cursive"
+    fontFamily: "Creepster, cursive" | "Bangers, cursive" | "Inter"
   ) {
     this._fontFamily = fontFamily;
+  }
+
+  protected get fontWeight():
+    | "normal"
+    | "bold"
+    | "bolder"
+    | "lighter"
+    | number {
+    return this._fontWeight;
+  }
+
+  protected set fontWeight(
+    fontWeight: "normal" | "bold" | "bolder" | "lighter" | number
+  ) {
+    this._fontWeight = fontWeight;
+  }
+
+  protected get fontStyle(): "normal" | "italic" | "oblique" {
+    return this._fontStyle;
+  }
+
+  protected set fontStyle(fontStyle: "normal" | "italic" | "oblique") {
+    this._fontStyle = fontStyle;
   }
 
   protected get fontSize(): number {

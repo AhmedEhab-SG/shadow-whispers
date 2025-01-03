@@ -33,12 +33,11 @@ class Controls extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "white";
-
         gameStates.status = GameStatus.CONTROLS;
-      }
+      });
     } else {
       this.color = "grey";
       this.shadowColor = "white";

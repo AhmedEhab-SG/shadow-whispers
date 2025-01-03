@@ -31,12 +31,12 @@ class Menu extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      if (this.isClicked(controlActions)) {
+      this.click(controlActions, () => {
         this.color = "grey";
         this.shadowColor = "black";
 
         gameStates.status = GameStatus.MENU;
-      }
+      });
     } else {
       this.color = "black";
       this.shadowColor = "white";
