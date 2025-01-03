@@ -9,6 +9,15 @@ export default defineConfig({
       manifest: manifest as Partial<ManifestOptions>,
       workbox: {
         globPatterns: ["**/*.{js,css,html,png,svg,ttf,woff2}"],
+        runtimeCaching: [
+          {
+            urlPattern: /\.(?:ttf|woff2)$/,
+            handler: "CacheFirst",
+            options: {
+              cacheName: "font-cache",
+            },
+          },
+        ],
       },
     }),
   ],
