@@ -4,7 +4,7 @@ class ScreenViewport {
   public constructor(private _aspectRatio: AspectRatio) {}
 
   public calcWidth(): number {
-    return Math.floor(innerWidth);
+    return Math.floor(screen.width);
   }
 
   public calcHeight(): number {
