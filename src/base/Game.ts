@@ -51,6 +51,7 @@ class Game extends GameUtils implements IGame {
   public constructor() {
     super();
     this.init();
+    this.afterInit();
   }
 
   private init(): void {
@@ -62,8 +63,6 @@ class Game extends GameUtils implements IGame {
       this.screenViewport.calcHeight()
     );
     this.canvas.create();
-
-    this.afterInit();
   }
 
   private afterInit(): void {
