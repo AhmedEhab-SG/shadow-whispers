@@ -8,7 +8,7 @@ export default defineConfig({
       registerType: "autoUpdate",
       manifest: manifest as Partial<ManifestOptions>,
       workbox: {
-        globPatterns: ["**/*.{js,css,html,png,svg,ttf}"],
+        globPatterns: ["**/*.{js,css,html,png,svg,ttf,woff2}"],
       },
     }),
   ],
