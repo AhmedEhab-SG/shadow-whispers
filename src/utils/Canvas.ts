@@ -26,8 +26,6 @@ class Canvas {
     this._tag.style.height = `${height}px`;
 
     if (!defaultStyles) return;
-    // const isPortrait = screen.orientation.type.includes("portrait");
-
     this._tag.style.position = "absolute";
     this._tag.style.top = "50%";
     this._tag.style.left = "50%";

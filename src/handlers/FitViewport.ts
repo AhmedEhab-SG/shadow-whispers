@@ -4,7 +4,9 @@ class FitViewport {
   private _width = innerWidth;
   private _height = innerHeight;
 
-  public constructor(private _aspectRatio: AspectRatio) {}
+  public constructor(private _aspectRatio: AspectRatio) {
+    this.updateDimensions();
+  }
 
   private updateDimensions(): void {
     if (this._width / this._aspectRatio > this._height)
