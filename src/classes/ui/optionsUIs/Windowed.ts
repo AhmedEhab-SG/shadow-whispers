@@ -22,6 +22,7 @@ class Windowed extends UI {
   public update({ controlActions }: { controlActions: ControlActions }): void {
     const isWindowed = !document.fullscreenElement;
     this.color = isWindowed ? "green" : "grey";
+    this.shadowColor = "white";
 
     if (isWindowed) return;
 
