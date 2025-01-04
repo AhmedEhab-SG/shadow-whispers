@@ -15,6 +15,7 @@ import ControlInput from "../events/ControlInput";
 import Pause from "./status/Pause";
 import Over from "./status/Over";
 import Next from "./status/Next";
+import Orientation from "../events/Orientation";
 
 class Game extends GameUtils implements IGame {
   private width = 0;
@@ -39,6 +40,7 @@ class Game extends GameUtils implements IGame {
   );
   private controlInput: ControlInput = new ControlInput(this.canvas.tag);
   private resize = new Resize(this.fitViewport, this.canvas.tag);
+  private orientation = new Orientation();
 
   private menu?: Menu;
   private playing?: Playing;
@@ -60,6 +62,7 @@ class Game extends GameUtils implements IGame {
       this.fitViewport.calcWidth(),
       this.fitViewport.calcHeight()
     );
+
     this.canvas.create();
   }
 
@@ -79,12 +82,14 @@ class Game extends GameUtils implements IGame {
     this.resize.addHandler();
     this.controlKeys.addHandlers();
     this.controlInput.addHandlers();
+    this.orientation.addHandler();
   }
 
   private removeEvents(): void {
     this.resize.removeHandler();
     this.controlKeys.removeHandlers();
     this.controlInput.removeHandlers();
+    this.orientation.removeHandler();
   }
 
   private updateAspectRatio(): void {
