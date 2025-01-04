@@ -90,6 +90,7 @@ class Game extends GameUtils implements IGame {
   private updateAspectRatio(): void {
     if (this.gameStates.aspectRatio !== this.fitViewport.aspectRatio) {
       this.fitViewport.aspectRatio = this.gameStates.aspectRatio;
+      this.fitViewport.update(innerWidth, innerHeight);
       this.init();
     }
   }
