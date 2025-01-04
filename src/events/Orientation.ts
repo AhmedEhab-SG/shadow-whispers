@@ -14,7 +14,7 @@ class Orientation extends Event {
   private handler = (): void => {
     if (screen.orientation.type.startsWith("portrait")) {
       if ("lock" in screen.orientation)
-        (screen.orientation as any).lock("landscape").catch(() => {});
+        (screen.orientation as any).lock("landscape");
     }
   };
 }
