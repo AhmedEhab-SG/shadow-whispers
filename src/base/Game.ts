@@ -4,7 +4,7 @@ import BaseResolution from "../constants/BaseResolution";
 import AspectRatio from "../enum/AspectRatio";
 import ControlKeys from "../events/ControlKeys";
 import Resize from "../events/Resize";
-import ScreenViewport from "../handlers/ScreenViewport";
+import FitViewport from "../handlers/FitViewport";
 import IGame from "../interfaces/IGame";
 import Canvas from "../utils/Canvas";
 import GameUtils from "../utils/GameUtils";
@@ -24,14 +24,12 @@ class Game extends GameUtils implements IGame {
   private canvas: Canvas = new Canvas(BaseResolution);
 
   // Viewport
-  private screenViewport: ScreenViewport = new ScreenViewport(
-    AspectRatio.WIDE_SCREEN
-  );
+  private fitViewport: FitViewport = new FitViewport(AspectRatio.WIDE_SCREEN);
 
   private gameStates: GameStates = {
     debugMode: false,
     status: GameStatus.MENU,
-    aspectRatio: this.screenViewport.aspectRatio,
+    aspectRatio: this.fitViewport.aspectRatio,
   };
 
   // Events
@@ -40,7 +38,7 @@ class Game extends GameUtils implements IGame {
     this.gameStates.debugMode
   );
   private controlInput: ControlInput = new ControlInput(this.canvas.tag);
-  private resize = new Resize(this.screenViewport, this.canvas.tag);
+  private resize = new Resize(this.fitViewport, this.canvas.tag);
 
   private menu?: Menu;
   private playing?: Playing;
@@ -59,8 +57,8 @@ class Game extends GameUtils implements IGame {
     this.height = this.canvas.height;
 
     this.canvas.setBaseStyles(
-      this.screenViewport.calcWidth(),
-      this.screenViewport.calcHeight()
+      this.fitViewport.calcWidth(),
+      this.fitViewport.calcHeight()
     );
     this.canvas.create();
   }
@@ -90,8 +88,8 @@ class Game extends GameUtils implements IGame {
   }
 
   private updateAspectRatio(): void {
-    if (this.gameStates.aspectRatio !== this.screenViewport.aspectRatio) {
-      this.screenViewport.aspectRatio = this.gameStates.aspectRatio;
+    if (this.gameStates.aspectRatio !== this.fitViewport.aspectRatio) {
+      this.fitViewport.aspectRatio = this.gameStates.aspectRatio;
       this.init();
     }
   }

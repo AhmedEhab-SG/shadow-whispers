@@ -1,8 +1,8 @@
-import ScreenViewport from "../handlers/ScreenViewport";
+import FitViewport from "../handlers/FitViewport";
 
 class Resize extends Event {
   public constructor(
-    private screenViewport: ScreenViewport,
+    private fitViewport: FitViewport,
     private canvas: HTMLCanvasElement
   ) {
     super("resize");
@@ -17,8 +17,9 @@ class Resize extends Event {
   }
 
   private handler = (): void => {
-    this.canvas.style.width = `${this.screenViewport.calcWidth()}px`;
-    this.canvas.style.height = `${this.screenViewport.calcHeight()}px`;
+    this.fitViewport.update(innerWidth, innerHeight);
+    this.canvas.style.width = `${this.fitViewport.calcWidth()}px`;
+    this.canvas.style.height = `${this.fitViewport.calcHeight()}px`;
   };
 }
 
