@@ -21,7 +21,7 @@ class Playing extends Interval implements IDrawable {
   private level = 1;
 
   private score = 0;
-  private scorePerLevel = 50;
+  private scorePerLevel = 2;
 
   private speed = 0;
   private maxSpeed = 3;
@@ -188,6 +188,7 @@ class Playing extends Interval implements IDrawable {
     if (this.isTimesUp()) this.gameStates.status = GameStatus.TIMES_UP;
 
     if (this.gameStates.status !== GameStatus.PLAYING) return;
+
     this.time += deltaTime;
 
     // environment update
@@ -307,16 +308,21 @@ class Playing extends Interval implements IDrawable {
   private nextLevelStart(): void {
     this.level++;
     this.maxTime -= this.maxTime * 0.015 * this.level;
-    this.scorePerLevel += this.scorePerLevel * 0.1 * this.level;
+    this.scorePerLevel += Math.ceil(this.scorePerLevel * 0.1 * this.level);
     this.restartLevel();
   }
 
   private isLevelWin(): boolean {
-    return this.score >= this.scorePerLevel;
+    return (
+      this.score >= this.scorePerLevel &&
+      this.gameStates.status !== GameStatus.MENU
+    );
   }
 
   private isTimesUp(): boolean {
-    return this.time > this.maxTime;
+    return (
+      this.time > this.maxTime && this.gameStates.status !== GameStatus.MENU
+    );
   }
 }
 
