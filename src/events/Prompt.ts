@@ -21,9 +21,8 @@ class Prompt extends Event {
     );
   }
 
-  private handler = (event: IBeforeInstallPromptEvent): void => {
-    event.preventDefault();
-    this.deferredPrompt = event;
+  private handler = (e: IBeforeInstallPromptEvent): void => {
+    this.deferredPrompt = e;
   };
 
   public showInstallPrompt(): void {
