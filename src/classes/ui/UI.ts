@@ -44,14 +44,14 @@ abstract class UI extends Sprite {
     controlActions.isClick = false;
   }
 
-  protected click = (controlActions: ControlActions, fun: () => void): void => {
+  protected click(controlActions: ControlActions, fun: () => void): void {
     if (this.isClicked(controlActions)) {
       this.color = "grey";
       this.shadowColor = "none";
       fun();
       this.clicked(controlActions);
     }
-  };
+  }
 
   protected isHover(controlActions: ControlActions): boolean {
     return (

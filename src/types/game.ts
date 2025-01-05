@@ -5,7 +5,7 @@ type GameStates = {
   status: GameStatus;
   debugMode: boolean;
   aspectRatio: AspectRatio;
-  showInstallPrompt: () => void;
+  showInstallPrompt: () => Promise<void>;
 };
 
 export type { GameStates };

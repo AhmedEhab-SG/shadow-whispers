@@ -11,9 +11,9 @@ class DownloadApp extends UI {
     gameHeight?: number;
   }) {
     super();
-    this.textX = gameWidth ? gameWidth * 0.08 : 0;
+    this.textX = gameWidth ? gameWidth * 0.0655 : 0;
     this.textY = gameHeight ? gameHeight * 0.985 : 0;
-    this.text = "Download the game by clicking here.📲";
+    this.text = "➜ Or click here to install the game as an application.📲";
     this.color = "white";
     this.shadowColor = "grey";
     this.fontSize = 16;
@@ -33,7 +33,10 @@ class DownloadApp extends UI {
       this.color = "white";
       this.shadowColor = "none";
 
-      this.click(controlActions, () => gameStates.showInstallPrompt());
+      this.click(
+        controlActions,
+        async () => await gameStates.showInstallPrompt()
+      );
     } else {
       this.color = "rgb(136, 136, 255)";
       this.shadowColor = "none";

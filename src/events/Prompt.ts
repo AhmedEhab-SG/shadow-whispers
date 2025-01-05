@@ -4,7 +4,7 @@ class Prompt extends Event {
   private deferredPrompt: IBeforeInstallPromptEvent | null = null;
 
   public constructor() {
-    super("beforeinstallprompt");
+    super("prompt");
   }
 
   public addHandler(): void {
@@ -22,15 +22,16 @@ class Prompt extends Event {
   }
 
   private handler = (e: IBeforeInstallPromptEvent): void => {
+    e.preventDefault();
     this.deferredPrompt = e;
+    this.deferredPrompt.userChoice.then(() => {
+      this.deferredPrompt = null;
+    });
   };
 
-  public showInstallPrompt(): void {
+  public async showInstallPrompt(): Promise<void> {
     if (this.deferredPrompt) {
-      this.deferredPrompt.prompt();
-      this.deferredPrompt.userChoice.then(() => {
-        this.deferredPrompt = null;
-      });
+      this.deferredPrompt.prompt().catch(() => {});
     }
   }
 }

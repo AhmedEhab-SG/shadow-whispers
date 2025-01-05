@@ -39,7 +39,7 @@ class Game extends GameUtils implements IGame {
     debugMode: false,
     status: GameStatus.MENU,
     aspectRatio: this.fitViewport.aspectRatio,
-    showInstallPrompt: this.prompt.showInstallPrompt,
+    showInstallPrompt: () => this.prompt.showInstallPrompt(),
   };
   private controlKeys: ControlKeys = new ControlKeys(
     DefaultControls,
