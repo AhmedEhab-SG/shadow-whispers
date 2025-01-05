@@ -26,6 +26,8 @@ abstract class UI extends Sprite {
 
   private _markForDelete: boolean = false;
 
+  private _firingClick: boolean = false;
+
   public destroy(): void {
     this._markForDelete = true;
   }
@@ -48,8 +50,16 @@ abstract class UI extends Sprite {
     if (this.isClicked(controlActions)) {
       this.color = "grey";
       this.shadowColor = "none";
-      fun();
-      this.clicked(controlActions);
+
+      if (this._firingClick) return;
+      this._firingClick = true;
+
+      const id = setTimeout(() => {
+        fun();
+        this.clicked(controlActions);
+        clearTimeout(id);
+        this._firingClick = false;
+      }, 150);
     }
   }
 
