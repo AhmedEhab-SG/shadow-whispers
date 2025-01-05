@@ -31,12 +31,10 @@ class NextLevel extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      this.click(controlActions, () => {
-        this.color = "grey";
-        this.shadowColor = "black";
-
-        gameStates.status = GameStatus.NEXT_LEVEL;
-      });
+      this.click(
+        controlActions,
+        () => (gameStates.status = GameStatus.NEXT_LEVEL)
+      );
     } else {
       this.color = "rgb(50,205,50)";
       this.shadowColor = "black";

@@ -46,6 +46,8 @@ abstract class UI extends Sprite {
 
   protected click = (controlActions: ControlActions, fun: () => void): void => {
     if (this.isClicked(controlActions)) {
+      this.color = "grey";
+      this.shadowColor = "none";
       fun();
       this.clicked(controlActions);
     }

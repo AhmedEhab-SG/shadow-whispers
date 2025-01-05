@@ -1,9 +1,8 @@
 import { ControlActions } from "../../../types/events";
-import logoImg from "../../../assets/imgs/ui/logo.png";
-import UI from "../UI";
 import { GameStates } from "../../../types/game";
+import UI from "../UI";
 
-class CopyRight extends UI {
+class DownloadApp extends UI {
   public constructor({
     gameWidth,
     gameHeight,
@@ -12,34 +11,29 @@ class CopyRight extends UI {
     gameHeight?: number;
   }) {
     super();
-    this.textX = gameWidth ? gameWidth * 0.78 : 0;
+    this.textX = gameWidth ? gameWidth * 0.08 : 0;
     this.textY = gameHeight ? gameHeight * 0.985 : 0;
-    this.text = "Built By: Ahmed Ehab SG";
+    this.text = "Download the game by clicking here.📲";
+    this.color = "white";
+    this.shadowColor = "grey";
+    this.fontSize = 16;
     this.fontFamily = "Arial";
     this.fontWeight = "bold";
     this.fontStyle = "italic";
-    this.fontSize = 18;
-    this.imgSize = 28;
-
-    this.imgY = this.textY - this.imgSize + 5;
-    this.loadImage(logoImg);
-    this.drawImg = true;
   }
 
   public update({
     controlActions,
+    gameStates,
   }: {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
-    this.imgX = this.textX - this.imgSize + this.textWidth + this.imgSize + 8;
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "none";
 
-      this.click(controlActions, () =>
-        window.open("https://ahmedehab-sg.com/", "_blank")
-      );
+      this.click(controlActions, () => gameStates.showInstallPrompt());
     } else {
       this.color = "rgb(136, 136, 255)";
       this.shadowColor = "none";
@@ -47,4 +41,4 @@ class CopyRight extends UI {
   }
 }
 
-export default CopyRight;
+export default DownloadApp;

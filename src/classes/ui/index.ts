@@ -38,7 +38,7 @@ import OptionsName from "./optionsUIs/OptionsName.ts";
 import ScreenAspect from "./optionsUIs/ScreenAspect.ts";
 import UltraWide from "./optionsUIs/UltraWide.ts";
 import Wide from "./optionsUIs/Wide.ts";
-import Full from "./optionsUIs/Full.ts";
+import Square from "./optionsUIs/Square.ts";
 import MenuBack from "./optionsUIs/Menu.ts";
 import ScreenMode from "./optionsUIs/ScreenMode.ts";
 import Windowed from "./optionsUIs/Windowed.ts";
@@ -48,6 +48,8 @@ import Computer from "./controlsUIs/Computer.ts";
 import ComputerControls from "./controlsUIs/ComputerControls.ts";
 import Mobile from "./controlsUIs/Mobile.ts";
 import MobileControls from "./controlsUIs/MobileControls.ts";
+import ProTip from "./menuUIs/ProTip.ts";
+import DownloadApp from "./menuUIs/DownloadApp.ts";
 
 class UI {
   public static readonly MenuUIs = [
@@ -57,6 +59,8 @@ class UI {
     Controls,
     CopyRight,
     Options,
+    ProTip,
+    DownloadApp,
   ];
   public static readonly OptionsUIs = [
     OptionsName,
@@ -66,10 +70,12 @@ class UI {
     ScreenMode,
     UltraWide,
     Wide,
-    Full,
+    Square,
     MenuBack,
     FullScreenMenu,
     Windowed,
+    ProTip,
+    DownloadApp,
   ];
   public static readonly ControlsUIs = [
     Name,
@@ -80,6 +86,8 @@ class UI {
     ComputerControls,
     Mobile,
     MobileControls,
+    ProTip,
+    DownloadApp,
   ];
   public static readonly PlayingUIs = [
     Energy,

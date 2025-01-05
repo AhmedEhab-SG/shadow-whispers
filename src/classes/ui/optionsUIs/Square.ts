@@ -13,9 +13,9 @@ class Full extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.75 : 0;
+    this.textX = gameWidth ? gameWidth * 0.73 : 0;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
-    this.text = "Full";
+    this.text = "Square";
     this.color = "grey";
     this.shadowColor = "white";
     this.fontSize = 40;
@@ -40,11 +40,10 @@ class Full extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      this.click(controlActions, () => {
-        this.color = "black";
-        this.shadowColor = "white";
-        gameStates.aspectRatio = AspectRatio.FULL_SCREEN;
-      });
+      this.click(
+        controlActions,
+        () => (gameStates.aspectRatio = AspectRatio.FULL_SCREEN)
+      );
     }
   }
 }

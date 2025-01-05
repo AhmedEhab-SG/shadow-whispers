@@ -31,12 +31,7 @@ class MenuOver extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      this.click(controlActions, () => {
-        this.color = "grey";
-        this.shadowColor = "black";
-
-        gameStates.status = GameStatus.MENU;
-      });
+      this.click(controlActions, () => (gameStates.status = GameStatus.MENU));
     } else {
       this.color = "black";
       this.shadowColor = "white";

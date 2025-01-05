@@ -5,6 +5,7 @@ type GameStates = {
   status: GameStatus;
   debugMode: boolean;
   aspectRatio: AspectRatio;
+  showInstallPrompt: () => void;
 };
 
 export type { GameStates };

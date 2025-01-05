@@ -33,11 +33,10 @@ class Start extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      this.click(controlActions, () => {
-        this.color = "grey";
-        this.shadowColor = "white";
-        gameStates.status = GameStatus.RESTART;
-      });
+      this.click(
+        controlActions,
+        () => (gameStates.status = GameStatus.RESTART)
+      );
     } else {
       this.color = "grey";
       this.shadowColor = "white";

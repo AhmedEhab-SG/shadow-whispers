@@ -31,12 +31,10 @@ class Restart extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      this.click(controlActions, () => {
-        this.color = "grey";
-        this.shadowColor = "black";
-
-        gameStates.status = GameStatus.RESTART_LEVEL;
-      });
+      this.click(
+        controlActions,
+        () => (gameStates.status = GameStatus.RESTART_LEVEL)
+      );
     } else {
       this.color = "rgb(168, 165, 0)";
       this.shadowColor = "black";

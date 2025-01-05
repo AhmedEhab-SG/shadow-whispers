@@ -16,6 +16,7 @@ import Pause from "./status/Pause";
 import Over from "./status/Over";
 import Next from "./status/Next";
 import Orientation from "../events/Orientation";
+import Prompt from "../events/Prompt";
 
 class Game extends GameUtils implements IGame {
   private width = 0;
@@ -27,20 +28,23 @@ class Game extends GameUtils implements IGame {
   // Viewport
   private fitViewport: FitViewport = new FitViewport(AspectRatio.WIDE_SCREEN);
 
+  // Events
+  private controlInput: ControlInput = new ControlInput(this.canvas.tag);
+  private resize = new Resize(this.fitViewport, this.canvas.tag);
+  private orientation = new Orientation();
+  private prompt = new Prompt();
+
+  // Game States
   private gameStates: GameStates = {
     debugMode: false,
     status: GameStatus.MENU,
     aspectRatio: this.fitViewport.aspectRatio,
+    showInstallPrompt: this.prompt.showInstallPrompt,
   };
-
-  // Events
   private controlKeys: ControlKeys = new ControlKeys(
     DefaultControls,
     this.gameStates.debugMode
   );
-  private controlInput: ControlInput = new ControlInput(this.canvas.tag);
-  private resize = new Resize(this.fitViewport, this.canvas.tag);
-  private orientation = new Orientation();
 
   private menu?: Menu;
   private playing?: Playing;
@@ -83,6 +87,7 @@ class Game extends GameUtils implements IGame {
     this.controlKeys.addHandlers();
     this.controlInput.addHandlers();
     this.orientation.addHandler();
+    this.prompt.addHandler();
   }
 
   private removeEvents(): void {
@@ -90,6 +95,7 @@ class Game extends GameUtils implements IGame {
     this.controlKeys.removeHandlers();
     this.controlInput.removeHandlers();
     this.orientation.removeHandler();
+    this.prompt.removeHandler();
   }
 
   private updateAspectRatio(): void {

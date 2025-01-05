@@ -36,11 +36,7 @@ class Pause extends UI {
       this.color = "white";
       this.shadowColor = "black";
 
-      this.click(controlActions, () => {
-        this.color = "white";
-        this.shadowColor = "black";
-        gameStates.status = GameStatus.PAUSED;
-      });
+      this.click(controlActions, () => (gameStates.status = GameStatus.PAUSED));
     } else {
       this.color = "black";
       this.shadowColor = "white";

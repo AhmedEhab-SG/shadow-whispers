@@ -40,12 +40,10 @@ class Wide extends UI {
       this.color = "white";
       this.shadowColor = "grey";
 
-      this.click(controlActions, () => {
-        this.color = "black";
-        this.shadowColor = "white";
-
-        gameStates.aspectRatio = AspectRatio.WIDE_SCREEN;
-      });
+      this.click(
+        controlActions,
+        () => (gameStates.aspectRatio = AspectRatio.WIDE_SCREEN)
+      );
     }
   }
 }
