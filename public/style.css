@@ -22,6 +22,4 @@ body {
   min-width: 100vw;
   min-height: 100vh;
   overflow: hidden;
-  touch-action: none;
-  zoom: 0;
 }

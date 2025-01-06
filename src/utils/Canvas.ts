@@ -32,6 +32,8 @@ class Canvas {
     this._tag.style.transform = "translate(-50%, -50%)";
     this._tag.style.maxWidth = "100%";
     this._tag.style.maxHeight = "100%";
+    this._tag.style.touchAction = "none";
+    this._tag.style.zoom = "0";
   }
 
   public create() {
