@@ -1,6 +1,8 @@
 import UI from "../UI";
 
 class Time extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,7 +12,7 @@ class Time extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.8 - 50 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.05 : 0;
   }
 
@@ -25,11 +27,10 @@ class Time extends UI {
       timeLimit * 0.001
     )}`;
 
-    if (time + 30 * 1000 >= timeLimit) {
-      this.color = "rgb(168, 0, 0)";
-    } else {
-      this.color = "rgb(0, 0, 0)";
-    }
+    if (time + 30 * 1000 >= timeLimit) this.color = "rgb(168, 0, 0)";
+    else this.color = "rgb(0, 0, 0)";
+
+    this.textX = this.gameWidth ? this.gameWidth - 15 - this.textWidth : 0;
   }
 }
 

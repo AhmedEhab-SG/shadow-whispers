@@ -59,7 +59,7 @@ abstract class UI extends Sprite {
         this.clicked(controlActions);
         clearTimeout(id);
         this._firingClick = false;
-      }, 150);
+      }, 100);
     }
   }
 
@@ -104,6 +104,7 @@ abstract class UI extends Sprite {
     level: number;
     time: number;
     timeLimit: number;
+    highScore: number;
     hero: { energy: number; lives: number };
     gameStates: GameStates;
   }): void;

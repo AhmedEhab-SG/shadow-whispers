@@ -16,7 +16,7 @@ class Windowed extends UI {
     this.text = "Windowed";
     this.color = "grey";
     this.shadowColor = "white";
-    this.fontSize = 40;
+    this.fontSize = 35;
     this.fontFamily = "Bangers, cursive";
   }
   public update({ controlActions }: { controlActions: ControlActions }): void {

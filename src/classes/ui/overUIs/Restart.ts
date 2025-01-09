@@ -4,6 +4,8 @@ import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
 class Restart extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,9 +15,9 @@ class Restart extends UI {
   }) {
     super();
 
-    this.text = "Restart";
-    this.textX = gameWidth ? gameWidth * 0.45 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
+    this.text = "Restart";
     this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
@@ -27,6 +29,10 @@ class Restart extends UI {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "black";

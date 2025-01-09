@@ -18,7 +18,7 @@ class Full extends UI {
     this.text = "Square";
     this.color = "grey";
     this.shadowColor = "white";
-    this.fontSize = 40;
+    this.fontSize = 35;
     this.fontFamily = "Bangers, cursive";
   }
   public update({

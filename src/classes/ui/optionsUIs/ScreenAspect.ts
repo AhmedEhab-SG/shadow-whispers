@@ -15,7 +15,7 @@ class ScreenAspect extends UI {
     this.text = "Screen Aspect:";
     this.color = "white";
     this.shadowColor = "grey";
-    this.fontSize = 45;
+    this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
 

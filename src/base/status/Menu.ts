@@ -3,6 +3,7 @@ import FireFly from "../../classes/vfx/particles/FIreFly";
 import Particle from "../../classes/vfx/particles/Particle";
 import GameStatus from "../../config/GameStatus";
 import BaseKeys from "../../enum/BaseKeys";
+import Save from "../../handlers/Save";
 import IDrawable from "../../interfaces/IDrawable";
 import { ControlActions } from "../../types/events";
 import { GameStates } from "../../types/game";
@@ -19,6 +20,7 @@ class Menu extends Interval implements IDrawable {
   private menUi: MenuUIInstance[] = [];
   private optionsUi: OptionsUIInstance[] = [];
   private controlsUi: ControlsUIInstance[] = [];
+  private save: Save | null = null;
 
   private activeStates = [
     GameStatus.MENU,
@@ -29,7 +31,7 @@ class Menu extends Interval implements IDrawable {
   public constructor(
     private width: number,
     private height: number,
-    public gameStates: GameStates
+    private gameStates: GameStates
   ) {
     super();
 
@@ -38,6 +40,7 @@ class Menu extends Interval implements IDrawable {
 
   private init() {
     // create particles
+    this.save = new Save();
     this.createParticles();
 
     // create UI
@@ -45,7 +48,7 @@ class Menu extends Interval implements IDrawable {
     this.menUi = new UI({
       gameWidth: this.width,
       gameHeight: this.height,
-    }).getAllMenuUIs();
+    }).getAllMenuUIs(this.save.loadGame());
 
     this.optionsUi = new UI({
       gameWidth: this.width,

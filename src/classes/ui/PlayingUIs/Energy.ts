@@ -20,7 +20,7 @@ class Energy extends UI {
     } else {
       this.color = "rgb(0, 0, 0)";
     }
-    this.imgX = this.textX + this.textWidth ;
+    this.imgX = this.textX + this.textWidth;
   }
 }
 

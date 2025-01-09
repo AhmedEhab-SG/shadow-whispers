@@ -4,6 +4,8 @@ import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
 class Resume extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,8 +15,8 @@ class Resume extends UI {
   }) {
     super();
 
+    this.gameWidth = gameWidth;
     this.text = "Resume";
-    this.textX = gameWidth ? gameWidth * 0.5 - 50 : 0;
     this.textY = gameHeight ? gameHeight * 0.45 : 0;
     this.fontSize = 30;
     this.fontFamily = "Bangers, cursive";
@@ -27,6 +29,10 @@ class Resume extends UI {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "black";

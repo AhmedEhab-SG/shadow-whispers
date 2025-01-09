@@ -2,6 +2,7 @@ import { ControlActions } from "../../../types/events";
 import logoImg from "../../../assets/imgs/ui/logo.png";
 import UI from "../UI";
 import { GameStates } from "../../../types/game";
+import { GameSave } from "../../../types/save";
 
 class CopyRight extends UI {
   public constructor({
@@ -10,6 +11,7 @@ class CopyRight extends UI {
   }: {
     gameWidth?: number;
     gameHeight?: number;
+    gameSave?: GameSave | null;
   }) {
     super();
     this.textX = gameWidth ? gameWidth * 0.875 : 0;

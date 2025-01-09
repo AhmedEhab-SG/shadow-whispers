@@ -1,5 +1,4 @@
 import Enemies from "../../classes/characters/enemies/index.ts";
-import Hero from "../../classes/characters/heroes/Hero.ts";
 import Environments from "../../classes/environments/index.ts";
 import Boom from "../../classes/vfx/Boom.ts";
 import GameStatus from "../../config/GameStatus.ts";
@@ -16,6 +15,11 @@ import { CollectableInstance } from "../../types/collectable.ts";
 import Collectables from "../../classes/collectables/index.ts";
 import { GameStates } from "../../types/game.ts";
 import { ControlActions } from "../../types/events.ts";
+import Save from "../../handlers/Save.ts";
+import { GameSave } from "../../types/save.ts";
+// import EnvironmentsEnum from "../../enum/Environments.ts";
+// import HeroesEnum from "../../enum/Heroes.ts";
+import { HeroesTypesInstance } from "../../types/hero.ts";
 
 class Playing extends Interval implements IDrawable {
   private level = 1;
@@ -28,7 +32,7 @@ class Playing extends Interval implements IDrawable {
 
   private heroLives = 0;
 
-  //private highScore = 0;
+  private highScore = 0;
 
   private time = 0;
   private maxTime = 5 * 60 * 1000;
@@ -36,7 +40,7 @@ class Playing extends Interval implements IDrawable {
   private environments: Environments;
   private currentEnvironment?: EnvironmentsInstance;
 
-  private hero?: Hero;
+  private hero?: HeroesTypesInstance;
 
   private enemies?: Enemies;
   private activeEnemies: EnemiesTypesInstance[] = [];
@@ -52,6 +56,9 @@ class Playing extends Interval implements IDrawable {
   private activeCollectables: CollectableInstance[] = [];
   private collectableTimerRef = { timer: 0 };
 
+  private save: Save | null = null;
+  private gameSave: GameSave | null = null;
+
   private drawingStatus = [
     GameStatus.PLAYING,
     GameStatus.PAUSED,
@@ -66,12 +73,16 @@ class Playing extends Interval implements IDrawable {
     private gameStates: GameStates
   ) {
     super();
+
     this.environments = new Environments(this.height);
 
     this.init();
   }
 
   private init() {
+    this.save = new Save();
+    this.gameSave = this.save.loadGame();
+
     this.currentEnvironment = this.environments.getRandomEnvironment();
 
     this.ui = new UI({
@@ -113,6 +124,8 @@ class Playing extends Interval implements IDrawable {
       this.height,
       this.currentEnvironment.groundMargin
     );
+
+    this.highScore = this.gameSave?.progress.highScore ?? 0;
   }
 
   // collectable handling
@@ -180,10 +193,17 @@ class Playing extends Interval implements IDrawable {
 
     if (this.gameStates.status === GameStatus.RESTART) this.restart();
 
-    if (this.gameStates.status === GameStatus.RESTART_LEVEL)
+    if (
+      this.gameStates.status === GameStatus.RESTART_LEVEL ||
+      this.gameStates.status === GameStatus.CONTINUE
+    )
       this.restartLevel();
 
-    if (this.isLevelWin()) this.gameStates.status = GameStatus.NEXT;
+    // save game progress if level is won
+    if (this.isLevelWin()) {
+      this.updateGameSave();
+      this.gameStates.status = GameStatus.NEXT;
+    }
 
     if (this.isTimesUp()) this.gameStates.status = GameStatus.TIMES_UP;
 
@@ -206,6 +226,7 @@ class Playing extends Interval implements IDrawable {
     this.speed = this.hero?.gameSpeed ?? this.speed;
     this.score = this.hero?.score ?? this.score;
     this.heroLives = this.hero?.lives ?? this.heroLives;
+    if (this.highScore < this.score) this.highScore = this.score;
 
     // enemy update
     this.addEnemy(deltaTime);
@@ -229,6 +250,7 @@ class Playing extends Interval implements IDrawable {
     this.ui.forEach((ui) =>
       ui.update({
         score: this.score,
+        highScore: this.highScore,
         keys,
         scorePerLevel: this.scorePerLevel,
         gameStates: this.gameStates,
@@ -290,18 +312,73 @@ class Playing extends Interval implements IDrawable {
     );
   }
 
-  private restart(): void {
-    this.level = 1;
-    this.restartLevel();
+  private loadGameSave() {
+    if (!this.gameSave) return this.restart();
+
+    this.level = this.gameSave.progress.level;
+    this.heroLives = this.gameSave.progress.lives;
+
+    this.currentEnvironment = this.environments.getEnvironmentByName(
+      this.gameSave.environment.name
+    );
+
+    this.hero = new Heroes(
+      this.width,
+      this.height,
+      this.currentEnvironment.groundMargin,
+      this.currentEnvironment.gravity,
+      this.speed,
+      this.maxSpeed,
+      this.score,
+      this.gameStates
+    ).getHeroByName(this.gameSave.hero.name);
   }
 
-  private restartLevel(): void {
+  private clearLevelStates = () => {
     this.score = 0;
     this.time = 0;
     this.speed = 0;
     this.activeEnemies = [];
     this.floatingMessages = [];
+  };
+
+  private restart(): void {
+    this.level = 1;
+    this.restartLevel();
+  }
+
+  private updateGameSave() {
+    if (!this.save) return;
+
+    if (
+      this.gameSave?.progress.lives === this.heroLives &&
+      this.gameSave?.progress.highScore === this.highScore &&
+      this.gameSave.environment.name === this.currentEnvironment?.uniqueName &&
+      this.gameSave.hero.name === this.hero?.uniqueName
+    )
+      return;
+
+    // this.save.saveGame({
+    //   progress: {
+    //     level: this.level,
+    //     lives: this.heroLives,
+    //     highScore: this.highScore,
+    //   },
+    //   environment: {
+    //     name: this.currentEnvironment?.uniqueName ?? EnvironmentsEnum.FOREST,
+    //   },
+    //   hero: {
+    //     name: this.hero?.uniqueName ?? HeroesEnum.SHADOW_DOG,
+    //   },
+    // });
+
+    this.gameSave = this.save.loadGame();
+  }
+
+  private restartLevel(): void {
+    this.clearLevelStates();
     this.init();
+    if (this.gameStates.status === GameStatus.CONTINUE) this.loadGameSave();
     this.gameStates.status = GameStatus.PLAYING;
   }
 

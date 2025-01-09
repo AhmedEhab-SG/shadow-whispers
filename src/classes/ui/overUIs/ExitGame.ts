@@ -2,6 +2,8 @@ import { ControlActions } from "../../../types/events";
 import UI from "../UI";
 
 class ExitGame extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -12,13 +14,17 @@ class ExitGame extends UI {
     super();
 
     this.text = "Exit Game";
-    this.textX = gameWidth ? gameWidth * 0.65 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
     this.fontSize = 30;
     this.fontFamily = "Bangers, cursive";
   }
 
   public update({ controlActions }: { controlActions: ControlActions }): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.7 - this.textWidth * 0.5
+      : 0;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "black";

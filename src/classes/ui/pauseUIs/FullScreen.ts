@@ -23,13 +23,12 @@ class FullScreen extends UI {
   }
 
   public update({ controlActions }: { controlActions: ControlActions }): void {
-    if (document.fullscreenElement) {
-      this.text = "Exit Full Screen";
-      this.textX = this.gameWidth ? this.gameWidth * 0.5 - 95 : 0;
-    } else {
-      this.text = "Full Screen";
-      this.textX = this.gameWidth ? this.gameWidth * 0.5 - 72 : 0;
-    }
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+
+    if (document.fullscreenElement) this.text = "Exit Full Screen";
+    else this.text = "Full Screen";
 
     if (this.isHover(controlActions)) {
       this.color = "white";

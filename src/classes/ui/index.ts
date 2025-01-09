@@ -16,7 +16,7 @@ import Score from "./PlayingUIs/Score.ts";
 import Time from "./PlayingUIs/Time.ts";
 import Exit from "./menuUIs/Exit.ts";
 import Name from "./menuUIs/Name.ts";
-import Start from "./menuUIs/Start.ts";
+import NewGame from "./menuUIs/NewGame.ts";
 import NextLevel from "./nextUIs/NextLevel.ts";
 import Win from "./nextUIs/Win.ts";
 import Reason from "./overUIs/Reason.ts";
@@ -50,17 +50,21 @@ import Mobile from "./controlsUIs/Mobile.ts";
 import MobileControls from "./controlsUIs/MobileControls.ts";
 import ProTip from "./menuUIs/ProTip.ts";
 import DownloadApp from "./menuUIs/DownloadApp.ts";
+import Continue from "./menuUIs/Continue.ts";
+import { GameSave } from "../../types/save.ts";
+import HightScore from "./PlayingUIs/HighScroe.ts";
 
 class UI {
   public static readonly MenuUIs = [
     Name,
-    Start,
+    NewGame,
     Exit,
     Controls,
     CopyRight,
     Options,
     ProTip,
     DownloadApp,
+    Continue,
   ];
   public static readonly OptionsUIs = [
     OptionsName,
@@ -96,6 +100,7 @@ class UI {
     Lives,
     Pause,
     Level,
+    HightScore,
   ];
   public static readonly PauseUI = [
     Paused,
@@ -139,10 +144,14 @@ class UI {
     );
   }
 
-  public getAllMenuUIs(): MenuUIInstance[] {
+  public getAllMenuUIs(gameSave: GameSave | null): MenuUIInstance[] {
     return UI.MenuUIs.map(
       (MenuUI) =>
-        new MenuUI({ gameWidth: this.gameWidth, gameHeight: this.gameHeight })
+        new MenuUI({
+          gameWidth: this.gameWidth,
+          gameHeight: this.gameHeight,
+          gameSave,
+        })
     );
   }
 

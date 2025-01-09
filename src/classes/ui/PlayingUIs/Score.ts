@@ -1,6 +1,8 @@
 import UI from "../UI";
 
 class Score extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -9,8 +11,8 @@ class Score extends UI {
     gameHeight?: number;
   }) {
     super();
-    this.textX = gameWidth ? gameWidth * 0.27 : 0;
-    this.textY = gameHeight ? gameHeight * 0.05 : 0;
+    this.gameWidth = gameWidth;
+    this.textY = gameHeight ? gameHeight * 0.05 + 30 : 0;
   }
 
   public update({
@@ -21,6 +23,10 @@ class Score extends UI {
     scorePerLevel: number;
   }): void {
     this.text = `Score: ${score.toFixed(0)}/${scorePerLevel.toFixed(0)}`;
+
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.3 - this.textWidth * 0.5
+      : 0;
   }
 }
 

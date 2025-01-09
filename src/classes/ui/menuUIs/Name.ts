@@ -1,6 +1,8 @@
 import UI from "../UI";
 
 class Name extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,7 +12,7 @@ class Name extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.5 - 210 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.2 : 0;
     this.text = "Shadow Wispers";
     this.color = "white";
@@ -18,7 +20,11 @@ class Name extends UI {
     this.fontSize = 70;
   }
 
-  public update(): void {}
+  public update(): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+  }
 }
 
 export default Name;

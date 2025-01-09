@@ -4,6 +4,8 @@ import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
 class Controls extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -13,12 +15,12 @@ class Controls extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.41 : 0;
-    this.textY = gameHeight ? gameHeight * 0.7 : 0;
+    this.gameWidth = gameWidth;
+    this.textY = gameHeight ? gameHeight * 0.725 : 0;
     this.text = "Controls";
     this.color = "grey";
     this.shadowColor = "white";
-    this.fontSize = 55;
+    this.fontSize = 45;
     this.fontFamily = "Bangers, cursive";
   }
 
@@ -29,6 +31,10 @@ class Controls extends UI {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "grey";

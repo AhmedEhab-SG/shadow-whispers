@@ -1,6 +1,8 @@
 import UI from "../UI";
 
 class ControlsName extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -10,7 +12,7 @@ class ControlsName extends UI {
   }) {
     super();
 
-    this.textX = gameWidth ? gameWidth * 0.5 - 80 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.37 : 0;
     this.text = "Controls";
     this.color = "white";
@@ -19,7 +21,11 @@ class ControlsName extends UI {
     this.fontFamily = "Bangers, cursive";
   }
 
-  public update({}: {}): void {}
+  public update({}: {}): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.5 - this.textWidth * 0.5
+      : 0;
+  }
 
   public draw(ctx: CanvasRenderingContext2D): void {
     super.draw(ctx);

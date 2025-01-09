@@ -4,6 +4,8 @@ import { GameStates } from "../../../types/game";
 import UI from "../UI";
 
 class MenuOver extends UI {
+  private gameWidth?: number;
+
   public constructor({
     gameWidth,
     gameHeight,
@@ -14,7 +16,7 @@ class MenuOver extends UI {
     super();
 
     this.text = "Main Menu";
-    this.textX = gameWidth ? gameWidth * 0.28 : 0;
+    this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.55 : 0;
     this.fontSize = 30;
     this.fontFamily = "Bangers, cursive";
@@ -27,6 +29,10 @@ class MenuOver extends UI {
     controlActions: ControlActions;
     gameStates: GameStates;
   }): void {
+    this.textX = this.gameWidth
+      ? this.gameWidth * 0.3 - this.textWidth * 0.5
+      : 0;
+
     if (this.isHover(controlActions)) {
       this.color = "white";
       this.shadowColor = "black";

@@ -15,7 +15,7 @@ class Computer extends UI {
     this.text = "Computer:";
     this.color = "white";
     this.shadowColor = "grey";
-    this.fontSize = 45;
+    this.fontSize = 40;
     this.fontFamily = "Bangers, cursive";
   }
 
