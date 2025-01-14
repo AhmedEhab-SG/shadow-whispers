@@ -28,7 +28,7 @@ class Playing extends Interval implements IDrawable {
   private totalScore = 0;
 
   private prevScorePerLevel = 0;
-  private scorePerLevel = 10;
+  private scorePerLevel = 50;
 
   private speed = 0;
   private maxSpeed = 3;
