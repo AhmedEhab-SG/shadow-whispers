@@ -48,7 +48,7 @@ class Menu extends Interval implements IDrawable {
     this.menUi = new UI({
       gameWidth: this.width,
       gameHeight: this.height,
-    }).getAllMenuUIs(this.save.loadGame());
+    }).getAllMenuUIs();
 
     this.optionsUi = new UI({
       gameWidth: this.width,
@@ -88,6 +88,7 @@ class Menu extends Interval implements IDrawable {
         ui.update({
           controlActions,
           gameStates: this.gameStates,
+          gameSave: this.save?.loadGame(),
         });
       });
 

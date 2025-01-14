@@ -32,6 +32,7 @@ class CopyRight extends UI {
   }: {
     controlActions: ControlActions;
     gameStates: GameStates;
+    gameSave?: GameSave | null;
   }): void {
     this.imgX = this.textX - this.imgSize - 8;
     if (this.isHover(controlActions)) {

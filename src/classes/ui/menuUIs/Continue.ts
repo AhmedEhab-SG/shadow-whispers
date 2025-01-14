@@ -10,32 +10,40 @@ class Continue extends UI {
   public constructor({
     gameWidth,
     gameHeight,
-    gameSave,
   }: {
     gameWidth?: number;
     gameHeight?: number;
-    gameSave?: GameSave | null;
   }) {
     super();
 
-    if (!gameSave) return;
-
     this.gameWidth = gameWidth;
     this.textY = gameHeight ? gameHeight * 0.375 : 0;
-    this.text = "Continue";
     this.color = "grey";
     this.shadowColor = "white";
     this.fontSize = 45;
     this.fontFamily = "Bangers, cursive";
   }
 
+  private hide(): void {
+    this.text = "";
+  }
+
+  private show(): void {
+    this.text = "Continue";
+  }
+
   public update({
     controlActions,
     gameStates,
+    gameSave,
   }: {
     controlActions: ControlActions;
     gameStates: GameStates;
+    gameSave: GameSave | null;
   }): void {
+    if (!gameSave) return this.hide();
+    else this.show();
+
     this.textX = this.gameWidth
       ? this.gameWidth * 0.5 - this.textWidth * 0.5
       : 0;

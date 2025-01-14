@@ -51,7 +51,6 @@ import MobileControls from "./controlsUIs/MobileControls.ts";
 import ProTip from "./menuUIs/ProTip.ts";
 import DownloadApp from "./menuUIs/DownloadApp.ts";
 import Continue from "./menuUIs/Continue.ts";
-import { GameSave } from "../../types/save.ts";
 import HightScore from "./PlayingUIs/HighScroe.ts";
 
 class UI {
@@ -144,13 +143,12 @@ class UI {
     );
   }
 
-  public getAllMenuUIs(gameSave: GameSave | null): MenuUIInstance[] {
+  public getAllMenuUIs(): MenuUIInstance[] {
     return UI.MenuUIs.map(
       (MenuUI) =>
         new MenuUI({
           gameWidth: this.gameWidth,
           gameHeight: this.gameHeight,
-          gameSave,
         })
     );
   }

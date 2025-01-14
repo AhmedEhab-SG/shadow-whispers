@@ -1,6 +1,7 @@
 import BaseKeys from "../../enum/BaseKeys";
 import { ControlActions } from "../../types/events";
 import { GameStates } from "../../types/game";
+import { GameSave } from "../../types/save";
 import Sprite from "../../utils/Sprite";
 
 abstract class UI extends Sprite {
@@ -107,6 +108,7 @@ abstract class UI extends Sprite {
     highScore: number;
     hero: { energy: number; lives: number };
     gameStates: GameStates;
+    gameSave: GameSave | null;
   }): void;
 
   public draw(ctx: CanvasRenderingContext2D): void {

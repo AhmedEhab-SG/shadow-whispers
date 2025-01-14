@@ -17,15 +17,18 @@ import { GameStates } from "../../types/game.ts";
 import { ControlActions } from "../../types/events.ts";
 import Save from "../../handlers/Save.ts";
 import { GameSave } from "../../types/save.ts";
-// import EnvironmentsEnum from "../../enum/Environments.ts";
-// import HeroesEnum from "../../enum/Heroes.ts";
+import EnvironmentsEnum from "../../enum/Environments.ts";
+import HeroesEnum from "../../enum/Heroes.ts";
 import { HeroesTypesInstance } from "../../types/hero.ts";
 
 class Playing extends Interval implements IDrawable {
   private level = 1;
 
   private score = 0;
-  private scorePerLevel = 50;
+  private totalScore = 0;
+
+  private prevScorePerLevel = 0;
+  private scorePerLevel = 10;
 
   private speed = 0;
   private maxSpeed = 3;
@@ -82,6 +85,11 @@ class Playing extends Interval implements IDrawable {
   private init() {
     this.save = new Save();
     this.gameSave = this.save.loadGame();
+
+    this.totalScore = this.calcScorePerLevel(
+      this.prevScorePerLevel,
+      this.level - 1
+    );
 
     this.currentEnvironment = this.environments.getRandomEnvironment();
 
@@ -225,8 +233,12 @@ class Playing extends Interval implements IDrawable {
     });
     this.speed = this.hero?.gameSpeed ?? this.speed;
     this.score = this.hero?.score ?? this.score;
-    this.heroLives = this.hero?.lives ?? this.heroLives;
-    if (this.highScore < this.score) this.highScore = this.score;
+
+    // somthing wrong here
+
+    if (this.totalScore + this.score > this.highScore) {
+      this.highScore = this.totalScore + this.score;
+    }
 
     // enemy update
     this.addEnemy(deltaTime);
@@ -315,7 +327,7 @@ class Playing extends Interval implements IDrawable {
   private loadGameSave() {
     if (!this.gameSave) return this.restart();
 
-    this.level = this.gameSave.progress.level;
+    this.level = this.gameSave.progress.level += 1;
     this.heroLives = this.gameSave.progress.lives;
 
     this.currentEnvironment = this.environments.getEnvironmentByName(
@@ -358,19 +370,19 @@ class Playing extends Interval implements IDrawable {
     )
       return;
 
-    // this.save.saveGame({
-    //   progress: {
-    //     level: this.level,
-    //     lives: this.heroLives,
-    //     highScore: this.highScore,
-    //   },
-    //   environment: {
-    //     name: this.currentEnvironment?.uniqueName ?? EnvironmentsEnum.FOREST,
-    //   },
-    //   hero: {
-    //     name: this.hero?.uniqueName ?? HeroesEnum.SHADOW_DOG,
-    //   },
-    // });
+    this.save.saveGame({
+      progress: {
+        level: this.level,
+        lives: this.heroLives,
+        highScore: this.highScore,
+      },
+      environment: {
+        name: this.currentEnvironment?.uniqueName ?? EnvironmentsEnum.FOREST,
+      },
+      hero: {
+        name: this.hero?.uniqueName ?? HeroesEnum.SHADOW_DOG,
+      },
+    });
 
     this.gameSave = this.save.loadGame();
   }
@@ -382,10 +394,30 @@ class Playing extends Interval implements IDrawable {
     this.gameStates.status = GameStatus.PLAYING;
   }
 
+  private calcScorePerLevel(initialScore: number, level: number): number {
+    if (level === 0) return 0;
+    let score = initialScore;
+    for (let i = 1; i <= level; i++) {
+      score += Math.ceil(score * 0.1);
+    }
+    return score;
+  }
+
+  private calcMaxTime(initialTime: number, level: number): number {
+    if (level === 0) return 0;
+
+    let score = initialTime;
+    for (let i = 1; i <= level; i++) {
+      score -= Math.ceil(score * 0.015);
+    }
+    return score;
+  }
+
   private nextLevelStart(): void {
     this.level++;
-    this.maxTime -= this.maxTime * 0.015 * this.level;
-    this.scorePerLevel += Math.ceil(this.scorePerLevel * 0.1 * this.level);
+    this.maxTime = this.calcMaxTime(this.maxTime, this.level);
+    this.prevScorePerLevel = this.scorePerLevel;
+    this.scorePerLevel = this.calcScorePerLevel(this.scorePerLevel, this.level);
     this.restartLevel();
   }
 
