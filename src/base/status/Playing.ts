@@ -359,7 +359,7 @@ class Playing extends Interval implements IDrawable {
   };
 
   private restart(): void {
-    this.level = 10;
+    this.level = 1;
     this.restartLevel();
   }
 
