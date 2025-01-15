@@ -44,10 +44,12 @@ class HeroStates {
     {
       gameHeight,
       enviGroundMargin,
+      enviSkyMargin,
       enviGravity,
     }: {
       gameHeight: number;
       enviGroundMargin: number;
+      enviSkyMargin: number;
       enviGravity: number;
     }
   ) {
@@ -59,6 +61,7 @@ class HeroStates {
       return new StateClass(this.hero, this.heroObj, {
         gameHeight: this.gameHeight,
         enviGroundMargin: this.enviGroundMargin,
+        enviSkyMargin: enviSkyMargin,
         enviGravity: this.enviGravity,
       });
     });

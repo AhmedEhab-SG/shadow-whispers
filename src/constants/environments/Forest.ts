@@ -11,8 +11,8 @@ class Forest {
   public static name: Environments = Environments.FOREST;
   public static width: number = 1667;
   public static height: number = 500;
-  public static jumpHeight: number = 25;
   public static gravity: number = 0.45;
+  public static skyMargin: number = 80;
   public static groundMargin: number = 50;
   public static layers: Layer[] = [
     {
@@ -43,8 +43,8 @@ class Forest {
       name: Forest.name,
       width: Forest.width,
       height: Forest.height,
-      jumpHeight: Forest.jumpHeight,
       gravity: Forest.gravity,
+      skyMargin : Forest.skyMargin,
       groundMargin: Forest.groundMargin,
       layers: Forest.layers,
     };

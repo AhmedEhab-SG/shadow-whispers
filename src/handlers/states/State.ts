@@ -33,17 +33,18 @@ abstract class State implements IState {
   protected calcJumpHeight(
     gameHeight: number,
     groundMargin: number,
+    skyMargin: number,
     characterHeight: number,
     characterWeight: number,
     enviGravity: number,
     scalingFactor = 0.062
   ): number {
     return (
-      ((enviGravity * (gameHeight - groundMargin - characterHeight)) /
+      ((enviGravity *
+        (gameHeight - groundMargin - skyMargin - characterHeight)) /
         (characterWeight * enviGravity)) *
       scalingFactor
     );
   }
 }
-
 export default State;

@@ -109,6 +109,7 @@ class Playing extends Interval implements IDrawable {
       this.width,
       this.height,
       this.currentEnvironment.groundMargin,
+      this.currentEnvironment.skyMargin,
       this.currentEnvironment.gravity,
       this.speed,
       this.maxSpeed,
@@ -124,13 +125,15 @@ class Playing extends Interval implements IDrawable {
 
     this.enemies = new Enemies(this.width, this.height, {
       enviGroundMargin: this.currentEnvironment.groundMargin,
+      enviSkyMargin: this.currentEnvironment.skyMargin,
       heroCord: { x: this.hero.x, y: this.hero.y },
     });
 
     this.collectables = new Collectables(
       this.width,
       this.height,
-      this.currentEnvironment.groundMargin
+      this.currentEnvironment.groundMargin,
+      this.currentEnvironment.skyMargin
     );
 
     this.highScore = this.gameSave?.progress.highScore ?? 0;
@@ -338,6 +341,7 @@ class Playing extends Interval implements IDrawable {
       this.width,
       this.height,
       this.currentEnvironment.groundMargin,
+      this.currentEnvironment.skyMargin,
       this.currentEnvironment.gravity,
       this.speed,
       this.maxSpeed,
@@ -355,7 +359,7 @@ class Playing extends Interval implements IDrawable {
   };
 
   private restart(): void {
-    this.level = 1;
+    this.level = 10;
     this.restartLevel();
   }
 

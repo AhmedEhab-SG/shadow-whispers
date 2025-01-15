@@ -9,9 +9,19 @@ class GhostGloomy extends FlyingEnemy {
 
   public constructor(
     protected gameWidth: number,
-    protected gameHeight: number
+    protected gameHeight: number,
+    {
+      enviSkyMargin,
+      enviGroundMargin,
+    }: { enviSkyMargin: number; enviGroundMargin: number }
   ) {
-    super(GhostGloomyObj.enemyObj, gameWidth, gameHeight);
+    super(
+      GhostGloomyObj.enemyObj,
+      gameWidth,
+      gameHeight,
+      enviGroundMargin,
+      enviSkyMargin
+    );
     this.init();
   }
 

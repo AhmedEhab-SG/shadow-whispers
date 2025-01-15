@@ -9,9 +9,19 @@ class Bird extends FlyingEnemy {
 
   public constructor(
     protected gameWidth: number,
-    protected gameHeight: number
+    protected gameHeight: number,
+    {
+      enviSkyMargin,
+      enviGroundMargin,
+    }: { enviSkyMargin: number; enviGroundMargin: number }
   ) {
-    super(BirdObj.enemyObj, gameWidth, gameHeight);
+    super(
+      BirdObj.enemyObj,
+      gameWidth,
+      gameHeight,
+      enviGroundMargin,
+      enviSkyMargin
+    );
     this.init();
   }
 

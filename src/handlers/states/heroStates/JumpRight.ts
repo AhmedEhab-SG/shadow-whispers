@@ -10,6 +10,7 @@ class JumpRight extends State {
 
   private gameHeight: number;
   private enviGroundMargin: number;
+  private enviSkyMargin: number;
   private enviGravity: number;
 
   public constructor(
@@ -18,10 +19,12 @@ class JumpRight extends State {
     {
       gameHeight,
       enviGroundMargin,
+      enviSkyMargin,
       enviGravity,
     }: {
       gameHeight: number;
       enviGroundMargin: number;
+      enviSkyMargin: number;
       enviGravity: number;
     }
   ) {
@@ -29,6 +32,7 @@ class JumpRight extends State {
     this.gameHeight = gameHeight;
     this.enviGroundMargin = enviGroundMargin;
     this.enviGravity = enviGravity;
+    this.enviSkyMargin = enviSkyMargin;
   }
 
   public enter() {
@@ -37,6 +41,7 @@ class JumpRight extends State {
       this.hero.vy = -this.calcJumpHeight(
         this.gameHeight,
         this.enviGroundMargin,
+        this.enviSkyMargin,
         this.hero.height,
         this.heroObj.weight,
         this.enviGravity

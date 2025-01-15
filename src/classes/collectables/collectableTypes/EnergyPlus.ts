@@ -9,12 +9,14 @@ class EnergyPlus extends Collectable {
   public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
-    protected enviGroundMargin: number
+    protected enviGroundMargin: number,
+    protected enviSkyMargin: number
   ) {
     super(
       gameWidth,
       gameHeight,
       enviGroundMargin,
+      enviSkyMargin,
       EnergyPlusObj.collectableObj
     );
 

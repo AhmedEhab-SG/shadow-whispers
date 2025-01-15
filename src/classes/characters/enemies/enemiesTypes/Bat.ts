@@ -9,9 +9,19 @@ class Bat extends FlyingEnemy {
 
   public constructor(
     protected gameWidth: number,
-    protected gameHeight: number
+    protected gameHeight: number,
+    {
+      enviSkyMargin,
+      enviGroundMargin,
+    }: { enviSkyMargin: number; enviGroundMargin: number }
   ) {
-    super(BatObj.enemyObj, gameWidth, gameHeight);
+    super(
+      BatObj.enemyObj,
+      gameWidth,
+      gameHeight,
+      enviGroundMargin,
+      enviSkyMargin
+    );
     this.init();
   }
 

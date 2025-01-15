@@ -11,7 +11,7 @@ type EnvironmentObj = {
   name: EnvironmentsEnum;
   width: number;
   height: number;
-  jumpHeight: number;
+  skyMargin: number;
   groundMargin: number;
   gravity: number;
   layers: Layer[];

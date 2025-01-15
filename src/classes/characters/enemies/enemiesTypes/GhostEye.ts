@@ -9,9 +9,19 @@ class GhostEye extends FlyingEnemy {
 
   public constructor(
     protected gameWidth: number,
-    protected gameHeight: number
+    protected gameHeight: number,
+    {
+      enviSkyMargin,
+      enviGroundMargin,
+    }: { enviSkyMargin: number; enviGroundMargin: number }
   ) {
-    super(GhostEyeObj.enemyObj, gameWidth, gameHeight);
+    super(
+      GhostEyeObj.enemyObj,
+      gameWidth,
+      gameHeight,
+      enviGroundMargin,
+      enviSkyMargin
+    );
     this.init();
   }
 

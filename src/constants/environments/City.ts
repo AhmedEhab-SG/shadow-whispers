@@ -11,8 +11,8 @@ class City {
   public static name: Environments = Environments.CITY;
   public static width: number = 1667;
   public static height: number = 500;
-  public static jumpHeight: number = 25;
   public static gravity: number = 0.45;
+  public static skyMargin: number = 60;
   public static groundMargin: number = 80;
   public static layers: Layer[] = [
     {
@@ -43,8 +43,8 @@ class City {
       name: City.name,
       width: City.width,
       height: City.height,
-      jumpHeight: City.jumpHeight,
       gravity: City.gravity,
+      skyMargin: City.skyMargin,
       groundMargin: City.groundMargin,
       layers: City.layers,
     };

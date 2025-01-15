@@ -5,17 +5,27 @@ abstract class FlyingEnemy extends Enemy {
   private _angle = 0;
   private _angleCurve = 0;
   private _va = 0; // angle velocity
+  private offsetY = 30;
 
   protected constructor(
     protected enemyObj: EnemyObj,
     protected gameWidth: number,
-    protected gameHeight: number
+    protected gameHeight: number,
+    protected groundMargin: number,
+    protected enviSkyMargin: number
   ) {
     super(enemyObj);
 
     this.x = this.gameWidth + Math.random() * this.gameWidth * 0.5;
 
-    this.y = Math.random() * this.gameHeight * 0.5;
+    this.y =
+      this.enviSkyMargin +
+      Math.random() *
+        (this.gameHeight -
+          this.enviSkyMargin -
+          this.height -
+          this.groundMargin -
+          this.offsetY);
 
     this.vx = Math.random() + 1;
     this.vy = 0;

@@ -5,6 +5,7 @@ import Layer from "./Layer";
 abstract class Environment implements IDrawable {
   private _layers: Layer[] = [];
   private _groundMargin: number;
+  private _skyMargin: number;
 
   protected constructor(
     private environmentObj: EnvironmentObj,
@@ -18,6 +19,10 @@ abstract class Environment implements IDrawable {
     this._groundMargin =
       (this.environmentObj.groundMargin * this.height) /
       this.environmentObj.height;
+
+    this._skyMargin =
+      (this.environmentObj.skyMargin * this.height) /
+      this.environmentObj.height;
   }
 
   public update({ gameSpeed }: { gameSpeed: number }): void {
@@ -30,6 +35,10 @@ abstract class Environment implements IDrawable {
 
   public get groundMargin() {
     return this._groundMargin;
+  }
+
+  public get skyMargin() {
+    return this._skyMargin;
   }
 
   public get gravity() {

@@ -11,6 +11,7 @@ class RollLeft extends State {
 
   private gameHeight: number;
   private enviGroundMargin: number;
+  private enviSkyMargin: number;
   private enviGravity: number;
 
   public constructor(
@@ -19,10 +20,12 @@ class RollLeft extends State {
     {
       gameHeight,
       enviGroundMargin,
+      enviSkyMargin,
       enviGravity,
     }: {
       gameHeight: number;
       enviGroundMargin: number;
+      enviSkyMargin: number;
       enviGravity: number;
     }
   ) {
@@ -30,6 +33,7 @@ class RollLeft extends State {
     this.gameHeight = gameHeight;
     this.enviGroundMargin = enviGroundMargin;
     this.enviGravity = enviGravity;
+    this.enviSkyMargin = enviSkyMargin;
   }
 
   public keysHandler(keys: BaseKeys[]) {
@@ -131,6 +135,7 @@ class RollLeft extends State {
       this.hero.vy = -this.calcJumpHeight(
         this.gameHeight,
         this.enviGroundMargin,
+        this.enviSkyMargin,
         this.hero.height,
         this.heroObj.weight,
         this.enviGravity

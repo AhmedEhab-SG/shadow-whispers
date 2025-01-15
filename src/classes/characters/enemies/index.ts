@@ -48,6 +48,7 @@ class Enemies {
   ];
 
   protected enviGroundMargin: number;
+  protected enviSkyMargin: number;
   protected heroCord: { x: number; y: number };
 
   public constructor(
@@ -55,13 +56,16 @@ class Enemies {
     protected gameHeight: number,
     {
       enviGroundMargin,
+      enviSkyMargin,
       heroCord,
     }: {
       enviGroundMargin: number;
+      enviSkyMargin: number;
       heroCord: { x: number; y: number };
     }
   ) {
     this.enviGroundMargin = enviGroundMargin;
+    this.enviSkyMargin = enviSkyMargin;
     this.heroCord = heroCord;
   }
 
@@ -70,6 +74,7 @@ class Enemies {
       (enemy) => enemy.uniqueName === uniqueName
     )!)(this.gameWidth, this.gameHeight, {
       enviGroundMargin: this.enviGroundMargin,
+      enviSkyMargin: this.enviSkyMargin,
       heroCord: this.heroCord,
     });
   }
@@ -79,6 +84,7 @@ class Enemies {
       (enemy) =>
         new enemy(this.gameWidth, this.gameHeight, {
           enviGroundMargin: this.enviGroundMargin,
+          enviSkyMargin: this.enviSkyMargin,
           heroCord: this.heroCord,
         })
     );
@@ -93,6 +99,7 @@ class Enemies {
       Math.floor(Math.random() * Enemies.EnemiesTypes.length)
     ]!(this.gameWidth, this.gameHeight, {
       enviGroundMargin: this.enviGroundMargin,
+      enviSkyMargin: this.enviSkyMargin,
       heroCord: this.heroCord,
     });
 
@@ -100,6 +107,7 @@ class Enemies {
       Math.floor(Math.random() * ClassesNotGroundStatic.length)
     ]!(this.gameWidth, this.gameHeight, {
       enviGroundMargin: this.enviGroundMargin,
+      enviSkyMargin: this.enviSkyMargin,
       heroCord: this.heroCord,
     });
 
@@ -111,6 +119,7 @@ class Enemies {
       (enemy) =>
         new enemy(this.gameWidth, this.gameHeight, {
           enviGroundMargin: this.enviGroundMargin,
+          enviSkyMargin: this.enviSkyMargin,
           heroCord: this.heroCord,
         })
     );

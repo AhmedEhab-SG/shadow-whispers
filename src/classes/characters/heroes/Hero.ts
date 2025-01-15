@@ -29,6 +29,7 @@ abstract class Hero extends Character {
     protected gameWidth: number,
     protected gameHeight: number,
     protected enviGroundMargin: number,
+    protected enviSkyMargin: number,
     protected enviGravity: number,
     protected _gameSpeed: number,
     protected maxGameSpeed: number,
@@ -53,6 +54,7 @@ abstract class Hero extends Character {
     this._heroStates = new HeroStates(this, this.heroObj, {
       gameHeight: this.gameHeight,
       enviGroundMargin: this.enviGroundMargin,
+      enviSkyMargin: this.enviSkyMargin,
       enviGravity: this.enviGravity,
     });
     this.setState(HeroStatesEnum.IDLE, 0);

@@ -5,6 +5,7 @@ import Hero from "../characters/heroes/Hero";
 abstract class Collectable extends Sprite {
   private _x: number = 0;
   private _y: number = 0;
+  private offsetY = 30;
   private _gameHightRange: number = 0.5;
   private _size: number = 0;
   private _maxSize: number = 0;
@@ -32,6 +33,7 @@ abstract class Collectable extends Sprite {
     protected gameWidth: number,
     protected gameHeight: number,
     protected enviGroundMargin: number,
+    protected enviSkyMargin: number,
     protected collectableObj: CollectableObj
   ) {
     super();
@@ -43,9 +45,13 @@ abstract class Collectable extends Sprite {
     this._effectNumber = collectableObj.effectNumber;
 
     this.y =
+      this.enviSkyMargin +
       Math.random() *
-      ((this.gameHeight - this.size - this.enviGroundMargin) *
-        this._gameHightRange);
+        (this.gameHeight -
+          this.enviSkyMargin -
+          this.size -
+          this.enviGroundMargin -
+          this.offsetY);
 
     this.size = collectableObj.size;
     this._maxSize = this.size * this._maxSizeScale;

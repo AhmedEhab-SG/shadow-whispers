@@ -9,9 +9,16 @@ class LivePlus extends Collectable {
   public constructor(
     protected gameWidth: number,
     protected gameHeight: number,
-    protected enviGroundMargin: number
+    protected enviGroundMargin: number,
+    protected enviSkyMargin: number
   ) {
-    super(gameWidth, gameHeight, enviGroundMargin, LivePlusObj.collectableObj);
+    super(
+      gameWidth,
+      gameHeight,
+      enviGroundMargin,
+      enviSkyMargin,
+      LivePlusObj.collectableObj
+    );
 
     this.strokeColor = "rgb(84, 207, 46)";
     this.strokeOffsetY = -1;
